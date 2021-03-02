@@ -1,21 +1,22 @@
 /*Footer*/
 footer {
-    padding: 15px 0px;
-    background-color: purple;
-  }
+  padding: 15px 0px;
+  bottom: 0px;
+  width: 100%;
+}
   
-  .footer-copyright {
-    font-size: smaller;
-  }
+.footer-copyright {
+  font-size: smaller;
+}
   
-  .footer-links {
-    text-decoration: none;
-  }
+.footer-links {
+  text-decoration: none;
+}
   
-  .list-inline-item{
-    padding-bottom: 0.5rem;
-    padding-left: 1rem!important;
-    padding-right: 1rem!important;
-    padding-top: 0.5rem;
-  }
+.list-inline-item{
+  padding-bottom: 0.5rem;
+  padding-left: 1rem!important;
+  padding-right: 1rem!important;
+  padding-top: 0.5rem;
+}
   /*END Footer*/

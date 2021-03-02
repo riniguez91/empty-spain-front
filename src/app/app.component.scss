@@ -1,8 +1,9 @@
-$colorPrincipal: red;
-$colorSecundario: blue;
+$colorPrincipal: rgb(115, 137, 220);
+$colorSecundario: rgb(64, 77, 126);
 
 .btn-primary {
     background-color: $colorPrincipal;
+    
 }
 
 .btn-primary:hover{
