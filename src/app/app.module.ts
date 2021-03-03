@@ -6,17 +6,26 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { AnalisisTextoComponent } from './analisis-texto/analisis-texto.component';
+import { RouterModule } from '@angular/router';
+import { InicioComponent } from './inicio/inicio.component'
+import { pathToFileURL } from 'url';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    AnalisisTextoComponent
+    AnalisisTextoComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,
-    NgbModule
+    NgbModule,
+    RouterModule.forRoot([
+      {path: 'analisis-texto', component: AnalisisTextoComponent},
+      {path: 'inicio', component: InicioComponent},
+      {path: '', redirectTo: '/inicio', pathMatch: 'full'}
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

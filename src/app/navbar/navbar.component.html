@@ -1,24 +1,19 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
-      Brand
-    </a>
+  <a class="navbar-brand"> Grupo 5 </a>
   
-    <button class="navbar-toggler" type="button"
-            (click)="toggleNavbar()">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
   
   
-    <div class="collapse navbar-collapse"
-         [ngClass]="{ 'show': navbarOpen }">
+  <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">Inicio</a>
+          <a class="nav-link" routerLink="/inicio" >Inicio</a>
         </li>
-  
         <li class="nav-item">
-          <a class="nav-link" href="#">Análisis de Texto</a>
+          <a class="nav-link" routerLink="/analisis-texto">Análisis de Texto</a>
         </li>
       </ul>
-    </div>
-  </nav>
+  </div>
+</nav>

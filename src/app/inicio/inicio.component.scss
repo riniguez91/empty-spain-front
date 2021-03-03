@@ -1,0 +1,25 @@
+$colorPrincipal: rgb(115, 137, 220);
+$colorSecundario: rgb(64, 77, 126);
+
+.btn-primary {
+    background-color: $colorPrincipal;
+    
+}
+
+.btn-primary:hover{
+    background-color: $colorSecundario;
+}
+
+a {
+    display: block;
+    padding-top: 5px;
+}
+
+.hasDisplay {
+    display: block;
+  }
+
+#home-sentiment-img {
+    display: block;
+    margin: auto;
+}
