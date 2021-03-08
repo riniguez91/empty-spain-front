@@ -9,6 +9,7 @@ import { AnalisisTextoComponent } from './analisis-texto/analisis-texto.componen
 import { RouterModule } from '@angular/router';
 import { InicioComponent } from './inicio/inicio.component'
 import { pathToFileURL } from 'url';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { pathToFileURL } from 'url';
   imports: [
     BrowserModule,
     NgbModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path: 'analisis-texto', component: AnalisisTextoComponent},
       {path: 'inicio', component: InicioComponent},
