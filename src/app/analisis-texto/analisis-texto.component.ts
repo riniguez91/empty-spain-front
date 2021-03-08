@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { getAllJSDocTagsOfKind } from 'typescript';
 import { AnalisisSentimientoService } from '../services/analisis-sentimiento.service'
 
 @Component({
@@ -8,7 +9,7 @@ import { AnalisisSentimientoService } from '../services/analisis-sentimiento.ser
 })
 export class AnalisisTextoComponent implements OnInit {
 
-  sentimentResults: number[];
+  sentimentResults: Object[];
 
   constructor(private analsisSentimientoService: AnalisisSentimientoService) { }
 
@@ -16,11 +17,11 @@ export class AnalisisTextoComponent implements OnInit {
   // for now
   getSentimentResults(): void {
     this.analsisSentimientoService.getSentimentResults().subscribe(
-      result => this.sentimentResults = result
-    );
+      result => {
+        this.sentimentResults = result;
+        console.log(this.sentimentResults);
+      });
   }
 
-  ngOnInit(): void {
-    this.getSentimentResults();
-  }
+  ngOnInit(): void { }
 }

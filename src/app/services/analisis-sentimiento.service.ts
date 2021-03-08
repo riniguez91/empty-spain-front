@@ -13,6 +13,6 @@ export class AnalisisSentimientoService {
   }
 
   getSentimentResults(): Observable<any> {
-    return this.http.get("localhost:5000/sentimiento");
+    return this.http.get("http://127.0.0.1:5000/sentimiento");
   }
 }

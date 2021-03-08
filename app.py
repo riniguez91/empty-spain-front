@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, abort, request, make_response, url_for
 from textblob import TextBlob
 from textblob.sentiments import NaiveBayesAnalyzer
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # Handles 404 errors where there is an incorrect route passed in the URL
 @app.errorhandler(404)
@@ -17,8 +19,6 @@ def get_sentimiento():
     text = texto.translate(to="en")
     result = text.sentiment 
 
-    print(result)
-  
     return jsonify({'resultado': result})
 
 
