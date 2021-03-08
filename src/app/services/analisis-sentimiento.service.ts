@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +8,11 @@ import { Observable, of } from 'rxjs';
 
 export class AnalisisSentimientoService {
   sentimentResults: number[];
-  constructor() {
+  constructor(private http: HttpClient) {
 
   }
 
-  getSentimentResults(): Observable {
-    return this.HttpClient.get("localhost:5000/sentimiento");
+  getSentimentResults(): Observable<any> {
+    return this.http.get("localhost:5000/sentimiento");
   }
 }
