@@ -7,10 +7,10 @@
     <hr>
     <textarea #textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Ejemplo: Odio los libros."></textarea>
     <button class="btn btn-primary botones" (click)="getSentimentResults(textarea.value)">Analizar</button>
-    <p>{{sentimentResults | json }}</p>
 </div>
-<div class="container text-center">
-    <img src="../../assets/images/feliz.png"  class="img_sentimiento" alt="Feliz" >
-    <img src="../../assets/images/triste.png" class="img_sentimiento" alt="Triste" >
-    <img src="../../assets/images/neutral.png" class="img_sentimiento" alt="Neutral" hidden>
+<div  *ngIf="respuesta > -1" class="container text-center">
+    <p>Resultado: {{respuesta}}</p>
+    <div *ngIf="respuesta >= 0.4"> <img src="../../assets/images/feliz.png"  class="img_sentimiento" alt="Feliz" > </div>
+    <div *ngIf="respuesta <= -0.4"> <img src="../../assets/images/triste.png" class="img_sentimiento" alt="Triste" > </div>
+    <div *ngIf="respuesta < 0.4 && respuesta > -0.4"> <img src="../../assets/images/neutral.png" class="img_sentimiento" alt="Neutral"> </div>
 </div>  

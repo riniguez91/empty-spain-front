@@ -12,7 +12,8 @@ export class AnalisisTextoComponent implements OnInit {
 
   sentimentResults: Object[];
   messageToProcess: String;
-
+  respuesta: Number;
+  
   constructor(private analsisSentimientoService: AnalisisSentimientoService) { }
 
   
@@ -25,7 +26,7 @@ export class AnalisisTextoComponent implements OnInit {
         result => {
           this.sentimentResults = result;
           console.log(this.sentimentResults);
-          
+          this.respuesta =  this.sentimentResults["resultado"][0];  
         });
     }
   }
