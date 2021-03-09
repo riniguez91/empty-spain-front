@@ -7,6 +7,7 @@
     <hr>
     <textarea #textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Ejemplo: Odio los libros."></textarea>
     <button class="btn btn-primary botones" (click)="getSentimentResults(textarea.value)">Analizar</button>
+    <p>{{sentimentResults | json }}</p>
 </div>
 <div class="container text-center">
     <img src="../../assets/images/feliz.png"  class="img_sentimiento" alt="Feliz" >

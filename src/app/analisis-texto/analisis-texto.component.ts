@@ -15,6 +15,7 @@ export class AnalisisTextoComponent implements OnInit {
 
   constructor(private analsisSentimientoService: AnalisisSentimientoService) { }
 
+  
   getSentimentResults(message: String): void {
     // Create an alert of sorts here
     if (message === "") { console.log("No mola tio"); }
@@ -24,6 +25,7 @@ export class AnalisisTextoComponent implements OnInit {
         result => {
           this.sentimentResults = result;
           console.log(this.sentimentResults);
+          
         });
     }
   }
