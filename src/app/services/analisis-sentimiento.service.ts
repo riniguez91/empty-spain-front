@@ -12,9 +12,8 @@ export class AnalisisSentimientoService {
 
   }
 
-  getSentimentResults(): Observable<any> {
+  processText(message: String): Observable<any> {
     let sentimentUrl = 'http://127.0.0.1:5000/sentimiento';
-    let testText = 'No me gusto nada la pelicula! Fue un horror y las escenas eran malisimas';
-    return this.http.post(sentimentUrl, testText);
+    return this.http.post(sentimentUrl, message);
   }
 }

@@ -11,11 +11,10 @@ CORS(app)
 def not_found(error):
     return make_response(jsonify( {'error': 'Not found'}), 404)
 
-# Used to test textblob library with sentiment analysis
+# Used to test textblob library with sentiment analysis (DOESN'T work when translating english to english!)
 @app.route('/sentimiento', methods =['POST'])
 def get_sentimiento():
     texto_introducido = str(request.data)
-    print(texto_introducido)
     texto = TextBlob(texto_introducido)
     text = texto.translate(to="en")
     result = text.sentiment 
