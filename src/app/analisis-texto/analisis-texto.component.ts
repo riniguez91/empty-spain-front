@@ -13,19 +13,23 @@ export class AnalisisTextoComponent implements OnInit {
   sentimentResults: Object[];
   messageToProcess: String;
   respuesta: Number;
+  visibility: boolean = false;
   
   constructor(private analsisSentimientoService: AnalisisSentimientoService) { }
 
   
   getSentimentResults(message: String): void {
-    // Create an alert of sorts here
-    if (message === "") { console.log("No mola tio"); }
+    // Display our warning div if the user has introduced empty text
+    if (message === "") {
+      this.visibility = true;
+    }
     // Asinchronous call to service which calls the API
     else {
+      // Change empty-text warning visibility
+      this.visibility = false;
       this.analsisSentimientoService.processText(message).subscribe(
         result => {
           this.sentimentResults = result;
-          console.log(this.sentimentResults);
           this.respuesta =  this.sentimentResults["resultado"][0];  
         });
     }

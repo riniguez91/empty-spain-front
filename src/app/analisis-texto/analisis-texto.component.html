@@ -2,7 +2,7 @@
     <h1 class="display-1 h1Titulo"><strong>Análisis de Texto</strong></h1>
 </div>
 
-<div class="container text-center">
+<div class="container text-center" id="sentiment-analyzer">
     <h2>Introducir la frase o texto que se quiere analizar:</h2>
     <hr>
     <p class="texto_principal">Si el analisis del texto devuelve como resultado un valor menor a -0.4 , el texto es considerado negativo;
@@ -12,18 +12,24 @@
     </p>
     <textarea #textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Ejemplo: Odio los libros."></textarea>
     <button class="btn btn-primary botones" (click)="getSentimentResults(textarea.value)">Analizar</button>
+
+    <!-- Empty textarea warning  -->
+    <div *ngIf="visibility" class="alert alert-warning" role="alert">
+        Has introducido un texto vacio, intentalo de nuevo!
+    </div>
 </div>
 
-<div  *ngIf="respuesta > -1" class="container text-center">
-    <div *ngIf="respuesta >= 0.4"> 
+<div class="container text-center">
+    <!-- Checks if the warning container is visible so that it only displays the result container if there is no warning -->
+    <div *ngIf="respuesta >= 0.4 && !visibility"> 
         <img src="../../assets/images/feliz.png"  class="img_sentimiento" alt="Positivo">
         <p class="display-4 resultado" id="positivo">Resultado positivo: {{respuesta}}</p>
     </div>
-    <div *ngIf="respuesta <= -0.4"> 
+    <div *ngIf="respuesta <= -0.4 && !visibility"> 
         <img src="../../assets/images/triste.png" class="img_sentimiento" alt="Negativo">
         <p class="display-4 resultado" id="negativo">Resultado negativo: {{respuesta}}</p>
     </div>
-    <div *ngIf="respuesta < 0.4 && respuesta > -0.4">
+    <div *ngIf="respuesta < 0.4 && respuesta > -0.4 && !visibility">
         <img src="../../assets/images/neutral.png" class="img_sentimiento" alt="Neutral">
         <p class="display-4 resultado" id="neutral">Resultado neutral: {{respuesta}}</p>
     </div>
