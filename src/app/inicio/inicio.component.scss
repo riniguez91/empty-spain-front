@@ -1,23 +1,5 @@
-$colorPrincipal: rgb(115, 137, 220);
-$colorSecundario: rgb(64, 77, 126);
-
-.btn-primary {
-    background-color: $colorPrincipal;
-    
-}
-
-.btn-primary:hover{
-    background-color: $colorSecundario;
-}
-
-a {
-    display: block;
-    padding-top: 5px;
-}
-
-.hasDisplay {
-    display: block;
-  }
+// Import para poder utilizar las clases de styles.scss
+@import '../../styles.scss';
 
 #home-sentiment-img {
     display: block;

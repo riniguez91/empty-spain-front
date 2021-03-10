@@ -6,11 +6,43 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
+/*Variables globales */
+$colorPrincipal: rgb(115, 137, 220);
+$colorSecundario: rgb(64, 77, 126);
+$colorNeutral: rgb(243, 252, 193);
+$colorPositivo: rgb(157, 240, 157);
+$colorNegativo: rgb(247, 126, 126);
+
 .botones{
     margin-top: 20px!important;
     margin-bottom: 20px!important;
 }
 
+.btn-primary {
+    background-color: $colorPrincipal;
+    
+}
+
+.btn-primary:hover{
+    background-color: $colorSecundario;
+}
+
+
 .h1Titulo{
     margin-bottom: 20px;
+    letter-spacing: 6px;
+    font-family:'Lucida Sans';
+}
+
+.texto_principal{
+    padding-top: 5px;
+    text-align: justify;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+}
+
+// Asignar a 100% para que el footer este fijo debajo (id=estilo en div de app.component.html necesario)
+body, html{
+    height: 100%
 }

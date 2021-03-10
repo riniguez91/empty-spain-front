@@ -5,12 +5,26 @@
 <div class="container text-center">
     <h2>Introducir la frase o texto que se quiere analizar:</h2>
     <hr>
+    <p class="texto_principal">Si el analisis del texto devuelve como resultado un valor menor a -0.4 , el texto es considerado negativo;
+        si el resultado obtenido es mayor a -0.4 y  menor que 0.4 es considerado de caracter neutro; 
+        y si es superior a 0.4, es un texto positivo.
+        Teniendo la máxima positividad si el resultado es 1 y la máxima negatividad si es -1.
+    </p>
     <textarea #textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Ejemplo: Odio los libros."></textarea>
     <button class="btn btn-primary botones" (click)="getSentimentResults(textarea.value)">Analizar</button>
 </div>
+
 <div  *ngIf="respuesta > -1" class="container text-center">
-    <p>Resultado: {{respuesta}}</p>
-    <div *ngIf="respuesta >= 0.4"> <img src="../../assets/images/feliz.png"  class="img_sentimiento" alt="Feliz" > </div>
-    <div *ngIf="respuesta <= -0.4"> <img src="../../assets/images/triste.png" class="img_sentimiento" alt="Triste" > </div>
-    <div *ngIf="respuesta < 0.4 && respuesta > -0.4"> <img src="../../assets/images/neutral.png" class="img_sentimiento" alt="Neutral"> </div>
+    <div *ngIf="respuesta >= 0.4"> 
+        <img src="../../assets/images/feliz.png"  class="img_sentimiento" alt="Positivo">
+        <p class="display-4 resultado" id="positivo">Resultado positivo: {{respuesta}}</p>
+    </div>
+    <div *ngIf="respuesta <= -0.4"> 
+        <img src="../../assets/images/triste.png" class="img_sentimiento" alt="Negativo">
+        <p class="display-4 resultado" id="negativo">Resultado negativo: {{respuesta}}</p>
+    </div>
+    <div *ngIf="respuesta < 0.4 && respuesta > -0.4">
+        <img src="../../assets/images/neutral.png" class="img_sentimiento" alt="Neutral">
+        <p class="display-4 resultado" id="neutral">Resultado neutral: {{respuesta}}</p>
+    </div>
 </div>  
