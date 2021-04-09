@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +15,8 @@ export class AnalisisSentimientoService {
    * @returns sentiment analysis result 
    */
   processText(message: String): Observable<any> {
-    let sentimentUrl = 'http://127.0.0.1:5000/sentimiento';
-    return this.http.post(sentimentUrl, message);
+    //let sentimentUrl = 'http://127.0.0.1:5000/sentimiento';
+    //return this.http.post(sentimentUrl, message);
+    return this.http.post(environment.apiUrl_sentiment, message); 
   }
 }

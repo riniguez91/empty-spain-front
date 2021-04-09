@@ -11,6 +11,7 @@ import { InicioComponent } from './inicio/inicio.component'
 import { pathToFileURL } from 'url';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,
