@@ -21,6 +21,5 @@ def get_sentimiento():
 
     return jsonify({'resultado': result})
 
-
 if __name__ == '__main__':
     app.run(debug = True)

@@ -10,8 +10,8 @@
         y si es superior a 0.4, es un texto positivo.
         Teniendo la máxima positividad si el resultado es 1 y la máxima negatividad si es -1.
     </p>
-    <textarea #textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Ejemplo: Odio los libros."></textarea>
-    <button class="btn btn-primary botones" (click)="getSentimentResults(textarea.value)">Analizar</button>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Ejemplo: Odio los libros." [(ngModel)]="textarea"></textarea>
+    <button class="btn btn-primary botones" (click)="getSentimentResults()">Analizar</button>
 
     <!-- Empty textarea warning  -->
     <div *ngIf="visibility" class="alert alert-warning" role="alert">

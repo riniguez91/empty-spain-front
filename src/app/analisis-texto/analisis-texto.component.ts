@@ -13,6 +13,7 @@ export class AnalisisTextoComponent implements OnInit {
   sentimentResults: Object[];
   respuesta: Number;
   visibility: boolean = false;
+  textarea = "";
   
   constructor(private analsisSentimientoService: AnalisisSentimientoService) { }
 
@@ -22,16 +23,16 @@ export class AnalisisTextoComponent implements OnInit {
    * and if it is it uses property binding to show the warning div, else it calls the API to obtain the sentiment result
    * @returns void 
    */
-  getSentimentResults(message: String): void {
+  getSentimentResults(): void {
     // Display our warning div if the user has introduced empty text
-    if (message === "") {
+    if (this.textarea === "") {
       this.visibility = true;
     }
     // Asinchronous call to service which calls the API
     else {
       // Change empty-text warning visibility
       this.visibility = false;
-      this.analsisSentimientoService.processText(message).subscribe(
+      this.analsisSentimientoService.processText(this.textarea).subscribe(
         result => {
           this.sentimentResults = result;
           // API returns a JSON containing polarity and subjectivity, since we are only interested in one we obtain the frist

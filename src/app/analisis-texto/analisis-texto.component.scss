@@ -1,24 +1,21 @@
-// Import para poder utilizar las clases de styles.scss
-@import '../../styles.scss';
-
-.img_sentimiento{
+.img_sentimiento {
     height: 200px;
 }
 
-.resultado{
+.resultado {
     font-size: 32px;
     padding-bottom: 6px;
     color: rgb(0, 0, 0);
 }
 
-#positivo{
+#positivo {
     background-color: $colorPositivo;
 }
 
-#negativo{
+#negativo {
     background-color: $colorNegativo;
 }
 
-#neutral{
+#neutral {
     background-color: $colorNeutral;
 }
