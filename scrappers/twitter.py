@@ -42,7 +42,7 @@ def sns(query, num_tweets):
             'Date': str(tweet.date),
             'ID': tweet.id,
             'Content': tweet.content,
-            'Username': tweet.user.username
+            'Username': tweet.username
         }
 
     return json.dumps(output, indent=3)

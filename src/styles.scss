@@ -1,13 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
-
 /*Variables globales */
 $colorPrincipal: rgb(115, 137, 220);
 $colorSecundario: rgb(64, 77, 126);
 $colorNeutral: rgb(243, 252, 193);
 $colorPositivo: rgb(157, 240, 157);
 $colorNegativo: rgb(247, 126, 126);
-
-@import "app/analisis-texto/analisis-texto.component.scss";
 
 .botones {
     margin-top: 20px!important;
@@ -39,4 +35,16 @@ $colorNegativo: rgb(247, 126, 126);
 // Asignar a 100% para que el footer este fijo debajo (id=estilo en div de app.component.html necesario)
 body, html {
     height: 100%
+}
+
+#positivo {
+    background-color: red;//$colorPositivo
+}
+
+#negativo {
+    background-color: $colorNegativo;
+}
+
+#neutral {
+    background-color: $colorNeutral;
 }
