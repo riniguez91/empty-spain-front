@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "entrega1-empty-spain": {
+    "empty-spain-front": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/entrega1-empty-spain",
+            "outputPath": "dist/empty-spain-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,18 +68,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "entrega1-empty-spain:build"
+            "browserTarget": "empty-spain-front:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "entrega1-empty-spain:build:production"
+              "browserTarget": "empty-spain-front:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "entrega1-empty-spain:build"
+            "browserTarget": "empty-spain-front:build"
           }
         },
         "test": {
@@ -116,16 +116,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "entrega1-empty-spain:serve"
+            "devServerTarget": "empty-spain-front:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "entrega1-empty-spain:serve:production"
+              "devServerTarget": "empty-spain-front:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "entrega1-empty-spain"
+  "defaultProject": "empty-spain-front"
 }

@@ -38,7 +38,7 @@ def text(user_input):
         
         noticias["COPE News in " + user_input].append({
             'Name': titulo.text,
-            'Subtitle':subtitulo.text,
+            'Subtitle':'' if not subtitulo else subtitulo.text,
             'URL':link_completo
         })
     return json.dumps(noticias, indent=3)
