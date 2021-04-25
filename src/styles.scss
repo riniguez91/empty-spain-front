@@ -1,9 +1,25 @@
-/*Variables globales */
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Poppins:wght@300;400&display=swap');
+
+/* Variables globales */
 $colorPrincipal: rgb(115, 137, 220);
 $colorSecundario: rgb(64, 77, 126);
 $colorNeutral: rgb(243, 252, 193);
 $colorPositivo: rgb(157, 240, 157);
 $colorNegativo: rgb(247, 126, 126);
+
+// Asignar a 100% para que el footer este fijo debajo (id=estilo en div de app.component.html necesario)
+body, html {
+    height: 100%;
+    background-color: #f2f2f2!important;
+}
+
+.container {
+    background-color: white;
+}
+
+.main-container {
+    margin: 3vh;
+}
 
 .botones {
     margin-top: 20px!important;
@@ -20,8 +36,7 @@ $colorNegativo: rgb(247, 126, 126);
 
 .h1Titulo {
     margin-bottom: 20px;
-    letter-spacing: 6px;
-    font-family:'Lucida Sans';
+    font-family: 'Poppins', sans-serif;
 }
 
 .texto_principal {
@@ -30,11 +45,7 @@ $colorNegativo: rgb(247, 126, 126);
     text-decoration: none;
     font-size: 18px;
     color: black;
-}
-
-// Asignar a 100% para que el footer este fijo debajo (id=estilo en div de app.component.html necesario)
-body, html {
-    height: 100%
+    font-family: 'Lora', serif;
 }
 
 #positivo {

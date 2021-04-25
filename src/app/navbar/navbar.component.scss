@@ -1,9 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
 .activeLink {
-    font-weight: 750;
+    background-color: #6A9A1F;
+}
+
+.nav-link {
+    color: white!important;
+    text-align: center;
 }
 
 .navbar {
     padding-left: 20px;
     padding-right: 12px;
-    margin-bottom: 25px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
 }
+
+.navbar-brand {
+    font-size: 23px;
+}
+
+/* Navbar collapse elements */
+.show {
+    margin-top: 10px;
+} 
+

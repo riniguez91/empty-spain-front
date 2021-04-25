@@ -3,16 +3,18 @@
   
   <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
     <span class="navbar-toggler-icon"></span>
-  </button>
-  
-  
-  <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+  </button> 
+
+  <div class="collapse navbar-collapse" [ngClass]="{'show': navbarOpen}">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item mx-1">
           <a class="nav-link" routerLink="/inicio" routerLinkActive="activeLink">Inicio</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/analisis-texto" routerLinkActive='activeLink'> Análisis de Texto</a>
+        <li class="nav-item mx-1">
+          <a class="nav-link" routerLink="/analisis-texto" routerLinkActive="activeLink">Análisis de Texto</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="nav-link" routerLink="/authentication" routerLinkActive="activeLink">Login</a>
         </li>
       </ul>
   </div>

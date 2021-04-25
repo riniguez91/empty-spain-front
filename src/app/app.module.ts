@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { InicioComponent } from './inicio/inicio.component'
 import { pathToFileURL } from 'url';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     FooterComponent,
     AnalisisTextoComponent,
-    InicioComponent
+    InicioComponent,
+    AuthenticationComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,9 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule.forRoot([
       {path: 'analisis-texto', component: AnalisisTextoComponent},
       {path: 'inicio', component: InicioComponent},
-      {path: '', redirectTo: '/inicio', pathMatch: 'full'}
+      {path: 'authentication', component: AuthenticationComponent},
+      {path: '404', component: NotFoundComponent},
+      {path: '**', redirectTo: '/404', pathMatch: 'full'}
     ])
   ],
   providers: [],
