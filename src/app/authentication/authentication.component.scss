@@ -44,6 +44,11 @@ button[type=submit] {
   margin-top: 10px;
 }
 
+/* cuando el popup se abre se disipa el fondo */
+.modal-backdrop {
+    opacity:0.5 !important;
+    
+}
 
 /* Register */
 /* #name.form-control {

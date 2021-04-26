@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserModule,
     NgbModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
     RouterModule.forRoot([
       {path: 'analisis-texto', component: AnalisisTextoComponent},

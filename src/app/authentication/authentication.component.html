@@ -1,20 +1,105 @@
 <div class="mw-100 main-container">
     <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-signin mx-auto d-block">
-        <img class="icon mx-auto d-block" src="https://i.pinimg.com/originals/20/d2/81/20d28190d1556b7279ba6f0c87b0d9f2.jpg" alt="Logo Movie Showcase" >
+        <img class="icon mx-auto d-block"
+            src="https://i.pinimg.com/originals/20/d2/81/20d28190d1556b7279ba6f0c87b0d9f2.jpg"
+            alt="Logo Movie Showcase">
         <h1 class="h3 mb-3 font-weight-normal">Empty Spain Inc.</h1>
 
         <label for="inputEmail" class="sr-only">E-mail address</label>
-        <input type="email" id="inputEmail" class="form-control" name="username" placeholder="E-mail address" ngModel email required autofocus>
-        
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" ngModel name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="email" id="inputEmail" class="form-control" name="username" placeholder="E-mail address" ngModel
+            email required autofocus>
 
-<!--         <div *ngIf="username.invalid && username != ''" class="alert alert-danger">Invalid username or password</div>
- -->    
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" ngModel name="password" id="inputPassword" class="form-control" placeholder="Password"
+            required>
+
+        <!--         <div *ngIf="username.invalid && username != ''" class="alert alert-danger">Invalid username or password</div>
+ -->
         <div class="text-center">
             <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="f.invalid">Sign in</button>
-            <a class="register-link d-block" href="./register.php">Don't have an account?</a>
+            <a class="register-link d-block" (click)="show()">Don't have an account?</a>
             <p class="mt-4 text-muted">&copy; 2019-2020 by Grupo 5</p>
         </div>
     </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- Creates the bootstrap modal where the image will appear -->
+
+<div [style.display]="showModal ? 'block' : 'none'" class="modal" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Register</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit(f)">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" formControlName="name" placeholder="Name" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.name.errors.required">Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Surnames</label>
+                                <input type="text" formControlName="surnames" placeholder="Surnames"
+                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.surnames.errors }" />
+                                <div *ngIf="submitted && f.surnames.errors" class="invalid-feedback">
+                                    <div *ngIf="f.surnames.errors">Mobile must be Valid and at least 10 digits</div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-m-6">
+                            <div class="col-m-6">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="text" formControlName="email" placeholder="Email" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                        <div *ngIf="f.email.errors.required">Email is required</div>
+                                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" formControlName="password" placeholder="Password"
+                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                    <div *ngIf="f.password.errors.required">Password is required</div>
+                                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+
+                <!-- Boton en la parte inferior de cerrar popup -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="hide()">Close</button>
+
+            </div>
+        </div>
+    </div>
+
 </div>
