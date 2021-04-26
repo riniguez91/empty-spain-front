@@ -34,6 +34,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
       {path: 'inicio', component: InicioComponent},
       {path: 'authentication', component: AuthenticationComponent},
       {path: '404', component: NotFoundComponent},
+      {path: '', redirectTo: '/inicio', pathMatch: 'full'},
       {path: '**', redirectTo: '/404', pathMatch: 'full'}
     ])
   ],
