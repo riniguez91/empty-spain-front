@@ -2,6 +2,7 @@ from flask import Flask, jsonify, abort, request, make_response, url_for
 from textblob import TextBlob
 from textblob.sentiments import NaiveBayesAnalyzer
 from flask_cors import CORS
+from tripadvisor import informacion_detallada
 
 app = Flask(__name__)
 CORS(app)
@@ -20,6 +21,11 @@ def get_sentimiento():
     result = text.sentiment 
 
     return jsonify({'resultado': result})
+
+@app.route('/tripadvisor', methods=['POST'])
+def info_trip():
+    name = ""
+    return informacion_detallada(name)
 
 if __name__ == '__main__':
     app.run(debug = True)

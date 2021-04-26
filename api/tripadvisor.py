@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import re
 import json
 
+
 def link_zona_hoteles(user_input):
     query = "Hoteles en " + user_input
     # Headless is faster than a window browser and consumes less resources since there is no need for a GUI
@@ -15,7 +16,7 @@ def link_zona_hoteles(user_input):
     options.add_argument('--incognito')
     options.add_argument('--headless') 
     options.add_argument('--enable-javascript')
-    PATH = "chromedriver.exe"
+    PATH = "C:/Chromedriver/chromedriver.exe"
 
     driver = webdriver.Chrome(PATH, options=options)
     driver.get('https://www.tripadvisor.es/Hotels')     #Lanzar la URL
@@ -30,8 +31,8 @@ def link_zona_hoteles(user_input):
 
 hoteles = []    #Nombre de los hoteles
 url_hotel = []  #Link de los hoteles
-def info_basica_varias_paginas():
-    paginas = ["","oa30-"]      #Array con el formato que sigue el paginado de TripAdvisor (para coger más paginas sería "oa60-" -> "oa90-" -> "oa120-"...)
+def info_basica_varias_paginas(user_input):
+    paginas = [""]      #Array con el formato que sigue el paginado de TripAdvisor (para coger más paginas sería "oa30-" -> "oa60-" -> "oa90-" -> "oa120-"...)
 
     #Separar los links
     url_consulta = link_zona_hoteles(user_input)
@@ -69,10 +70,10 @@ def info_basica_varias_paginas():
     return json.dumps(hoteles_basico, indent=3)
 
 ####################################################################################################
-def informacion_detallada():
+def informacion_detallada(user_input):
     hoteles_detallado = {}
     hoteles_detallado[user_input] = []
-    info_basica_varias_paginas()    #Se llama a la funcion "info_basica_varias_paginas" para cargar los nombres y links de los hoteles, y también la cantidad de hoteles que hay (con el length)
+    info_basica_varias_paginas(user_input)    #Se llama a la funcion "info_basica_varias_paginas" para cargar los nombres y links de los hoteles, y también la cantidad de hoteles que hay (con el length)
 
     for count in range(len(url_hotel)):         #bucle que itera el numero de 'url_hotel', es decir, el total de hoteles que hay
         r = requests.get(url_hotel[count])
@@ -114,5 +115,5 @@ def informacion_detallada():
 
 ############
 
-user_input = str(input("Introducir el municipio en el cual quieres buscar hoteles (ej: Madrid): ")) 
-print(informacion_detallada())
+#user_input = str(input("Introducir el municipio en el cual quieres buscar hoteles (ej: Madrid): ")) 
+#print(informacion_detallada())
