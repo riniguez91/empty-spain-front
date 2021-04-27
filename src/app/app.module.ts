@@ -14,6 +14,7 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { NotFoundComponent } from './not-found/not-found.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AnalisisTextoComponent,
     InicioComponent,
     AuthenticationComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
       {path: 'analisis-texto', component: AnalisisTextoComponent},
       {path: 'inicio', component: InicioComponent},
       {path: 'authentication', component: AuthenticationComponent},
+      {path: 'perfil', component: PerfilComponent},
       {path: '404', component: NotFoundComponent},
       {path: '', redirectTo: '/inicio', pathMatch: 'full'},
       {path: '**', redirectTo: '/404', pathMatch: 'full'}
