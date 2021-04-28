@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,11 +10,25 @@ import { Component, OnInit } from '@angular/core';
 
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  navbarOpen = false;
+  profileLink = false;
+
+  userCredentials: object;
+  observable: Observable<any>;
+
+  constructor(private loginService: LoginService) {
+
+    /* if (!this.userCredentials) this.router.navigate(['/inicio']); */
+    this.observable = this.loginService.getUserCredentials();
+    if (this.observable) this.observable.subscribe(result => {
+      console.log(result);
+      this.profileLink = true
+    }
+    );
+    
+}
 
   ngOnInit(): void { }
-
-  navbarOpen = false;
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;

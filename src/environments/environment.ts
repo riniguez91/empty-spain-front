@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  apiUrl_sentiment:'http://127.0.0.1:5000/sentimiento'
+  sentiment_url:'http://127.0.0.1:5000/sentimiento',
+  login_url:'http://localhost:8000/login',
+  register_url: 'http://localhost:8000/register',
+  tripadvisor_scrapper_url: 'http://localhost:5000/tripadvisor',
+  tripadvisor_api_url: 'http://localhost:8000/scrapers/tripadvisor'
 };
 
 /*

@@ -8,21 +8,18 @@
             <table>
                 <tr>
                     <td>Name:</td>
-                    <td></td>
+                    <td>{{userCredentials['name']}}</td>
                 </tr>
                 <tr>
                     <td>Surnames:</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td></td>
+                    <td>{{userCredentials['surnames']}}</td>
                 </tr>
             </table>
+            <div class="container text-center">
+                <button class="btn btn-primary" (click)="tripAdvisorScraper()">TripAdvisor scraper</button><br>
+                <button class="btn btn-primary mt-4">Twitter scraper</button><br>
+                <button class="btn btn-primary mt-4">DBPedia scraper</button>
+            </div>
         </div>
 
 

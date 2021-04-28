@@ -1,12 +1,12 @@
 <div class="mw-100 main-container">
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-signin mx-auto d-block">
+    <form #f="ngForm" (ngSubmit)="onLoginSubmit(f)" class="form-signin mx-auto d-block">
         <img class="icon mx-auto d-block"
             src="https://i.pinimg.com/originals/20/d2/81/20d28190d1556b7279ba6f0c87b0d9f2.jpg"
             alt="Logo Movie Showcase">
         <h1 class="h3 mb-3 font-weight-normal">Empty Spain Inc.</h1>
 
         <label for="inputEmail" class="sr-only">E-mail address</label>
-        <input type="email" id="inputEmail" class="form-control" name="username" placeholder="E-mail address" ngModel
+        <input type="email" id="inputEmail" class="form-control" name="email" placeholder="E-mail address" ngModel
             email required autofocus>
 
         <label for="inputPassword" class="sr-only">Password</label>
@@ -23,15 +23,6 @@
     </form>
 </div>
 
-
-
-
-
-
-
-
-
-
 <!-- Creates the bootstrap modal where the image will appear -->
 
 <div [style.display]="showModal ? 'block' : 'none'" class="modal" tabindex="-1" role="dialog"
@@ -43,7 +34,7 @@
                 <h4 class="modal-title" id="myModalLabel">Register</h4>
             </div>
             <div class="modal-body">
-                <form #register="ngForm" [formGroup]="registerForm" (ngSubmit)="onSubmit(register)">
+                <form #register="ngForm" [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit(register)">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -91,6 +82,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Sign Up</button>
+                    <div *ngIf="user_register_success" class="alert alert-danger text-center mt-4">Introduced email is already taken!</div>
                 </form>
 
                 <!-- Boton en la parte inferior de cerrar popup -->

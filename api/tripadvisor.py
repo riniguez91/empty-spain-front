@@ -16,7 +16,7 @@ def link_zona_hoteles(user_input):
     options.add_argument('--incognito')
     options.add_argument('--headless') 
     options.add_argument('--enable-javascript')
-    PATH = "C:/Chromedriver/chromedriver.exe"
+    PATH = "C:/WebDriver/bin/chromedriver.exe"
 
     driver = webdriver.Chrome(PATH, options=options)
     driver.get('https://www.tripadvisor.es/Hotels')     #Lanzar la URL
@@ -48,7 +48,7 @@ def info_basica_varias_paginas(user_input):
         r = requests.get(pagina_actual)
         soup = BeautifulSoup(r.text, 'lxml')
         #Div que contiene toda la informacion necesaria
-        bloque = soup.find_all(class_="prw_rup prw_meta_hsx_responsive_listing ui_section listItem")
+        bloque = soup.find_all(class_="prw_rup prw_meta_hsx_responsive_listing ui_section listItem")[:5]
         for i in bloque:
             #Nombre Hotel
             hotel = i.find(class_="property_title prominent")

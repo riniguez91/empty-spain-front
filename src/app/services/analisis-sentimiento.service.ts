@@ -17,6 +17,6 @@ export class AnalisisSentimientoService {
   processText(message: String): Observable<any> {
     //let sentimentUrl = 'http://127.0.0.1:5000/sentimiento';
     //return this.http.post(sentimentUrl, message);
-    return this.http.post(environment.apiUrl_sentiment, message); 
+    return this.http.post(environment.sentiment_url, message); 
   }
 }
