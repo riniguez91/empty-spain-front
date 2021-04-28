@@ -1,7 +1,7 @@
 <div class="text-center">
     <div class="content">
         <h2>Personal Information Page</h2>
-        <p style="text-align: left">Welcome back,<strong>  </strong>!</p>
+        <p style="text-align: left">Welcome back, {{userCredentials['name']}} {{userCredentials['surnames']}}<strong>  </strong>!</p>
         <div>
             <p>Your account details are below: <br><br></p>
             <hr>
@@ -16,7 +16,7 @@
                 </tr>
             </table>
             <div class="container text-center">
-                <button class="btn btn-primary" (click)="tripAdvisorScraper()">TripAdvisor scraper</button><br>
+                <button class="btn btn-primary" (click)="tripAdvisorScraper()">TripAdvisor scraper MADRID</button><br>
                 <button class="btn btn-primary mt-4">Twitter scraper</button><br>
                 <button class="btn btn-primary mt-4">DBPedia scraper</button>
             </div>
