@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,14 +11,10 @@ export class PerfilComponent implements OnInit {
 
   userCredentials: object;
 
-  constructor(private loginService: LoginService, private router: Router) {
+  constructor(private loginService: LoginService) {  this.userCredentials = JSON.parse(sessionStorage.getItem('user')); }
 
-      /* if (!this.userCredentials) this.router.navigate(['/inicio']); */
-      this.loginService.getUserCredentials().subscribe(result => this.userCredentials = result);
-      
-  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {  }
 
   tripAdvisorScraper() {
     var defaultName = 'Madrid';

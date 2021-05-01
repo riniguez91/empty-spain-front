@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AnalisisSentimientoService } from '../services/analisis-sentimiento.service'
+import { AnalisisSentimientoService } from '../../services/analisis-sentimiento.service'
 import { NgModule } from '@angular/core'
 
 @Component({

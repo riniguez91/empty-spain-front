@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-authentication',
@@ -19,7 +18,6 @@ export class AuthenticationComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   user_register_success = false;
-  subscription: Subscription;
 
   ngOnInit() : void {
     this.registerForm = this.formBuilder.group({
@@ -46,17 +44,18 @@ export class AuthenticationComponent implements OnInit {
   }
 
   /**
-   * Gets the user credentials from the API
+   * Sets the user credentials from the API inside sessionStorage
    * 
    * @param f NgForm
    * @return void
    */
   onLoginSubmit(f: NgForm): void {
-    this.subscription = this.loginService.updateUserCredentials(f.value).subscribe(
-      result => {
-        if (result) this.router.navigate(['/perfil']); 
-      }
-    ); 
+    this.loginService.updateUserCredentials(f.value).subscribe(
+      result => { 
+        sessionStorage.setItem('user', JSON.stringify(result));
+        console.log(sessionStorage.getItem('user'));
+        this.router.navigate(['/perfil']); 
+      });
   }
 
 

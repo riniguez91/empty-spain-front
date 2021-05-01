@@ -3,18 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
-import { AnalisisTextoComponent } from './analisis-texto/analisis-texto.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { AnalisisTextoComponent } from './components/analisis-texto/analisis-texto.component';
 import { RouterModule } from '@angular/router';
-import { InicioComponent } from './inicio/inicio.component'
+import { InicioComponent } from './components/inicio/inicio.component'
 import { pathToFileURL } from 'url';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthenticationComponent } from './authentication/authentication.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-
+import { AuthenticationComponent } from './components/authentication/authentication.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PerfilComponent } from './perfil/perfil.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,19 +16,9 @@ export class NavbarComponent implements OnInit {
   userCredentials: object;
   observable: Observable<any>;
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService) { }
 
-    /* if (!this.userCredentials) this.router.navigate(['/inicio']); */
-    this.observable = this.loginService.getUserCredentials();
-    if (this.observable) this.observable.subscribe(result => {
-      console.log(result);
-      this.profileLink = true
-    }
-    );
-    
-}
-
-  ngOnInit(): void { }
+  ngOnInit(): void { if (sessionStorage.getItem('user')) this.profileLink = true; }
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;

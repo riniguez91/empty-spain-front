@@ -9,10 +9,6 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) {}
-
-  private userCredentials: Observable<any>;
-
   // Allows us to bypass CORS policy on API server
   httpOptions = {
     headers: new HttpHeaders({
@@ -21,6 +17,8 @@ export class LoginService {
     })
   };
 
+  constructor(private http: HttpClient) {}
+
   /**
    * Update user credentials obtained from the API server using POST with the JSON in the body
    * 
@@ -28,17 +26,7 @@ export class LoginService {
    * @return Observable<any>
    */
   updateUserCredentials(userJson: object): Observable<any> {
-    this.userCredentials = this.http.post(environment.login_url, userJson);
     return this.http.post(environment.login_url, userJson);
-  }
-
-  /**
-   * Get user credentials
-   *  
-   * @returns objcet
-   */
-  getUserCredentials(): Observable<any> {
-    return this.userCredentials;
   }
 
   /**
