@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
-import { Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
+import { Session } from 'src/app/models/session.model';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-perfil',
@@ -9,16 +11,36 @@ import { Router } from '@angular/router';
 })
 export class PerfilComponent implements OnInit {
 
-  userCredentials: object;
+  session: Session;
+  userCredentials: User;
 
-  constructor(private loginService: LoginService) {  this.userCredentials = JSON.parse(sessionStorage.getItem('user')); }
+  constructor(private loginService: LoginService, private storageService: StorageService) { }
 
+  /**
+   * Load session and user data on component load
+   * 
+   * @return void
+   */
+  ngOnInit(): void { 
+    this.session = this.storageService.loadSessionData();
+    this.userCredentials = this.session['user'];
+  }
 
-  ngOnInit(): void {  }
+  /**
+   * Remove current user from localStorage and logout 
+   * 
+   * @return void
+   */
+  logout(): void { this.storageService.logout(); }
 
-  tripAdvisorScraper() {
+  /**
+   * TEST FUNCTION!! (Inserts tripadvisor information on the database)
+   * 
+   * @return void
+   */
+
+  tripAdvisorScraper(): void {
     var defaultName = 'Madrid';
-
     this.loginService.getTripAdvisorJson(defaultName).subscribe(result => {
       var json = {
         'tripadvisor_info': JSON.stringify(result),

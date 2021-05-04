@@ -20,13 +20,13 @@ export class LoginService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Update user credentials obtained from the API server using POST with the JSON in the body
+   * Obtain user credentials obtained from the API server using POST with the JSON in the body
    * 
-   * @param userJson object
+   * @param userJsonRequest object
    * @return Observable<any>
    */
-  updateUserCredentials(userJson: object): Observable<any> {
-    return this.http.post(environment.login_url, userJson);
+  login(userJsonRequest: object): Observable<any> {
+    return this.http.post(environment.login_url, userJsonRequest);
   }
 
   /**

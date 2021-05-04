@@ -3,6 +3,10 @@ import { NgForm } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
+import { User } from 'src/app/models/user.model';
+import { Session } from 'src/app/models/session.model';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-authentication',
@@ -12,12 +16,12 @@ import { Router } from '@angular/router';
 
 export class AuthenticationComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router, private storageService: StorageService) { }
 
   showModal: boolean;
   registerForm: FormGroup;
   submitted = false;
-  user_register_success = false;
+  userRegisterSuccess = false;
 
   ngOnInit() : void {
     this.registerForm = this.formBuilder.group({
@@ -34,11 +38,18 @@ export class AuthenticationComponent implements OnInit {
 
   get f() { return this.registerForm.controls; }  // Convenience getter for easy access to form fields
 
-  onRegisterSubmit(f: NgForm) {
+
+  /**
+  * Register the user inside the database
+  *  
+  * @param f NgForm 
+  * @return void
+  */
+  onRegisterSubmit(f: NgForm): void {
     this.loginService.insertUser(f.value).subscribe(
       result => {
-        this.user_register_success = !result['success'];
-        if (!this.registerForm.invalid && !this.user_register_success) this.showModal = false;
+        this.userRegisterSuccess = !result['success'];
+        if (!this.registerForm.invalid && !this.userRegisterSuccess) this.showModal = false;
       }
     );
   }
@@ -50,10 +61,12 @@ export class AuthenticationComponent implements OnInit {
    * @return void
    */
   onLoginSubmit(f: NgForm): void {
-    this.loginService.updateUserCredentials(f.value).subscribe(
+    this.loginService.login(f.value).subscribe(
       result => { 
-        sessionStorage.setItem('user', JSON.stringify(result));
-        console.log(sessionStorage.getItem('user'));
+        var user = new User(result['name'], result['surnames'], result['role']);
+        var session = new Session(result['access_token'], user);
+        this.storageService.setCurrentSession(session);
+        this.storageService.setLoggedIn(true);
         this.router.navigate(['/perfil']); 
       });
   }

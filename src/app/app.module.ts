@@ -8,12 +8,12 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AnalisisTextoComponent } from './components/analisis-texto/analisis-texto.component';
 import { RouterModule } from '@angular/router';
 import { InicioComponent } from './components/inicio/inicio.component'
-import { pathToFileURL } from 'url';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { AuthorizedGuard } from './guards/authorized.guard';
 
 
 @NgModule({
@@ -37,7 +37,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
       {path: 'analisis-texto', component: AnalisisTextoComponent},
       {path: 'inicio', component: InicioComponent},
       {path: 'authentication', component: AuthenticationComponent},
-      {path: 'perfil', component: PerfilComponent},
+      {path: 'perfil', component: PerfilComponent, canActivate: [AuthorizedGuard]},
       {path: '404', component: NotFoundComponent},
       {path: '', redirectTo: '/inicio', pathMatch: 'full'},
       {path: '**', redirectTo: '/404', pathMatch: 'full'}

@@ -14,13 +14,13 @@
           <a class="nav-link" routerLink="/analisis-texto" routerLinkActive="activeLink">Análisis de Texto</a>
         </li>
         <li class="nav-item mx-1">
+          <a class="nav-link" *ngIf="!profileLink" routerLink="/authentication" routerLinkActive="activeLink">Login</a>
+        </li>
+        <li class="nav-item mx-1">
           <a class="nav-link" *ngIf="profileLink" routerLink="/perfil" routerLinkActive="activeLink">Perfil</a>
         </li>
         <li class="nav-item mx-1">
-          <a class="nav-link" routerLink="/authentication" routerLinkActive="activeLink">Login</a>
-        </li>
-        <li class="nav-item mx-1">
-          <a class="nav-link" *ngIf="profileLink" routerLink="/authentication" routerLinkActive="activeLink">Log out</a>
+          <a class="nav-link" *ngIf="profileLink" routerLink="" (click)="logout()">Log out</a>
         </li>
       </ul>
   </div>
