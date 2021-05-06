@@ -5,7 +5,7 @@ import { StorageService } from '../services/storage.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorizedGuard implements CanActivate {
+export class PerfilGuard implements CanActivate {
 
   constructor(private router: Router, private storageService: StorageService) { }
 

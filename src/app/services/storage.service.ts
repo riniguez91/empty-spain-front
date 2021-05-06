@@ -2,7 +2,6 @@ import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Session } from '../models/session.model';
-import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,7 @@ export class StorageService {
   private currentSession: Session = null;
   private loggedIn = new BehaviorSubject<boolean>(false);
 
-  constructor(private router: Router) {  }
+  constructor(private router: Router) { if (this.loadSessionData()) this.setLoggedIn(true); }
 
   /**
    * Returns loggedIn: BehaviourSubject<boolean> as an observable

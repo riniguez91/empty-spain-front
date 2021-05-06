@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
 import { User } from 'src/app/models/user.model';
 import { Session } from 'src/app/models/session.model';
-import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-authentication',
@@ -22,11 +21,13 @@ export class AuthenticationComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   userRegisterSuccess = false;
+  validLoginEmail = true;
+  validLoginPassword = true;
 
   ngOnInit() : void {
     this.registerForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(16)]],
-      surnames: ['', [Validators.required, Validators.maxLength(16)]],
+      name: ['', [Validators.required, Validators.maxLength(8)]],
+      surnames: ['', [Validators.required, Validators.maxLength(24)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       email: ['', [Validators.required, Validators.email]],
     });
@@ -61,14 +62,20 @@ export class AuthenticationComponent implements OnInit {
    * @return void
    */
   onLoginSubmit(f: NgForm): void {
-    this.loginService.login(f.value).subscribe(
-      result => { 
-        var user = new User(result['name'], result['surnames'], result['role']);
-        var session = new Session(result['access_token'], user);
-        this.storageService.setCurrentSession(session);
-        this.storageService.setLoggedIn(true);
-        this.router.navigate(['/perfil']); 
-      });
+    this.validLoginEmail = f.form.controls['email'].valid;
+    this.validLoginPassword = f.form.controls['password'].valid;
+    if (this.validLoginEmail && this.validLoginPassword) {
+      this.loginService.login(f.value).subscribe(
+        result => { 
+          var user = new User(result['name'], result['surnames'], result['role']);
+          var session = new Session(result['access_token'], user);
+          this.storageService.setCurrentSession(session);
+          this.storageService.setLoggedIn(true);
+          this.router.navigate(['/perfil']); 
+        },
+        err => console.log(err)
+        );
+    } 
   }
 
 

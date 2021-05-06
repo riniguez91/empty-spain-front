@@ -10,13 +10,14 @@
             email required autofocus>
 
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" ngModel name="password" id="inputPassword" class="form-control" placeholder="Password"
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" ngModel
             required>
 
-        <!--         <div *ngIf="username.invalid && username != ''" class="alert alert-danger">Invalid username or password</div>
- -->
+        <div *ngIf="!validLoginEmail" class="alert alert-danger">Invalid username (should be example@example.com)</div>
+        <div *ngIf="!validLoginPassword" class="alert alert-danger">Please insert a password</div>
+    
         <div class="text-center">
-            <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="f.invalid">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
             <a class="register-link d-block" (click)="show()">Don't have an account?</a>
             <p class="mt-4 text-muted">&copy; 2019-2020 by Grupo 5</p>
         </div>
@@ -82,7 +83,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Sign Up</button>
-                    <div *ngIf="user_register_success" class="alert alert-danger text-center mt-4">Introduced email is already taken!</div>
+                    <div *ngIf="userRegisterSuccess" class="alert alert-danger text-center mt-4">Introduced email is already taken!</div>
                 </form>
 
                 <!-- Boton en la parte inferior de cerrar popup -->

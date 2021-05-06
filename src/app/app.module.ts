@@ -13,7 +13,8 @@ import { AuthenticationComponent } from './components/authentication/authenticat
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { AuthorizedGuard } from './guards/authorized.guard';
+import { PerfilGuard } from './guards/perfil.guard';
+import {AuthenticationGuard} from './guards/authentication.guard';
 
 
 @NgModule({
@@ -36,8 +37,8 @@ import { AuthorizedGuard } from './guards/authorized.guard';
     RouterModule.forRoot([
       {path: 'analisis-texto', component: AnalisisTextoComponent},
       {path: 'inicio', component: InicioComponent},
-      {path: 'authentication', component: AuthenticationComponent},
-      {path: 'perfil', component: PerfilComponent, canActivate: [AuthorizedGuard]},
+      {path: 'authentication', component: AuthenticationComponent, canActivate: [AuthenticationGuard]},
+      {path: 'perfil', component: PerfilComponent, canActivate: [PerfilGuard]},
       {path: '404', component: NotFoundComponent},
       {path: '', redirectTo: '/inicio', pathMatch: 'full'},
       {path: '**', redirectTo: '/404', pathMatch: 'full'}
