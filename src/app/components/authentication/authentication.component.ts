@@ -23,21 +23,25 @@ export class AuthenticationComponent implements OnInit {
   userRegisterSuccess = false;
   validLoginEmail = true;
   validLoginPassword = true;
+  validRegisterEmail = true;
+  validRegisterPassword = true;
+  validRegisterName = true;
+  validRegisterSurnames = true;
 
   ngOnInit() : void {
     this.registerForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(8)]],
       surnames: ['', [Validators.required, Validators.maxLength(24)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.maxLength(6)]],
       email: ['', [Validators.required, Validators.email]],
     });
   } 
 
   show() {  this.showModal = true; }  // Show-Hide Modal Check 
   
-  hide() { this.showModal = false; }  // Bootstrap Modal Close event
+  hide() {this.showModal = false; }  // Bootstrap Modal Close event
 
-  get f() { return this.registerForm.controls; }  // Convenience getter for easy access to form fields
+  get f() { return this.registerForm.controls;}  // Convenience getter for easy access to form fields
 
 
   /**
@@ -47,12 +51,17 @@ export class AuthenticationComponent implements OnInit {
   * @return void
   */
   onRegisterSubmit(f: NgForm): void {
+    this.validRegisterEmail = f.form.controls['email'].valid;
+    this.validRegisterPassword = f.form.controls['password'].valid;
+    this.validRegisterName= f.form.controls['name'].valid;
+    this.validRegisterSurnames= f.form.controls['surnames'].valid;
+    if (this.validRegisterEmail && this.validRegisterName && this.validRegisterPassword && this.validRegisterSurnames){
     this.loginService.insertUser(f.value).subscribe(
       result => {
         this.userRegisterSuccess = !result['success'];
         if (!this.registerForm.invalid && !this.userRegisterSuccess) this.showModal = false;
       }
-    );
+    );}
   }
 
   /**
