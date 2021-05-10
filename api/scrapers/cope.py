@@ -14,7 +14,7 @@ def cope_content(user_input):
     options.add_argument('--incognito')
     options.add_argument('--headless') 
     options.add_argument('--enable-javascript')
-    PATH = "chromedriver.exe"
+    PATH = 'C:/WebDriver/bin/chromedriver.exe'  
 
     pagina = "https://www.cope.es/emisoras/" + user_input
     driver = webdriver.Chrome(PATH, options=options)

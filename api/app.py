@@ -5,6 +5,7 @@ from flask_cors import CORS
 from scrapers.tripadvisor_v1 import informacion_detallada
 from scrapers.tiempo import scrape_tiempo
 from scrapers.twitter import scrape, sns
+from scrapers.wiki import wiki_content
 
 app = Flask(__name__)
 CORS(app)
@@ -43,6 +44,11 @@ def twitter_tweepy():
 @app.route('/scrapers/twitter/sns', methods=['POST'])
 def twitter_sns():
     return sns(request.data)
+
+# Wikipedia scrapper
+@app.route('/scrapers/wiki', methods=['POST'])
+def wiki():
+    return wiki_content(request.data)
 
 if __name__ == '__main__':
     app.run(debug=True)

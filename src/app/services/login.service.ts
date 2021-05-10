@@ -48,13 +48,40 @@ export class LoginService {
     return this.http.post(environment.tripadvisor_scrapper_url, city);
   }
 
+  /**
+   * Obtain JSON from the twitter scrapper
+   * 
+   * @returns JSON 
+   */
+  getTwitterJson(city: String): Observable<any> {
+    return this.http.post(environment.twitter_scrapper_url, city);
+  }
 
   /**
-   * Calls tripadvisor scrapper controller on the API backend and inserts the data in the database
-   * (We would need to pass the information inside the request, but we will simulate it for now)
+   * Obtain JSON from the tiempo scrapper
+   * 
+   * @returns JSON 
    */
-  insertTripAdvisor(json: object): Observable<any> {
-    return this.http.post(environment.tripadvisor_api_url, json);
+   getTiempoJson(city: String): Observable<any> {
+    return this.http.post(environment.tiempo_scrapper_url, city);
+  }
+
+  /**
+   * Obtain JSON from the wiki scrapper
+   * 
+   * @returns JSON 
+   */
+   getWikiJson(city: String): Observable<any> {
+    return this.http.post(environment.wiki_scrapper_url, city);
+  }
+
+
+  /**
+   * Calls add search controller on the API backend and inserts the data in the database
+   * (We would need to pass extra db information inside the request, but we will simulate it for now)
+   */
+  addSearch(json: object): Observable<any> {
+    return this.http.post(environment.add_search_url, json);
   }
 
 }

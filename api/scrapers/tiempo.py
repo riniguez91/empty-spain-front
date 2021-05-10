@@ -19,7 +19,7 @@ def contenido_tiempo(location):
     options.add_argument('--incognito')
     options.add_argument('--headless') 
     options.add_argument('--enable-javascript')
-    PATH = "C:/WebDriver/bin/chromedriver.exe"
+    PATH = 'C:/WebDriver/bin/chromedriver.exe'
 
     driver = webdriver.Chrome(PATH, options=options)
     driver.get('https://www.eltiempo.es/{}.html'.format(getUrl(location)))     #Lanzar la URL

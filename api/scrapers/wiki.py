@@ -14,7 +14,7 @@ def wiki_url(user_input):
 
     options.add_argument('--headless') 
  
-    PATH = "chromedriver" 
+    PATH = 'C:/WebDriver/bin/chromedriver.exe' 
 
     driver = webdriver.Chrome(PATH, options=options)
     driver.get('https://www.google.com/search?q={}'.format(user_input))     #Look for the search URL
@@ -26,7 +26,8 @@ def wiki_url(user_input):
 # using BeautifulSoup to scrap the map view, type of locality, population, a short description in the preview area about the location.
 def wiki_content(location):
     output = {}
-    r = wiki_url(location)
+    decoded_location = location.decode('utf-8') 
+    r = wiki_url(decoded_location)
     soup = BeautifulSoup(r, 'lxml')
     
     dict_response = {}
@@ -54,4 +55,4 @@ def wiki_content(location):
 
     return json_response
 
-print(wiki_content('Barbate'))
+""" print(wiki_content('Barbate')) """
