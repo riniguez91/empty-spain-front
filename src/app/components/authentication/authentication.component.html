@@ -15,6 +15,7 @@
 
         <div *ngIf="!validLoginEmail" class="alert alert-danger">Invalid email (should be example@example.com)</div>
         <div *ngIf="!validLoginPassword" class="alert alert-danger">Please insert a password.</div>
+        <div *ngIf="invalidLogin" class="alert alert-danger">Invalid user credentials, please check they are correct</div>
 
         <div class="text-center">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

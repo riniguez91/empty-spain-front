@@ -27,6 +27,7 @@ export class AuthenticationComponent implements OnInit {
   validRegisterPassword = true;
   validRegisterName = true;
   validRegisterSurnames = true;
+  invalidLogin = false;
 
   ngOnInit() : void {
     this.registerForm = this.formBuilder.group({
@@ -82,7 +83,7 @@ export class AuthenticationComponent implements OnInit {
           this.storageService.setLoggedIn(true);
           this.router.navigate(['/perfil']); 
         },
-        err => console.log(err)
+        err => this.invalidLogin = true
         );
     } 
   }
