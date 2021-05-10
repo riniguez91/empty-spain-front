@@ -13,6 +13,7 @@ import { AuthenticationComponent } from './components/authentication/authenticat
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { PueblosComponent } from './components/pueblos/pueblos.component'
 import { PerfilGuard } from './guards/perfil.guard';
 import {AuthenticationGuard} from './guards/authentication.guard';
 
@@ -26,7 +27,8 @@ import {AuthenticationGuard} from './guards/authentication.guard';
     InicioComponent,
     AuthenticationComponent,
     NotFoundComponent,
-    PerfilComponent
+    PerfilComponent,
+    PueblosComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import {AuthenticationGuard} from './guards/authentication.guard';
       {path: 'authentication', component: AuthenticationComponent, canActivate: [AuthenticationGuard]},
       {path: 'perfil', component: PerfilComponent, canActivate: [PerfilGuard]},
       {path: '404', component: NotFoundComponent},
+      {path: 'pueblos', component: PueblosComponent},
       {path: '', redirectTo: '/inicio', pathMatch: 'full'},
       {path: '**', redirectTo: '/404', pathMatch: 'full'}
     ])

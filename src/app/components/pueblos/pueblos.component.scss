@@ -1,0 +1,30 @@
+.container {
+    margin-top: 15px;
+    margin-bottom: 50px;
+}
+
+.row{
+    padding: 15px;
+}
+
+img{
+    margin-bottom: 10px!important;
+}
+
+.centrado{
+    position: relative;
+    text-align: center;
+}
+
+.texto{
+    position: absolute;
+    bottom: 20%;
+    
+    left: 15%;
+    right: 15%;
+    font-family:'Courier New', Courier, monospace;
+    font-size: large;
+    font-weight: bold;
+    justify-content: center;
+    background-color: rgba(255, 254, 254, 0.45);
+}
