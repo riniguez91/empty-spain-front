@@ -18,10 +18,12 @@ auth.set_access_token(access_token, access_token_secret)
 api = API(auth)
 
 # Tweepy function, we obtain the most relevant and the most recent with the mixed search_type param
-def scrape(query, num_tweets):
+def scrape(query, num_tweets=20):
     output = {}
+    # We decode the parameter since we are calling the function from a separate server and parameters info is binary-enconded
+    engine_query = '#' + query.decode('utf-8') + ' -filter:retweets'
     # There is no need to check if there is a list of tweets returned from Cursor() since if thats the case it won't enter the for loop and thus raise no exceptions
-    for i, tweet in enumerate(Cursor(api.search, q=query, lang='es', search_type='mixed').items(num_tweets)):
+    for i, tweet in enumerate(Cursor(api.search, q=engine_query, lang='es', search_type='mixed').items(num_tweets)):
         output['Tweet {}'.format(i+1)] = {
             'Date': str(tweet.created_at),
             'ID': tweet.id_str,
@@ -32,9 +34,11 @@ def scrape(query, num_tweets):
     return json.dumps(output, indent=3)
 
 # Snscrape function to obtain the tweets relevant to a less known town since the Tweepy API is limited to 7-days on the search (we're using the standard license)
-def sns(query, num_tweets):
+def sns(query, num_tweets=20):
     output = {}
-    for i, tweet in enumerate(sntwitter.TwitterSearchScraper(query).get_items()):
+    # We decode the parameter since we are calling the function from a separate server and parameters info is binary-enconded
+    engine_query = '#' + query.decode('utf-8') + ' -filter:retweets'
+    for i, tweet in enumerate(sntwitter.TwitterSearchScraper(engine_query).get_items()):
         # We need to limit the no. of tweets manually since the sns Python wrapper doesn't include the functionality
         if i > num_tweets-1:
             break
@@ -50,5 +54,5 @@ def sns(query, num_tweets):
     # Alternatively we can use system commands to obtain a .jsonl file
     # os.system('snscrape --jsonl --max-results {} twitter-search \"{}\" > tweets.json'.format(num_tweets, words))
 
-print(scrape('#Granada -filter:retweets', 20))
-print(sns('#Fondales OR (#Fondales#Granada) -filter:retweets', 20))
+""" print(scrape('#Granada -filter:retweets', 20))
+print(sns('#Fondales OR (#Fondales#Granada) -filter:retweets', 20)) """

@@ -5,13 +5,14 @@ from bs4 import BeautifulSoup
 import re
 import json
 
+# Transforms a string ex.'Villanueva de la Cañada' to the domain format ex.'villanueva_de_la_canada'
 def getUrl(location):
     transformed_location = location.lower().replace(" ", "-").replace("ñ","n")
     return transformed_location
 
+# Uses Selenium to obtain page source since we get blocked if we do a normal request w/o the library
 def contenido_tiempo(location):
     # Headless is faster than a window browser and consumes less resources since there is no need for a GUI
-    #Headless para evitar que se lance la ventana de chrome, ahorrando recursos ya que no se necesitan para la Interfaz Gráfica de Usuario
     options = webdriver.ChromeOptions()
     user_agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1'
     options.add_argument('user-agent={}'.format(user_agent))
@@ -28,11 +29,15 @@ def contenido_tiempo(location):
 
     return contenido
 
-def scrape(location):
+# Returns JSON containing city weather
+def scrape_tiempo(location):
+    # We decode the parameter since we are calling the function from a separate server and parameters info is binary-enconded
+    decoded_location = location.decode('utf-8')
     output = {}
-    r = contenido_tiempo(location)
+    r = contenido_tiempo(decoded_location)
     soup = BeautifulSoup(r, 'lxml')
     
+    # Obtain table wrapper and iterate through its rows to obtain data
     table = soup.find(class_='m_table_weather_day_wrapper')
     for column in table.findChildren('div', recursive=False):
         date = column.find(class_='m_table_weather_day_date')
@@ -52,5 +57,3 @@ def scrape(location):
         }
     
     return json.dumps(output, indent=3) 
-
-print(scrape("Brunete"))

@@ -71,9 +71,10 @@ def info_basica_varias_paginas(user_input):
 
 ####################################################################################################
 def informacion_detallada(user_input):
+    decoded_user_input = user_input.decode('utf-8') 
     hoteles_detallado = {}
-    hoteles_detallado[user_input] = []
-    info_basica_varias_paginas(user_input)    #Se llama a la funcion "info_basica_varias_paginas" para cargar los nombres y links de los hoteles, y también la cantidad de hoteles que hay (con el length)
+    hoteles_detallado[decoded_user_input] = []
+    info_basica_varias_paginas(decoded_user_input)    #Se llama a la funcion "info_basica_varias_paginas" para cargar los nombres y links de los hoteles, y también la cantidad de hoteles que hay (con el length)
 
     for count in range(len(url_hotel)):         #bucle que itera el numero de 'url_hotel', es decir, el total de hoteles que hay
         r = requests.get(url_hotel[count])
@@ -88,7 +89,7 @@ def informacion_detallada(user_input):
         valoraciones_separadas = soup.find_all(class_="_1krg1t5y")  #Encuentra las valoraciones separadas (1->Ubicacion, 2->Limpieza, 3->Servicio, 4->Relacion Calidad-precio)
         
         # A -1 score indicates the value does not exist since it isn't provided (the equivalent of an N/A in its float version)
-        hoteles_detallado[user_input].append({
+        hoteles_detallado[decoded_user_input].append({
             'Name': hoteles[count],
             'URL': url_hotel[count],
             'Detailed description': 'N/A' if not descripcion_detallada_hotel else descripcion_detallada_hotel.text, #Si está vacio pone 'N/A', sino la descripcion
@@ -108,12 +109,12 @@ def informacion_detallada(user_input):
             tipo_caracteristica = info.find(class_='_1h7NKZWM').text                        #Se coge la clase con el nombre de la caracteristica
             testvaloracion_caracteristica = float(info.span['class'][1].split("_")[1])/10   #Se coge el valor 2 del span dentro de la clase del tipo_caracteristica ('_1h7NKZWM') (Coincide con el texto) 
                                                                                             #Se hace split de la clase en posicion2 (bubble_40), para quedarnos con el valor, se pasa a float y se divide entre 10 para sacar la valoracion
-            current_dict = hoteles_detallado[user_input][count]                             #Se accede al diccionario 
+            current_dict = hoteles_detallado[decoded_user_input][count]                             #Se accede al diccionario 
             current_dict[tipo_caracteristica] = testvaloracion_caracteristica               #Accede al tipo de caracteristica, si coincide con 'Ubicacion, Limpieza, Servicio, Relacion calidad-precio' mete el valor, sino se queda con valor -1
 
     return json.dumps(hoteles_detallado, indent=3)
 
 ############
 
-#user_input = str(input("Introducir el municipio en el cual quieres buscar hoteles (ej: Madrid): ")) 
-#print(informacion_detallada())
+# user_input = str(input("Introducir el municipio en el cual quieres buscar hoteles (ej: Madrid): ")) 
+# print(informacion_detallada())
