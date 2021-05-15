@@ -1,3 +1,4 @@
+from warnings import catch_warnings
 from selenium import webdriver
 import time
 import requests
@@ -6,6 +7,7 @@ import re
 import json
 from selenium.webdriver.common.keys import Keys
 
+url = []
 
 def contenido_TripAdvisor(user_input):
     # Headless is faster than a window browser and consumes less resources since there is no need for a GUI
@@ -14,24 +16,30 @@ def contenido_TripAdvisor(user_input):
     options.add_argument('--headless') 
     PATH = "C:/WebDriver/bin/chromedriver.exe"
     driver = webdriver.Chrome(PATH, options=options)
-    """ 
     driver.get('https://www.tripadvisor.es/Hotels')     #Lanzar la URL
     driver.find_element_by_xpath('//*[@id="_evidon-accept-button"]').click()    #Aceptar Cookies
 
-    buscador = driver.find_element_by_xpath('//input')  #Buscar en la barra de busqueda
+    window_before = driver.window_handles[0]
+    buscador = driver.find_element_by_xpath('//input').send_keys(user_input)  #Buscar en la barra de busqueda
     time.sleep(1)
-    buscador.send_keys(user_input)
+    driver.find_element_by_xpath('//input').send_keys(Keys.ENTER)
+    time.sleep(3)
+        
+    cont = driver.find_element_by_xpath('//*[@id="BODY_BLOCK_JQUERY_REFLOW"]/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[1]/div/div[3]/div/div[1]/div/div[2]/div/div/div/div/div').click()
+    time.sleep(2)
 
-    time.sleep(2)  
-    driver.find_element_by_xpath('//*[@id="typeahead_results"]/a[1]/div[2]/div[1]').click() 
-    """
-    driver.get("https://www.tripadvisor.es/Tourism-g187514-Madrid-Vacations.html")  #Ejemplo con el link de Madrid (XPATH falla a veces)
-    
+    window_after = driver.window_handles[1]
+    driver.switch_to.window(window_after)
+    time.sleep(2)
+    url.append(driver.current_url)      # Url
+
     return driver.page_source
+
 
 def info_TripAdvisor(location):
     output = {}
     output[location] = []
+
     #Variables aux
     array_cosas = []
     array_alojate = []
@@ -60,11 +68,11 @@ def info_TripAdvisor(location):
                 array_come.append(nombre_restaurante.text)
         
         output[location].append({
+            'Url': url[-1],
             'Cosas que hacer': array_cosas,
             'Alojate en': array_alojate,
             'Comer en': array_come
         })
     return json.dumps(output, indent=3)
 
-
-#print(info_TripAdvisor("Madrid"))
+#print(info_TripAdvisor("Navacerrada"))
