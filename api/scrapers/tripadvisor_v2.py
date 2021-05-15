@@ -1,9 +1,6 @@
-from warnings import catch_warnings
 from selenium import webdriver
 import time
-import requests
 from bs4 import BeautifulSoup
-import re
 import json
 from selenium.webdriver.common.keys import Keys
 
