@@ -3,6 +3,7 @@ from textblob import TextBlob
 from textblob.sentiments import NaiveBayesAnalyzer
 from flask_cors import CORS
 from scrapers.tripadvisor_v1 import informacion_detallada
+from scrapers.tripadvisor_v2 import info_TripAdvisor
 from scrapers.tiempo import scrape_tiempo
 from scrapers.twitter import scrape, sns
 from scrapers.wiki import wiki_content
@@ -27,8 +28,13 @@ def get_sentimiento():
 
 # Tripadvisor scraper returns the city JSON hotels
 @app.route('/scrapers/tripadvisor/v1', methods=['POST'])
-def tripadvisor():
+def tripadvisor_v1():
     return informacion_detallada(request.data)
+
+# Tripadvisor scraper returns JSON with things to do, restaurants and hotels
+@app.route('/scrapers/tripadvisor/v2', methods=['POST'])
+def tripadvisor_v2():
+    return info_TripAdvisor(request.data)
 
 # eltiempo.es scrapers returns city JSON weather
 @app.route('/scrapers/tiempo', methods=['POST'])

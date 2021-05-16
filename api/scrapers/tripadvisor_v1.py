@@ -72,7 +72,6 @@ def info_basica_varias_paginas(user_input):
 ####################################################################################################
 def informacion_detallada(user_input):
     decoded_user_input = user_input.decode('utf-8') 
-    print(decoded_user_input)
     hoteles_detallado = {}
     hoteles_detallado[decoded_user_input] = []
     info_basica_varias_paginas(decoded_user_input)    #Se llama a la funcion "info_basica_varias_paginas" para cargar los nombres y links de los hoteles, y también la cantidad de hoteles que hay (con el length)

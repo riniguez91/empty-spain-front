@@ -49,6 +49,15 @@ export class LoginService {
   }
 
   /**
+   * Obtains JSON from the tripadvisor scrapper
+   * 
+   * @returns JSON
+   */
+   getTripAdvisorJsonV2(city: String): Observable<any> {
+    return this.http.post(environment.tripadvisor_scrapper_url_v2, city);
+  }
+
+  /**
    * Obtain JSON from the twitter scrapper
    * 
    * @returns JSON 

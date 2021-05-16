@@ -34,14 +34,15 @@ def contenido_TripAdvisor(user_input):
 
 
 def info_TripAdvisor(location):
+    decoded_location = location.decode('utf-8')
     output = {}
-    output[location] = []
+    output[decoded_location] = []
 
     #Variables aux
     array_cosas = []
     array_alojate = []
     array_come = []
-    r = contenido_TripAdvisor(location)
+    r = contenido_TripAdvisor(decoded_location)
     soup = BeautifulSoup(r, 'lxml')
 
     contenedor = soup.find_all(class_="_1HQROFP")   # Clase general con toda la informacion
@@ -64,7 +65,7 @@ def info_TripAdvisor(location):
             for nombre_restaurante in cont_comer:
                 array_come.append(nombre_restaurante.text)
         
-        output[location].append({
+        output[decoded_location].append({
             'Url': url[-1],
             'Cosas que hacer': array_cosas,
             'Alojate en': array_alojate,
@@ -72,4 +73,4 @@ def info_TripAdvisor(location):
         })
     return json.dumps(output, indent=3)
 
-#print(info_TripAdvisor("Navacerrada"))
+#print(info_TripAdvisor(b"Navacerrada"))

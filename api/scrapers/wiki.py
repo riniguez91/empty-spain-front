@@ -1,3 +1,4 @@
+import base64
 from selenium import webdriver
 import time
 import requests
@@ -19,7 +20,7 @@ def wiki_url(user_input):
     driver = webdriver.Chrome(PATH, options=options)
     driver.get('https://www.google.com/search?q={}'.format(user_input))     #Look for the search URL
     time.sleep(1)
-    driver.find_element_by_xpath('//*[@id="zV9nZe"]/div').click()    #Accepting Google Cookies
+    driver.find_element_by_xpath('//*[@id="L2AGLb"]/div').click()           #Accepting Google Cookies
     
     return driver.page_source
 
@@ -55,4 +56,4 @@ def wiki_content(location):
 
     return json_response
 
-""" print(wiki_content('Barbate')) """
+#print(wiki_content(b'Barbate'))

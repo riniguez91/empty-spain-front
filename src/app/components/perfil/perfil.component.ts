@@ -42,7 +42,7 @@ export class PerfilComponent implements OnInit {
   addSearch(): void {
     // Simula el campo que recojeriamos de la barra de busqueda
     var defaultName = 'Madrid';
-    var json = {
+    /*var json = {
       'tripadvisor_info': JSON.stringify({'test': 'test'}),
       'search_date': '2021-04-26 13:23:12',
       'municipio_id': '1001',
@@ -58,9 +58,9 @@ export class PerfilComponent implements OnInit {
           this.loginService.addSearch(json).subscribe(result => console.log(result));
         })
       })
-    })
+    })*/
 
-    /* this.loginService.getTripAdvisorJson(defaultName).subscribe(result => {
+    this.loginService.getTripAdvisorJsonV2(defaultName).subscribe(result => {
       var json = {
         'tripadvisor_info': JSON.stringify(result),
         'search_date': '2021-04-26 13:23:12',
@@ -68,16 +68,16 @@ export class PerfilComponent implements OnInit {
         'usuario_id': '1'
       }
       this.loginService.getTwitterJson(defaultName).subscribe(result => {
-        json['twitter_info'] = result;
+        json['twitter_info'] = JSON.stringify(result);
         this.loginService.getTiempoJson(defaultName).subscribe(result => {
-          json['tiempo_info'] = result;
+          json['tiempo_info'] = JSON.stringify(result);
           this.loginService.getWikiJson(defaultName).subscribe(result => {
-            json['wiki_info'] = result;
+            json['wiki_info'] = JSON.stringify(result);
             this.loginService.addSearch(json).subscribe(result => console.log(result));
           })
         })
       })
-    }) */
+    })
   }
 
 
