@@ -1,27 +1,31 @@
-# Entrega1EmptySpain
+# empty-spain-front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.0.
+Application that analyzes various sources of information (news/reviews etc.) about dying rural towns in Spain and offers the user various functionalities depending on its privileges, aimed to offer a solution in order to stop rural towns dying from lack of population. 
+
+This application uses the Angular framework to implement a user-friendly, rich front-end aided by Bootstrap v5 and various graphic libraries. It follows a Model-View-Controller pattern and uses a custom-built web service to authenticate users and registered users or admin specific functionalities, along with various APIs and WebScrappers implemented using Flask and Lumen on the back-end part of the project: https://github.com/riniguez91/empty-spain-back.
+
+Currently the machine learning model (Logistic Regression) has been trained with a dataset of 146 documents obtained through the Pentaho scrapper built, and we decided to use this model based on the performance obtained by it and various others in RapidMiner.
+
+Non-registered user functionalities:
+* Public access
+* After searching for a town it will show the model prediction for its "Empty Spain" status (depopulated or not) 
+* Town services (hotels, restaurants, places to visit) along with its correspondant sentiment analysis
+
+Admin functionalities:
+* Protected via user/password
+* Can launch various time-consuming WebsScrappers that populate the database amongst other things
+* Access to a dashboard that displays web information such as opinions, services
+* User privilige modifications
+
+# Authors
+* github.com/riniguez91
+* github.com/victor00hs
+* github.com/rubenoritznieto
+
+PD: Since all of our information is written in Spanish expect some parts that we can't simply write in English, doesn't affect the overall readibility of the code and docs. 
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
