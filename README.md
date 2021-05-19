@@ -2,7 +2,7 @@
 
 Application that analyzes various sources of information (news/reviews etc.) about dying rural towns in Spain and offers the user various functionalities depending on its privileges, aimed to offer a solution in order to stop rural towns dying from lack of population. 
 
-This application uses the Angular framework to implement a user-friendly, rich front-end aided by Bootstrap v5 and various graphic libraries. It follows a Model-View-Controller pattern and uses a custom-built web service to authenticate users and registered users or admin specific functionalities, along with various APIs and WebScrappers implemented using Flask and Lumen on the back-end part of the project: https://github.com/riniguez91/empty-spain-back.
+This application uses the Angular framework to implement a user-friendly, rich front-end aided by Bootstrap v5 and various graphic libraries. It follows a Model-View-Controller pattern and uses a web service to authenticate users and registered users or admin specific functionalities, along with various APIs and WebScrappers implemented using Flask and Lumen on the back-end part of the project: https://github.com/riniguez91/empty-spain-back.
 
 Currently the machine learning model (Logistic Regression) has been trained with a dataset of 146 documents obtained through the Pentaho scrapper built, and we decided to use this model based on the performance obtained by it and various others in RapidMiner.
 
