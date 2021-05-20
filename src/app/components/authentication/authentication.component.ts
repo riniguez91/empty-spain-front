@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
 import { User } from 'src/app/models/user.model';
 import { Session } from 'src/app/models/session.model';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-authentication',
@@ -83,8 +84,11 @@ export class AuthenticationComponent implements OnInit {
           this.storageService.setLoggedIn(true);
           this.router.navigate(['/perfil']); 
         },
-        err => this.invalidLogin = true
-        );
+        err => { 
+          this.invalidLogin = true;
+          throwError(err);
+        }
+      );
     } 
   }
 
