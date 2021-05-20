@@ -27,43 +27,42 @@
 
 
 
-
+<!--  REGISTER  -->
 <div [style.display]="showModal ? 'block' : 'none'" class="modal" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel" aria-hidden="true">
 
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="reg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">Register</h4>
-                <button type="button" (click)="hide()" class="close" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                <button type="button" (click)="close()" class="close" aria-label="Close"><span aria-hidden="false">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form #registerform="ngForm" (ngSubmit)="onRegisterSubmit(registerform)" class="form-signin mx-auto d-block">
             
-                    <label for="inputName" class="sr-only">Name</label>
-                    <input type="name" name="name" id="inputName" class="form-control" placeholder="Name" ngModel
+                    <label for="inputNameRegister" class="sr-only">Name</label>
+                    <input type="name" name="name" id="inputNameRegister" class="form-control" placeholder="Name" ngModel
                         required autofocus>
-                        
-                    <label for="inputSurnames" class="sr-only">Surnames</label>
-                    <input type="surnames" name="surnames" id="inputSurnames" class="form-control" placeholder="Surnames" ngModel
-                        required>
-
-                    <label for="inputEmail" class="sr-only">E-mail address</label>
-                    <input type="email" id="inputEmail" class="form-control" name="email" placeholder="E-mail address" ngModel email
-                        required >
-            
-                    <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" ngModel
-                        required>
-
-            
                     <div *ngIf="!validRegisterName" class="alert alert-danger">Invalid Name (max. 8 characters).</div>
+                        
+                    <label for="inputSurnamesRegister" class="sr-only">Surnames</label>
+                    <input type="surnames" name="surnames" id="inputSurnamesRegister" class="form-control" placeholder="Surnames" ngModel
+                        required>
                     <div *ngIf="!validRegisterSurnames" class="alert alert-danger">Invalidvalid Surnames (max. 24 characters).</div>
+
+                    <label for="inputEmailRegister" class="sr-only">E-mail address</label>
+                    <input type="email" id="inputEmailRegister" class="form-control" name="email" placeholder="E-mail address" ngModel email
+                        required >
                     <div *ngIf="!validRegisterEmail" class="alert alert-danger">Invalid E-mail (should be example@example.com)</div>
+            
+                    <label for="inputPasswordRegister" class="sr-only">Password</label>
+                    <input type="password" name="password" id="inputPasswordRegister" class="form-control" placeholder="Password" ngModel
+                        required>
                     <div *ngIf="!validRegisterPassword" class="alert alert-danger">Please insert a password longer than 6 characters.</div>
             
+                    <div *ngIf="submitted && validRegisterEmail && validRegisterName && validRegisterSurnames && validRegisterPassword" class="alert alert-success">Registrado Correctamente</div>
                     <div class="text-center">
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                        <button class="btn btn-lg btn-primary btn-block" (click)="hide(registerform)" type="submit">Register</button>
                         <p class="mt-4 text-muted">&copy; 2019-2020 by Grupo 5</p>
                     </div>
                 </form>
