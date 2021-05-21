@@ -1,3 +1,4 @@
+from os import replace
 from selenium import webdriver
 import time
 from bs4 import BeautifulSoup
@@ -19,18 +20,20 @@ def contenido_TripAdvisor(user_input):
     window_before = driver.window_handles[0]
     buscador = driver.find_element_by_xpath('//input').send_keys(user_input)  #Buscar en la barra de busqueda
     time.sleep(1)
-    driver.find_element_by_xpath('//input').send_keys(Keys.ENTER)
-    time.sleep(3)
-        
-    cont = driver.find_element_by_xpath('//*[@id="BODY_BLOCK_JQUERY_REFLOW"]/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[1]/div/div[3]/div/div[1]/div/div[2]/div/div/div/div/div').click()
-    time.sleep(2)
 
-    window_after = driver.window_handles[1]
-    driver.switch_to.window(window_after)
+    driver.find_element_by_xpath('//*[@id="typeahead_results"]/a[1]').click()
+    '''    
+    #driver.find_element_by_xpath('//input').send_keys(Keys.ENTER)
+    #cont = driver.find_element_by_xpath('//*[@id="BODY_BLOCK_JQUERY_REFLOW"]/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[1]/div/div[3]/div/div[1]/div/div[2]/div/div/div/div/div').click()
+    #time.sleep(2)
+
+    #window_after = driver.window_handles[1]
+    #driver.switch_to.window(window_after)'''
     time.sleep(2)
-    url.append(driver.current_url)      # Url
+    url.append(driver.current_url)      # Url 
 
     return driver.page_source
+
 
 
 def info_TripAdvisor(location):
@@ -41,7 +44,7 @@ def info_TripAdvisor(location):
     #Variables aux
     array_cosas = []
     array_alojate = []
-    array_come = []
+    array_comer = []
     r = contenido_TripAdvisor(decoded_location)
     soup = BeautifulSoup(r, 'lxml')
 
@@ -49,28 +52,57 @@ def info_TripAdvisor(location):
     for filas in contenedor:
         haz_cosas = filas.find_all(class_="_2dicJkxa _1EJ8NpwH _21Eo9VeW _2shTTUfB")[1] # Clase de cosas que hacer
         for cositas in haz_cosas:
-            cont_cosas = cositas.find_all(class_="DrjyGw-P _1SRa-qNz NGv7A1lw _1Pby4P1A _2cnjB3re _3j1Zx5J1 _1Z1zA2gh _3uNvbGKr _3SosR2yw") # Nombres por separado
-            for nombre_cosas in cont_cosas:
-                array_cosas.append(nombre_cosas.text)
+            cont_cosas = cositas.find_all(class_="_1RFDj48Z") # Nombres por separado
+            
+            for contenido_cosas in cont_cosas:
+                titulo_cosas = contenido_cosas.find(class_="VQlgmkyI WullykOU _3WoyIIcL").text
+                imagen_cosas = contenido_cosas.find("img").attrs['src']
+                valoracion_cosas = contenido_cosas.find(class_="zTTYS8QR _1myiToNC _1z-B2F-n").attrs['aria-label'].replace("burbujas", "puntos")
+                cosas_dict = {
+                    'Titulo': titulo_cosas,
+                    'Imagen': imagen_cosas,
+                    'Valoracion': valoracion_cosas
+                }
+                array_cosas.append(cosas_dict)
 
         alojate = filas.find_all(class_="_2dicJkxa _1EJ8NpwH _21Eo9VeW _2shTTUfB")[2]   # Clase de alojamiento
         for alojate_clase in alojate:
-            cont_alojate = alojate_clase.find_all(class_="DrjyGw-P _1SRa-qNz NGv7A1lw _1Pby4P1A _2cnjB3re _3j1Zx5J1 _1Z1zA2gh _3uNvbGKr _3SosR2yw") # Nombres por separado
-            for nombre_alojamiento in cont_alojate:
-                array_alojate.append(nombre_alojamiento.text)
+            cont_alojate = alojate_clase.find_all(class_="_1RFDj48Z") # Nombres por separado
+
+            for contenido_alojate in cont_alojate:
+                titulo_alojate = contenido_alojate.find(class_="VQlgmkyI WullykOU _3WoyIIcL").text
+                imagen_alojate = contenido_alojate.find("img").attrs['src']
+                valoracion_alojate = contenido_alojate.find(class_="zTTYS8QR _1myiToNC _1z-B2F-n").attrs['aria-label'].replace("burbujas", "puntos")
+                alojate_dict = {
+                    'Titulo': titulo_alojate,
+                    'Imagen': imagen_alojate,
+                    'Valoracion': valoracion_alojate
+                }
+                array_alojate.append(alojate_dict)
 
         comer = filas.find_all(class_="_2dicJkxa _1EJ8NpwH _21Eo9VeW _2shTTUfB")[3]     # Clase de restaurantes
         for comer_clase in comer:
-            cont_comer = comer_clase.find_all(class_="DrjyGw-P _1SRa-qNz NGv7A1lw _1Pby4P1A _2cnjB3re _3j1Zx5J1 _1Z1zA2gh _3uNvbGKr _3SosR2yw") # Nombres por separado
-            for nombre_restaurante in cont_comer:
-                array_come.append(nombre_restaurante.text)
+            cont_comer = comer_clase.find_all(class_="_1RFDj48Z") # Nombres por separado
+
+            for contenido_comer in cont_comer:
+                titulo_comer = contenido_cosas.find(class_="VQlgmkyI WullykOU _3WoyIIcL").text
+                imagen_comer = contenido_cosas.find("img").attrs['src']
+                valoracion_comer = contenido_cosas.find(class_="zTTYS8QR _1myiToNC _1z-B2F-n").attrs['aria-label'].replace("burbujas", "puntos")
+                descripcion_comer = contenido_comer.find(class_="DrjyGw-P _26S7gyB4 _3gC8zGeY _3SccQt-T").text
+                comer_dict = {
+                    'Titulo': titulo_comer,
+                    'Imagen': imagen_comer,
+                    'Valoracion': valoracion_comer,
+                    'Descripcion': descripcion_comer
+                }
+                array_comer.append(comer_dict)
         
         output[decoded_location].append({
             'Url': url[-1],
             'Cosas que hacer': array_cosas,
             'Alojate en': array_alojate,
-            'Comer en': array_come
+            'Comer en': array_comer
         })
     return json.dumps(output, indent=3)
 
-#print(info_TripAdvisor(b"Navacerrada"))
+print(info_TripAdvisor(b"fuengirola"))
