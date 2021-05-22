@@ -15,6 +15,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { PueblosComponent } from './components/pueblos/pueblos.component'
 import { PerfilGuard } from './guards/perfil.guard';
 import {AuthenticationGuard} from './guards/authentication.guard';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {AuthenticationGuard} from './guards/authentication.guard';
     AuthenticationComponent,
     NotFoundComponent,
     PerfilComponent,
-    PueblosComponent
+    PueblosComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,

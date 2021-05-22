@@ -1,6 +1,24 @@
+<!-- Search container -->
+<div class="container">
+    <div class="card">
+        <div class="form-group">
+            <label for="search-text">Search Text</label>
+            <input type="text" class="form-control" id="search-text" aria-describedby="search-text" 
+            [(ngModel)]="searchText" placeholder="Enter text to search" autofocus>
+        </div>
+        <ul class="list-group list-group-flush">
+            <!-- results of ngFor is passed to appFilter with argument searchText -->
+            <li class="list-group-item" *ngFor="let c of characters | searchFilter: searchText">
+                {{c}}
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Town container -->
 <div class="container-fluid">
     <div class="container">
-        <div class="row" (click)=invisible() *ngIf='ejemplo'>
+        <div class="row">
             <div class="col-sm-6 col-md-4 centrado">
                 <img class="img-fluid img-thumbnail" src="https://i.ibb.co/MkyqFkv/Andalucia.jpg" alt="Melilla" >
                 <div class="texto">Andalucia</div>
