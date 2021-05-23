@@ -92,7 +92,7 @@ export class AuthenticationComponent implements OnInit {
         },
         err => { 
           this.invalidLogin = true;
-          throwError(err);
+          console.log(throwError(err));
         }
       );
     } 

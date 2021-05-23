@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
    * 
    * @return void
    */
-  ngOnInit(): void { this.storageService.isLoggedIn().subscribe( res => {console.log(res); this.profileLink = res;}) }
+  ngOnInit(): void { this.storageService.isLoggedIn().subscribe( res => { this.profileLink = res; }) }
 
   toggleNavbar(): void { this.navbarOpen = !this.navbarOpen; }
 

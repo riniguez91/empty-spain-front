@@ -104,5 +104,3 @@ def info_TripAdvisor(location):
             'Comer en': array_comer
         })
     return json.dumps(output, indent=3)
-
-print(info_TripAdvisor(b"fuengirola"))

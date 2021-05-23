@@ -7,7 +7,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AnalisisTextoComponent } from './components/analisis-texto/analisis-texto.component';
 import { RouterModule } from '@angular/router';
 import { InicioComponent } from './components/inicio/inicio.component'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +16,7 @@ import { PueblosComponent } from './components/pueblos/pueblos.component'
 import { PerfilGuard } from './guards/perfil.guard';
 import {AuthenticationGuard} from './guards/authentication.guard';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
 
 
 @NgModule({
@@ -47,7 +48,13 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
       {path: '**', redirectTo: '/404', pathMatch: 'full'}
     ])
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppHttpInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
