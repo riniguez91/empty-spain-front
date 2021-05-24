@@ -1,5 +1,5 @@
 <!-- Search container -->
-<div class="container">
+<!-- <div class="container">
     <div class="card">
         <div class="form-group">
             <label for="search-text">Search Text</label>
@@ -7,16 +7,35 @@
             [(ngModel)]="searchText" placeholder="Enter text to search" autofocus>
         </div>
         <ul class="list-group list-group-flush">
-            <!-- results of ngFor is passed to appFilter with argument searchText -->
             <li class="list-group-item" *ngFor="let c of characters | searchFilter: searchText | slice:0:10">
                 {{c.municipio}}
             </li>
         </ul>
     </div>
+</div> -->
+
+<div class="container mt-4">
+    <h1 class="display-4 mt-5 text-center">¿Qué pueblo desea buscar?</h1>
+    <div class="p-1 bg-light shadow-sm mt-3 rounded rounded-pill">
+        <div class="input-group">
+            <input type="text" placeholder="What're you searching for?" aria-describedby="search-text" [(ngModel)]="searchText" class="form-control border-0 rounded rounded-pill bg-light" autofocus>
+            <button id="button-addon1" type="submit" class="btn btn-link text-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg></button>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush rounded mt-1">
+        <!-- results of ngFor is passed to appFilter with argument searchText -->
+        <li class="list-group-item" *ngFor="let c of characters | searchFilter: searchText | slice:0:10">
+            <a href="{{c.id}}">{{c.municipio}}</a>
+        </li>
+    </ul>
 </div>
 
+<h1>klko</h1>
+
 <!-- Town container -->
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-md-4 centrado">
@@ -29,7 +48,7 @@
             <div class="col-sm-6 col-md-4 centrado"><img class="img-fluid img-thumbnail" src="https://i.ibb.co/MkyqFkv/Andalucia.jpg" alt="Melilla"></div>
             <div class="col-sm-6 col-md-4 centrado"><img class="img-fluid img-thumbnail" src="https://i.ibb.co/MkyqFkv/Andalucia.jpg" alt="Melilla"></div>
             <div class="col-sm-6 col-md-4 centrado"><img class="img-fluid img-thumbnail" src="https://i.ibb.co/MkyqFkv/Andalucia.jpg" alt="Melilla"></div>
-            <div class="col-sm-6 col-md-4 centrado"><img class="img-fluid img-thumbnail" src="https://i.ibb.co/MkyqFkv/Andalucia.jpg" alt="Melilla"></div> <!-- https://source.unsplash.com/random/320x240 -->
+            <div class="col-sm-6 col-md-4 centrado"><img class="img-fluid img-thumbnail" src="https://i.ibb.co/MkyqFkv/Andalucia.jpg" alt="Melilla"></div> 
         </div>
     </div>
-</div>
+</div> -->

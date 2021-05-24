@@ -13,9 +13,10 @@ import { InicioComponent } from './components/inicio/inicio.component'
 import { AuthenticationComponent } from './components/authentication/authentication.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { PueblosComponent } from './components/pueblos/pueblos.component'
+import { TownSearchComponent } from './town/town-search/town-search.component'
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
+import { TownModule } from './town/town.module';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
     AuthenticationComponent,
     NotFoundComponent,
     PerfilComponent,
-    PueblosComponent,
+    TownSearchComponent,
     SearchFilterPipe
   ],
   imports: [
@@ -36,7 +37,8 @@ import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TownModule
   ],
   providers: [
     {

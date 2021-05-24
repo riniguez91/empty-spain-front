@@ -3,11 +3,11 @@ import { SearchFilterPipe } from 'src/app/pipes/search-filter.pipe';
 import { SearchService } from 'src/app/services/search.service';
 
 @Component({
-  selector: 'app-pueblos',
-  templateUrl: './pueblos.component.html',
-  styleUrls: ['./pueblos.component.scss']
+  selector: 'app-town-search',
+  templateUrl: './town-search.component.html',
+  styleUrls: ['./town-search.component.scss']
 })
-export class PueblosComponent implements OnInit {
+export class TownSearchComponent implements OnInit {
 
   searchText = '';
   /* characters = [
