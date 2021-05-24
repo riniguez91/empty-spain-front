@@ -8,8 +8,8 @@
         </div>
         <ul class="list-group list-group-flush">
             <!-- results of ngFor is passed to appFilter with argument searchText -->
-            <li class="list-group-item" *ngFor="let c of characters | searchFilter: searchText">
-                {{c}}
+            <li class="list-group-item" *ngFor="let c of characters | searchFilter: searchText | slice:0:10">
+                {{c.municipio}}
             </li>
         </ul>
     </div>

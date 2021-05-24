@@ -18,6 +18,6 @@ export class SearchFilterPipe implements PipeTransform {
     if (!searchText) return [];
 
     searchText = searchText.toLowerCase()
-    return towns.filter(town => { return town.toLowerCase().includes(searchText) }); 
+    return towns.filter(town => { return town['municipio'].toLowerCase().includes(searchText) }); 
   }
 }

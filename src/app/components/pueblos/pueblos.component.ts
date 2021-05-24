@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchFilterPipe } from 'src/app/pipes/search-filter.pipe';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-pueblos',
@@ -9,7 +10,7 @@ import { SearchFilterPipe } from 'src/app/pipes/search-filter.pipe';
 export class PueblosComponent implements OnInit {
 
   searchText = '';
-  characters = [
+  /* characters = [
     'Ant-Man',
     'Aquaman',
     'Asterix',
@@ -18,10 +19,11 @@ export class PueblosComponent implements OnInit {
     'Batgirl',
     'Batman',
     'Batwoman'
-  ]
+  ] */
+  characters: Object;
 
-  constructor() { }
+  constructor(private searchService: SearchService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { this.characters = this.searchService.getMunicipios().subscribe(result => this.characters = result) }
 
 }
