@@ -37,6 +37,7 @@ def wiki_content(location):
     contenedor = soup.find_all(class_="I6TXqe osrp-blk")
     for i in contenedor:
         mapa = i.find(class_="lu-fs").attrs['src']
+        mapa_url = "https://google.com" + mapa
         nombre = i.find("h2").text
         tipo_localidad = i.find(class_="wwUB2c PZPZlf E75vKf").text
         descripcion = i.find(class_="kno-rdesc").text
@@ -51,9 +52,9 @@ def wiki_content(location):
                 poblacion = filas.text
                 
     # Converting the return value into a json
-    dict_response = { nombre:{'locality_type': tipo_localidad, 'population':poblacion, 'description':descripcion_edit,'map': mapa} }
+    dict_response = {'locality_type': tipo_localidad, 'population':poblacion, 'description':descripcion_edit,'map': mapa_url}
     json_response = json.dumps(dict_response, indent=3)
 
     return json_response
 
-#print(wiki_content(b'Barbate'))
+#print(wiki_content(b'Madrid'))
