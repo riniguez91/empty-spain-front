@@ -13,8 +13,6 @@ import { InicioComponent } from './components/inicio/inicio.component'
 import { AuthenticationComponent } from './components/authentication/authentication.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { TownSearchComponent } from './town/town-search/town-search.component'
-import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
 import { TownModule } from './town/town.module';
 
@@ -28,17 +26,15 @@ import { TownModule } from './town/town.module';
     InicioComponent,
     AuthenticationComponent,
     NotFoundComponent,
-    PerfilComponent,
-    TownSearchComponent,
-    SearchFilterPipe
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule,
-    TownModule
+    TownModule,
+    AppRoutingModule
   ],
   providers: [
     {
