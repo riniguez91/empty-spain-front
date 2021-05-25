@@ -6,8 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 import { AnalisisTextoComponent } from './components/analisis-texto/analisis-texto.component';
 import { InicioComponent } from './components/inicio/inicio.component'
 import { AuthenticationComponent } from './components/authentication/authentication.component';
