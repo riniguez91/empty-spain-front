@@ -15,6 +15,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
 import { TownModule } from './town/town.module';
+import { SpinnerModule } from './shared/components/spinner/spinner.module';
+import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 
 
 @NgModule({
@@ -34,14 +36,12 @@ import { TownModule } from './town/town.module';
     ReactiveFormsModule,
     FormsModule,
     TownModule,
+    SpinnerModule,
     AppRoutingModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AppHttpInterceptor,
-      multi: true
-    }
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
