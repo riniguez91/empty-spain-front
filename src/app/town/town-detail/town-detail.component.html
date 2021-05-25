@@ -1,1 +1,6 @@
-<p>town-detail works!</p>
+<div class="container">
+    <div *ngIf="town$ | async as town">
+        <h1 class="display-3">{{town.municipio}}</h1>
+        <p>{{town.superficie}}</p>
+    </div>
+</div>

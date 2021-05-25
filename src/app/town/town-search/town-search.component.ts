@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchFilterPipe } from 'src/app/pipes/search-filter.pipe';
+import { Town } from 'src/app/models/town.model';
 import { TownService } from '../town.service'
 
 @Component({
@@ -10,10 +10,11 @@ import { TownService } from '../town.service'
 export class TownSearchComponent implements OnInit {
 
   searchText = '';
-  characters: Object;
+  towns: Town;
 
   constructor(private townService: TownService) { }
 
-  ngOnInit(): void { this.characters = this.townService.getMunicipios().subscribe(result => this.characters = result) }
+  ngOnInit(): void { this.townService.getMunicipios().subscribe(result => this.towns = result ) 
+  }
 
 }

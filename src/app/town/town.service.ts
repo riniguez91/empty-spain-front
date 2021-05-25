@@ -18,4 +18,14 @@ export class TownService {
   getMunicipios(): Observable<any> {
     return this.http.get(environment.municipios_url);
   }
+
+  /**
+   * Gets information belonging to a specific municipio
+   * 
+   * @param id number | string
+   * @return Observable<any>
+   */
+  getTown(id: number | string): Observable<any> {
+    return this.http.get(environment.municipios_url + '/' + id);
+  }
 }
