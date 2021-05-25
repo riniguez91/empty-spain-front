@@ -17,6 +17,8 @@
         <div *ngIf="!validLoginPassword" class="alert alert-danger">Please insert a password.</div>
         <div *ngIf="invalidLogin" class="alert alert-danger">Invalid user credentials, please check they are correct</div>
 
+        <div *ngIf="!notValidRegister" class="alert alert-success">Successfully registered.</div>
+
         <div class="text-center">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
             <a class="register-link d-block" (click)="show()">Don't have an account?</a>
@@ -35,7 +37,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">Register</h4>
-                <button type="button" (click)="close()" class="close" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                <button type="button" (click)="close(registerform)" class="close" aria-label="Close"><span aria-hidden="false">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form #registerform="ngForm" (ngSubmit)="onRegisterSubmit(registerform)" class="form-signin mx-auto d-block">
@@ -61,8 +63,10 @@
                     <div *ngIf="!validRegisterPassword" class="alert alert-danger">Please insert a password longer than 6 characters.</div>
             
                     <div *ngIf="submitted && validRegisterEmail && validRegisterName && validRegisterSurnames && validRegisterPassword" class="alert alert-success">Registrado Correctamente</div>
+                    <div *ngIf="invalidRegister" class="alert alert-danger">Email address is already in use.</div>
+
                     <div class="text-center">
-                        <button class="btn btn-lg btn-primary btn-block" (click)="hide(registerform)" type="submit">Register</button>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
                         <p class="mt-4 text-muted">&copy; 2019-2020 by Grupo 5</p>
                     </div>
                 </form>

@@ -30,6 +30,7 @@ export class AuthenticationComponent implements OnInit {
   validRegisterSurnames = true;
   invalidLogin = false;
   invalidRegister = false;
+  notValidRegister = true;
 
   ngOnInit() : void {
     this.registerForm = this.formBuilder.group({
@@ -42,12 +43,7 @@ export class AuthenticationComponent implements OnInit {
 
   show() {  this.showModal = true;  this.submitted = false};  // Show-Hide Modal Check 
   
-  hide(registerform) { 
-    //console.log(!registerform.invalid);
-    if (!registerform.invalid){this.close()}
-  }
-  
-  close() {this.showModal = false;}
+  close(from: NgForm) {this.showModal = false;from.reset(); this.invalidRegister = false;}
 
   get f() { return this.registerForm.controls;}  // Convenience getter for easy access to form fields
 
@@ -67,7 +63,18 @@ export class AuthenticationComponent implements OnInit {
     this.loginService.insertUser(f.value).subscribe(
       result => {
         this.userRegisterSuccess = !result['success'];
-        if (!this.registerForm.invalid && !this.userRegisterSuccess) this.showModal = false;
+        if (!f.invalid && result['success'] == true) {
+          this.showModal = false;
+          this.notValidRegister = false;
+          this.invalidRegister = false;
+          f.reset();
+          this.close(f);
+          }
+        },
+      err =>{
+        this.invalidRegister = true;
+        this.notValidRegister = true;
+        console.log(throwError(err));
       }
     );}
   }
