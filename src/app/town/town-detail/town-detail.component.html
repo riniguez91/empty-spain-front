@@ -3,5 +3,13 @@
         <h1 class="display-3">{{town.municipio}}</h1>
         <p>{{town.superficie}}</p>
         <p>{{town.scraped}}</p>
+        <p>{{town.twitter_info}}</p>
+        <div class="row">
+            <ul class="list-group mt-1">
+                <li class="list-group-item" *ngFor="let tweet of town">
+                    {{tweet}}
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

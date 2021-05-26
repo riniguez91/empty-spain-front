@@ -9,7 +9,7 @@ import { LoginService } from '../services/login.service';
 })
 export class TownService {
 
-  constructor(private http: HttpClient, private loginService: LoginService) { }
+  constructor(private http: HttpClient) { }
 
   /**
    * Get list of all the towns so we can pass them to the search bar

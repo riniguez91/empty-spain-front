@@ -51,16 +51,16 @@ export class TownDetailComponent implements OnInit {
    addSearch(municipioName: string, municipioId: number, userId?: number): void {
     this.townService.getTripAdvisorJsonV2(municipioName).subscribe(result => {
       var json = {
-        'tripadvisor_info': JSON.stringify(result),
-        'municipio_id': municipioId
+        "tripadvisor_info": JSON.stringify(result),
+        "municipio_id": municipioId
       }
       if (userId) json['usuario_id'] = userId;
       this.townService.getTwitterJson(municipioName).subscribe(result => {
-        json['twitter_info'] = JSON.stringify(result);
+        json["twitter_info"] = JSON.stringify(result);
         this.townService.getTiempoJson(municipioName).subscribe(result => {
-          json['tiempo_info'] = JSON.stringify(result);
+          json["tiempo_info"] = JSON.stringify(result);
           this.townService.getWikiJson(municipioName).subscribe(result => {
-            json['wiki_info'] = JSON.stringify(result);
+            json["wiki_info"] = JSON.stringify(result);
             this.townService.addScrapersTown(json).subscribe(
               err => throwError(err)
             );

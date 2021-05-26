@@ -32,8 +32,10 @@ export class AppHttpInterceptor implements HttpInterceptor {
     return next.handle(authReq).pipe(
       catchError((error: HttpErrorResponse) => {
         // 401 is expired token
-        if (error.status === 401) 
+        if (error.status === 401) {
           this.storageService.logout();
+          this.storageService.setLoggedIn(false);
+        }
         return throwError(error);
       })
     );
