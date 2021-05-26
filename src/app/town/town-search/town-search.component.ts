@@ -11,10 +11,14 @@ export class TownSearchComponent implements OnInit {
 
   searchText = '';
   towns: Town;
+  unfocusList = false;
 
   constructor(private townService: TownService) { }
 
-  ngOnInit(): void { this.townService.getMunicipios().subscribe(result => this.towns = result ) 
-  }
+  ngOnInit(): void { this.townService.getMunicipios().subscribe(result => this.towns = result ) }
+
+  unfocusSearchResults() { this.unfocusList = true }
+
+  focusSearchResults() { this.unfocusList = false }
 
 }

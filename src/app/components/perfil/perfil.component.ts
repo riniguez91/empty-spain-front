@@ -37,24 +37,25 @@ export class PerfilComponent implements OnInit {
   /**
    * Adds all the scrapper info in the db
    * 
+   * @param municipio_id number
+   * @param usuario_id number {optional}
    * @return void
    */
-
   addSearch(): void {
-    // Simula el campo que recojeriamos de la barra de busqueda
-    var defaultName = 'Madrid';
-    this.loginService.getTripAdvisorJsonV2(defaultName).subscribe(result => {
+    var municipioName = 'Madrid';
+    var municipioId = 1001;
+    var userId;
+    this.loginService.getTripAdvisorJsonV2(municipioName).subscribe(result => {
       var json = {
         'tripadvisor_info': JSON.stringify(result),
-        'search_date': '2021-04-26 13:23:12',
-        'municipio_id': '1001',
-        'usuario_id': '1'
+        'municipio_id': municipioId
       }
-      this.loginService.getTwitterJson(defaultName).subscribe(result => {
+      if (userId) json['usuario_id'] = userId;
+      this.loginService.getTwitterJson(municipioName).subscribe(result => {
         json['twitter_info'] = JSON.stringify(result);
-        this.loginService.getTiempoJson(defaultName).subscribe(result => {
+        this.loginService.getTiempoJson(municipioName).subscribe(result => {
           json['tiempo_info'] = JSON.stringify(result);
-          this.loginService.getWikiJson(defaultName).subscribe(result => {
+          this.loginService.getWikiJson(municipioName).subscribe(result => {
             json['wiki_info'] = JSON.stringify(result);
             this.loginService.addSearch(json).subscribe(
               result =>  console.log(result),

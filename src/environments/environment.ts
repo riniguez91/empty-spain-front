@@ -11,7 +11,7 @@ export const environment = {
   sentiment_url: 'http://localhost:5000/sentimiento',
   tripadvisor_scrapper_url: 'http://localhost:5000/scrapers/tripadvisor/v1',
   tripadvisor_scrapper_url_v2: 'http://localhost:5000/scrapers/tripadvisor/v2',
-  twitter_scrapper_url: 'http://localhost:5000/scrapers/twitter/tweepy',
+  twitter_scrapper_url: 'http://localhost:5000/scrapers/twitter/sns',
   tiempo_scrapper_url: 'http://localhost:5000/scrapers/tiempo',
   wiki_scrapper_url: 'http://localhost:5000/scrapers/wiki'
 };

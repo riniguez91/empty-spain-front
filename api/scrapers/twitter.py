@@ -18,7 +18,7 @@ auth.set_access_token(access_token, access_token_secret)
 api = API(auth)
 
 # Tweepy function, we obtain the most relevant and the most recent with the mixed search_type param
-def scrape(query, num_tweets=20):
+def scrape(query, num_tweets=10):
     output = {}
     # We decode the parameter since we are calling the function from a separate server and parameters info is binary-enconded
     engine_query = '#' + query.decode('utf-8') + ' -filter:retweets'
@@ -34,7 +34,7 @@ def scrape(query, num_tweets=20):
     return json.dumps(output, indent=3)
 
 # Snscrape function to obtain the tweets relevant to a less known town since the Tweepy API is limited to 7-days on the search (we're using the standard license)
-def sns(query, num_tweets=20):
+def sns(query, num_tweets=10):
     output = {}
     # We decode the parameter since we are calling the function from a separate server and parameters info is binary-enconded
     engine_query = '#' + query.decode('utf-8') + ' -filter:retweets'
