@@ -15,7 +15,6 @@ import { TownService } from '../town.service';
 export class TownDetailComponent implements OnInit {
 
   town$: Observable<any>;
-  test: object;
   townId: number;
   userId: number;
   townName: string;
@@ -30,9 +29,16 @@ export class TownDetailComponent implements OnInit {
     let session = this.storageService.loadSessionData();
     this.userId = session ? jwtDecode(session['access_token'])['sub'] : null;
 
-    this.town$ = this.townService.getTown(this.townId); 
-    if (this.userId) this.addSearch(this.townName, this.townId, this.userId)
-    else this.addSearch(this.townName, this.townId)
+    this.town$ = this.townService.getTown(this.townId);
+    this.town$.subscribe( result => {
+      // Check if the town has already been scraped
+      if (result['scraped']) return;
+      // If not call the scrapers depending if the user has logged in or not
+      else {
+        if (this.userId) this.addSearch(this.townName, this.townId, this.userId)
+        else this.addSearch(this.townName, this.townId)
+      }
+    });
   }
 
   /**
@@ -56,10 +62,6 @@ export class TownDetailComponent implements OnInit {
           this.townService.getWikiJson(municipioName).subscribe(result => {
             json['wiki_info'] = JSON.stringify(result);
             this.townService.addScrapersTown(json).subscribe(
-              result => { 
-                this.test = json; 
-                console.log(json) 
-              },
               err => throwError(err)
             );
           })
