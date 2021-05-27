@@ -18,10 +18,18 @@ def wiki_url(user_input):
     PATH = 'C:/WebDriver/bin/chromedriver.exe' 
 
     driver = webdriver.Chrome(PATH, options=options)
-    driver.get('https://www.google.com/search?q={}'.format(user_input))     #Look for the search URL
+    string_user_input = user_input + " ciudad"          #Se añade ciudad para asegurarse de que busca pueblo no otra cosa
+    driver.get('https://www.google.com/search?q={}'.format(string_user_input))     #Look for the search URL
     time.sleep(1)
     driver.find_element_by_xpath('//*[@id="L2AGLb"]/div').click()           #Accepting Google Cookies
     
+    #Comprobar si hay pueblo recomendado para acceder
+    try:
+        driver.find_element_by_xpath('//*[@id="rhs"]/div[2]/div/div/div[1]/div/div[2]/div/a/div/div').click()
+    except Exception as e:
+        None
+
+    time.sleep(10)
     return driver.page_source
 
 # using BeautifulSoup to scrap the map view, type of locality, population, a short description in the preview area about the location.
@@ -32,6 +40,10 @@ def wiki_content(location):
     soup = BeautifulSoup(r, 'lxml')
     
     dict_response = {}
+    mapa_url = ""
+    poblacion = ""
+    descripcion_edit = ""
+    tipo_localidad = ""
 
     # Looking for the fields we need using BS4
     contenedor = soup.find_all(class_="I6TXqe osrp-blk")
@@ -39,11 +51,17 @@ def wiki_content(location):
         mapa = i.find(class_="lu-fs").attrs['src']
         mapa_url = "https://google.com" + mapa
         nombre = i.find("h2").text
-        tipo_localidad = i.find(class_="wwUB2c PZPZlf E75vKf").text
-        descripcion = i.find(class_="kno-rdesc").text
+        tipo_localidad = i.find(class_="wwUB2c PZPZlf E75vKf")
+        if (tipo_localidad):
+            tipo_localidad = tipo_localidad.text
+        else: tipo_localidad = ""
         
-        # Edit the text to avoid useless terms. 
-        descripcion_edit = descripcion.replace("Wikipedia"," ").replace("Descripción","")
+        descripcion = i.find(class_="kno-rdesc")
+        if (descripcion):
+            descripcion = descripcion.text
+            # Edit the text to avoid useless terms. 
+            descripcion_edit = descripcion.replace("Wikipedia"," ").replace("Descripción","")
+        
 
         contenedor_info = i.find_all(class_="rVusze")
         # We only need information about population from this level so we discard every other data
@@ -57,4 +75,5 @@ def wiki_content(location):
 
     return json_response
 
-#print(wiki_content(b'Madrid'))
+#print(wiki_content(b'Samaniego'))  #Click en recomendados
+print(wiki_content(b'Madrid'))     #Directamente la busqueda

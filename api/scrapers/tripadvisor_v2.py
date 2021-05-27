@@ -3,7 +3,7 @@ from selenium import webdriver
 import time
 from bs4 import BeautifulSoup
 import json
-from selenium.webdriver.common.keys import Keys
+#from selenium.webdriver.common.keys import Keys
 
 url = []
 
@@ -55,9 +55,22 @@ def info_TripAdvisor(location):
             cont_cosas = cositas.find_all(class_="_1RFDj48Z") # Nombres por separado
             
             for contenido_cosas in cont_cosas:
-                titulo_cosas = contenido_cosas.find(class_="VQlgmkyI WullykOU _3WoyIIcL").text
-                imagen_cosas = contenido_cosas.find("img").attrs['src']
-                valoracion_cosas = contenido_cosas.find(class_="zTTYS8QR _1myiToNC _1z-B2F-n").attrs['aria-label'].replace("burbujas", "puntos")
+                #Titulo
+                try:
+                    titulo_cosas = contenido_cosas.find(class_="VQlgmkyI WullykOU _3WoyIIcL").text
+                except Exception as e:
+                    titulo_cosas = ""
+                #Imagen
+                try:
+                    imagen_cosas = contenido_cosas.find("img").attrs['src']
+                except Exception as e:
+                    imagen_cosas = ""
+                #Valoracion
+                try:
+                    valoracion_cosas = contenido_cosas.find(class_="zTTYS8QR _1myiToNC _1z-B2F-n").attrs['aria-label'].replace("burbujas", "puntos")
+                except Exception as e:
+                    valoracion_cosas = ""
+    
                 cosas_dict = {
                     'Titulo': titulo_cosas,
                     'Imagen': imagen_cosas,
@@ -70,9 +83,22 @@ def info_TripAdvisor(location):
             cont_alojate = alojate_clase.find_all(class_="_1RFDj48Z") # Nombres por separado
 
             for contenido_alojate in cont_alojate:
-                titulo_alojate = contenido_alojate.find(class_="VQlgmkyI WullykOU _3WoyIIcL").text
-                imagen_alojate = contenido_alojate.find("img").attrs['src']
-                valoracion_alojate = contenido_alojate.find(class_="zTTYS8QR _1myiToNC _1z-B2F-n").attrs['aria-label'].replace("burbujas", "puntos")
+                #Titulo
+                try:
+                    titulo_alojate = contenido_alojate.find(class_="VQlgmkyI WullykOU _3WoyIIcL").text
+                except Exception as e:
+                    titulo_alojate = ""
+                #Imagen
+                try:
+                    imagen_alojate = contenido_alojate.find("img").attrs['src']
+                except Exception as e:
+                    imagen_alojate = ""
+                #Valoracion
+                try:
+                    valoracion_alojate = contenido_alojate.find(class_="zTTYS8QR _1myiToNC _1z-B2F-n").attrs['aria-label'].replace("burbujas", "puntos")
+                except Exception as e:
+                    valoracion_alojate = ""
+                
                 alojate_dict = {
                     'Titulo': titulo_alojate,
                     'Imagen': imagen_alojate,
@@ -81,14 +107,32 @@ def info_TripAdvisor(location):
                 array_alojate.append(alojate_dict)
 
         comer = filas.find_all(class_="_2dicJkxa _1EJ8NpwH _21Eo9VeW _2shTTUfB")[3]     # Clase de restaurantes
+        
         for comer_clase in comer:
             cont_comer = comer_clase.find_all(class_="_1RFDj48Z") # Nombres por separado
-
+            
             for contenido_comer in cont_comer:
-                titulo_comer = contenido_cosas.find(class_="VQlgmkyI WullykOU _3WoyIIcL").text
-                imagen_comer = contenido_cosas.find("img").attrs['src']
-                valoracion_comer = contenido_cosas.find(class_="zTTYS8QR _1myiToNC _1z-B2F-n").attrs['aria-label'].replace("burbujas", "puntos")
-                descripcion_comer = contenido_comer.find(class_="DrjyGw-P _26S7gyB4 _3gC8zGeY _3SccQt-T").text
+                #Titulo
+                try:
+                    titulo_comer = contenido_comer.find(class_="VQlgmkyI WullykOU _3WoyIIcL").text
+                except Exception as e:
+                    titulo_comer = ""
+                #Imagen
+                try:
+                    imagen_comer = contenido_comer.find("img").attrs['src']
+                except Exception as e:
+                    None
+                #Valoracion
+                try:
+                    valoracion_comer = contenido_comer.find(class_="zTTYS8QR _1myiToNC _1z-B2F-n").attrs['aria-label'].replace("burbujas", "puntos")
+                except Exception as e:
+                    valoracion_comer = ""
+                #Descripcion
+                try:
+                    descripcion_comer = contenido_comer.find(class_="DrjyGw-P _26S7gyB4 _3gC8zGeY _3SccQt-T").text
+                except Exception as e:
+                    descripcion_comer = ""
+
                 comer_dict = {
                     'Titulo': titulo_comer,
                     'Imagen': imagen_comer,
@@ -104,3 +148,7 @@ def info_TripAdvisor(location):
             'Comer en': array_comer
         })
     return json.dumps(output, indent=3)
+
+
+#print(info_TripAdvisor(b'Samaniego'))
+#print(info_TripAdvisor(b'madrigalejo del monte'))

@@ -17,10 +17,12 @@ def cope_content(user_input):
     PATH = 'C:/WebDriver/bin/chromedriver.exe'  
 
     pagina = "https://www.cope.es/emisoras/" + user_input
-    driver = webdriver.Chrome(PATH, options=options)
+    driver = webdriver.Chrome(PATH)#, options=options)
     driver.get(pagina)              #Lanzar la URL
     time.sleep(1)
-    driver.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]').click()    #Aceptar Cookies
+    #driver.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]').click()    #Aceptar Cookies
+    driver.find_element_by_xpath('//*[@id="didomi-notice-agree-button"]').click()    #Aceptar Cookies
+
     return driver.page_source       #Recoger todo el html de la pagina
 
 def text(user_input):
@@ -44,5 +46,5 @@ def text(user_input):
     return json.dumps(noticias, indent=3)
 
 ###########
-user_input = str(input("Introduce el nombre del pueblo donde desea buscar noticias: "))
-print(text(user_input))
+#user_input = str(input("Introduce el nombre del pueblo donde desea buscar noticias: "))
+print(text("Brunete"))
