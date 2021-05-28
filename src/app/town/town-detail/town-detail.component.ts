@@ -15,6 +15,7 @@ import { TownService } from '../town.service';
 export class TownDetailComponent implements OnInit {
 
   town$: Observable<any>;
+  town: object;
   townId: number;
   userId: number;
   townName: string;
@@ -30,14 +31,21 @@ export class TownDetailComponent implements OnInit {
     this.userId = session ? jwtDecode(session['access_token'])['sub'] : null;
 
     this.town$ = this.townService.getTown(this.townId);
-    this.town$.subscribe( result => {
+    this.town$
+    .subscribe( result => {
       // Check if the town has already been scraped
-      if (result['scraped']) return;
+      if (result['scraped']) this.town = result;
       // If not call the scrapers depending if the user has logged in or not
       else {
         if (this.userId) this.addSearch(this.townName, this.townId, this.userId)
         else this.addSearch(this.townName, this.townId)
       }
+      result['tiempo_info'] = JSON.parse(result['tiempo_info']);
+      result['tripadvisor_info'] = JSON.parse(result['tripadvisor_info']);
+      result['twitter_info'] = JSON.parse(result['twitter_info']);
+      result['wiki_info'] = JSON.parse(result['wiki_info']);
+      this.town = result;
+      console.log(this.town)
     });
   }
 

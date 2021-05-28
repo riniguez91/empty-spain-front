@@ -41,6 +41,7 @@ yarn-error.log
 testem.log
 /typings
 *.cpython-39.pyc
+__pycache__/
 
 # System Files
 .DS_Store
