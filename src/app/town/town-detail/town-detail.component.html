@@ -4,12 +4,12 @@
         <p>{{town.superficie}}</p>
         <p>{{town.scraped}}</p>
         <p>{{town.wiki_info.locality_type}}</p>
-        <div class="row">
+       <div class="row">
             <ul class="list-group mt-1">
                 <li class="list-group-item" *ngFor="let tweet of town.tripadvisor_info[town.municipio][0]['Alojate en']">
                     {{tweet.Titulo}}
                 </li>
             </ul>
-        </div>
+        </div> 
     </div>
 </div>

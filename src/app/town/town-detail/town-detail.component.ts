@@ -34,34 +34,43 @@ export class TownDetailComponent implements OnInit {
     this.town$
     .subscribe( result => {
       // Check if the town has already been scraped
-      if (result['scraped']) this.town = result;
+      if (result['scraped']) this.town = this.parseScraperJsons(result);
       // If not call the scrapers depending if the user has logged in or not
+      // Pass along the json obtained from the API endpoint
       else {
-        if (this.userId) this.addSearch(this.townName, this.townId, this.userId)
-        else this.addSearch(this.townName, this.townId)
-      }
-      result['tiempo_info'] = JSON.parse(result['tiempo_info']);
-      result['tripadvisor_info'] = JSON.parse(result['tripadvisor_info']);
-      result['twitter_info'] = JSON.parse(result['twitter_info']);
-      result['wiki_info'] = JSON.parse(result['wiki_info']);
-      this.town = result;
-      console.log(this.town)
+        if (this.userId) this.addSearch(this.townName, this.townId, result, this.userId)
+        else this.addSearch(this.townName, this.townId, result)
+      } 
     });
   }
+
+  /**
+   * Parses the JSONs obtained from the different scrapers
+   * 
+   * @param jsonToParse object 
+   * @return object
+   */
+   parseScraperJsons(jsonToParse: object) {
+     jsonToParse['tiempo_info'] = JSON.parse(jsonToParse['tiempo_info']);
+     jsonToParse['tripadvisor_info'] = JSON.parse(jsonToParse['tripadvisor_info']);
+     jsonToParse['twitter_info'] = JSON.parse(jsonToParse['twitter_info']);
+     jsonToParse['wiki_info'] = JSON.parse(jsonToParse['wiki_info']);
+
+     return jsonToParse;
+   }
 
   /**
    * Adds all the scrapper info in the db
    * 
    * @param municipio_id number
-   * @param usuario_id number {optional}
+   * @param userId number {optional}
    * @return void
    */
-   addSearch(municipioName: string, municipioId: number, userId?: number): void {
+   addSearch(municipioName: string, municipioId: number, json: object, userId?: number): void {
     this.townService.getTripAdvisorJsonV2(municipioName).subscribe(result => {
-      var json = {
-        "tripadvisor_info": JSON.stringify(result),
-        "municipio_id": municipioId
-      }
+      // Add the following fields to our pre-fetched json from our API endpoint
+      json['tripadvisor_info'] = JSON.stringify(result);
+      json['municipio_id'] = municipioId;
       if (userId) json['usuario_id'] = userId;
       this.townService.getTwitterJson(municipioName).subscribe(result => {
         json["twitter_info"] = JSON.stringify(result);
@@ -70,6 +79,8 @@ export class TownDetailComponent implements OnInit {
           this.townService.getWikiJson(municipioName).subscribe(result => {
             json["wiki_info"] = JSON.stringify(result);
             this.townService.addScrapersTown(json).subscribe(
+              // Parse the scraper jsons
+              success => this.town = this.parseScraperJsons(json),
               err => throwError(err)
             );
           })
