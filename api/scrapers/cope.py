@@ -47,4 +47,4 @@ def text(user_input):
 
 ###########
 #user_input = str(input("Introduce el nombre del pueblo donde desea buscar noticias: "))
-print(text("Brunete"))
+#print(text("Brunete"))

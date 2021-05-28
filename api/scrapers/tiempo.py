@@ -74,5 +74,5 @@ def scrape_tiempo(location):
         None
     
     return json.dumps(output, indent=3)
-print(scrape_tiempo(b'Villanueva de la canada'))
+    
 #print(scrape_tiempo(b'Ayala/Aiara'))

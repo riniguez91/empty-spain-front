@@ -76,4 +76,4 @@ def wiki_content(location):
     return json_response
 
 #print(wiki_content(b'Samaniego'))  #Click en recomendados
-print(wiki_content(b'Madrid'))     #Directamente la busqueda
+# print(wiki_content(b'Madrid'))     #Directamente la busqueda

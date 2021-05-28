@@ -148,4 +148,4 @@ def scrape_pc1(user_input):
     if (cont_desp < cont_no_desp): return "No Despoblacion"
     else: return "Despoblacion"
 
-print(scrape_pc1(b"navacerrada"))
+# print(scrape_pc1(b"navacerrada"))
