@@ -48,7 +48,7 @@ def contenido_tiempo(location):
 def scrape_tiempo(location):
     # We decode the parameter since we are calling the function from a separate server and parameters info is binary-enconded
     decoded_location = location.decode('utf-8')
-    output = {}
+    output = []
     r = contenido_tiempo(decoded_location)
     soup = BeautifulSoup(r, 'lxml')
     try:
@@ -62,14 +62,15 @@ def scrape_tiempo(location):
             day_dawn = column.find(class_='m_table_weather_day_child m_table_weather_day_dawn')
             day_nightfall = column.find(class_='m_table_weather_day_child m_table_weather_day_nightfall')
 
-            output[re.sub('\s{2,}', '', date.contents[5].text)] = {
+            output.append({
+                'Day': re.sub('\s{2,}', '', date.contents[5].text),
                 'Max temp': temps.contents[1].text,
                 'Min temp': temps.contents[3].text,
                 'Rain': rain.contents[3].text,
                 'Wind': wind.contents[2].text,
                 'Day dawn': re.sub('\s+', ' ', day_dawn.contents[3].text),
                 'Day nightfall': re.sub('\s+', '', day_nightfall.contents[3].text)
-            }
+            })
     except Exception as e:
         None
     
