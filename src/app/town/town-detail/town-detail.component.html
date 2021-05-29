@@ -8,8 +8,7 @@
         <div class="row mt-4">
             <div class="col-md-6">
                 <div class="card">
-                    <!-- <img class="card-img-top" [src]="town.wiki_info.imagen"> -->
-                    <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Humada_Burgos.jpg">
+                    <img class="card-img-top" src="{{town.wiki_info.imagen}}">
                     <div class="card-body">
                         <p class="card-text">{{town.wiki_info.description}}</p>
                         <p class="card-text"><small class="text-muted">{{town.wiki_info.population}}</small></p>
@@ -31,9 +30,11 @@
                         <tr *ngFor="let day of town.tiempo_info | slice:0:7; index as i"> 
                             <th scope="row">{{i+1}}</th>
                             <td>{{day.Day}}</td>
-                            <td>{{day['Max temp']}} || {{day['Min temp']}}</td>
-                            <td>{{day.Rain}}</td>
-                            <td>{{day.Wind}}</td>
+                            <td> <img src="../../../assets/images/up-arrow.svg" width="15"> {{day['Max temp']}} <img src="../../../assets/images/down-arrow.svg" width="15"> {{day['Min temp']}} </td>
+                            <td *ngIf="ConvertStringToFloat(day.Rain) > 5.0"> <img src="../../../assets/images/rainy.svg" width="15"> {{day.Rain}}</td>
+                            <td *ngIf="ConvertStringToFloat(day.Rain) <= 5.0"> <img src="../../../assets/images/sunny.svg" width="15"> {{day.Rain}}</td>
+                            <td *ngIf="ConvertStringToFloat(day.Wind) > 22"> <img src="../../../assets/images/windy.svg" width="20"> {{day.Wind}}</td>
+                            <td *ngIf="ConvertStringToFloat(day.Wind) <= 22">{{day.Wind}}</td>
                         </tr>
                     </tbody>
                 </table>

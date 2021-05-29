@@ -87,8 +87,17 @@ export class TownDetailComponent implements OnInit {
         })
       })
     })
+  }
 
-
+  /**
+   * Parse str to float
+   * 
+   * @param input string
+   * @return float
+   */
+  ConvertStringToFloat(input: string) {
+    var numeric = parseFloat(input);
+    return numeric;
   }
 
 }

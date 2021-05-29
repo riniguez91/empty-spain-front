@@ -32,6 +32,28 @@ def wiki_url(user_input):
 
     return driver.page_source
 
+#Coge la imagen de "google imagenes" para mayor calidad
+def wiki_imagen(user_input):
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless') 
+    PATH = 'C:/WebDriver/bin/chromedriver.exe' 
+    driver = webdriver.Chrome(PATH, options=options)
+    string_user_input = user_input + " pueblo ciudad"
+    driver.get('https://www.google.com/search?q={}'.format(string_user_input))     #Look for the search URL
+    time.sleep(1)
+    driver.find_element_by_xpath('//*[@id="L2AGLb"]/div').click()           #Accepting Google Cookies
+    try: driver.find_element_by_xpath('//*[@id="rhs"]/div/div/div/div[1]/div/div[2]/div/a/div/div').click()
+    except Exception as e: None
+
+    try:
+        driver.find_element_by_xpath('//*[@id="media_result_group"]/div[1]/div/div[2]/div/div/a/g-img/div').click()
+        time.sleep(3)
+        imagen_municipio = driver.find_element_by_xpath('//*[@id="Sva75c"]/div/div/div[3]/div[2]/c-wiz/div/div[1]/div[1]/div/div[2]/a/img').get_attribute('src')
+    except Exception as e:
+        imagen_municipio = "https://programacion.net/files/article/20160819020822_image-not-found.png"
+
+    return imagen_municipio
+
 # using BeautifulSoup to scrap the map view, type of locality, population, a short description in the preview area about the location.
 def wiki_content(location):
     output = {}
@@ -50,9 +72,12 @@ def wiki_content(location):
     for i in contenedor:
         mapa = i.find(class_="lu-fs").attrs['src']
         mapa_url = "https://google.com" + mapa
-        imagen = i.find(class_="GMCzAd BA0A6c")
+        imagen = wiki_imagen(decoded_location)
+
+        """ imagen = i.find(class_="GMCzAd BA0A6c")
         if (imagen): imagen = imagen.find('img', recursive=False).attrs['src']
-        else: imagen = ""
+        else: imagen = "" """
+
         nombre = i.find("h2").text
         tipo_localidad = i.find(class_="wwUB2c PZPZlf E75vKf")
         if (tipo_localidad):
