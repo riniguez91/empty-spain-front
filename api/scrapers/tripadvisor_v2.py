@@ -29,7 +29,7 @@ def contenido_TripAdvisor(user_input):
 
     #window_after = driver.window_handles[1]
     #driver.switch_to.window(window_after)'''
-    time.sleep(2)
+    time.sleep(3)
     url.append(driver.current_url)      # Url 
 
     return driver.page_source
