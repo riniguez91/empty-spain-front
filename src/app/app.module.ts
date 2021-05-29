@@ -17,14 +17,7 @@ import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
 import { TownModule } from './town/town.module';
 import { SpinnerModule } from './shared/components/spinner/spinner.module';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 
-import { ChartModule } from '@syncfusion/ej2-angular-charts';
-import { CategoryService, LegendService, TooltipService } from '@syncfusion/ej2-angular-charts';
-import { DataLabelService, LineSeriesService} from '@syncfusion/ej2-angular-charts';
-import { AccumulationChartModule } from '@syncfusion/ej2-angular-charts';
-import { PieSeriesService, AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService,
-  AccumulationDataLabelService } from '@syncfusion/ej2-angular-charts';
 
 @NgModule({
   declarations: [
@@ -35,8 +28,7 @@ import { PieSeriesService, AccumulationLegendService, AccumulationTooltipService
     InicioComponent,
     AuthenticationComponent,
     NotFoundComponent,
-    PerfilComponent,
-    DashboardComponent
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
@@ -45,16 +37,11 @@ import { PieSeriesService, AccumulationLegendService, AccumulationTooltipService
     FormsModule,
     TownModule,
     SpinnerModule,
-    AppRoutingModule,
-    ChartModule,
-    AccumulationChartModule,
+    AppRoutingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
-    CategoryService, LegendService, TooltipService, DataLabelService, LineSeriesService,PieSeriesService, 
-    AccumulationLegendService, AccumulationTooltipService, AccumulationDataLabelService,
-    AccumulationAnnotationService
+    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
