@@ -1,4 +1,3 @@
-#from api.app import wiki
 import base64
 from selenium import webdriver
 import time
@@ -19,16 +18,18 @@ def wiki_url(user_input):
     PATH = 'C:/WebDriver/bin/chromedriver.exe' 
 
     driver = webdriver.Chrome(PATH, options=options)
-    string_user_input = user_input + " pueblo ciudad"          #Se añade ciudad para asegurarse de que busca pueblo no otra cosa
+    string_user_input = user_input + " ciudad"          #Se añade ciudad para asegurarse de que busca pueblo no otra cosa
     driver.get('https://www.google.com/search?q={}'.format(string_user_input))     #Look for the search URL
     time.sleep(1)
     driver.find_element_by_xpath('//*[@id="L2AGLb"]/div').click()           #Accepting Google Cookies
     
     #Comprobar si hay pueblo recomendado para acceder
     try:
-        driver.find_element_by_xpath('//*[@id="rhs"]/div/div/div/div[1]/div/div[2]/div/a/div/div').click()
+        driver.find_element_by_xpath('//*[@id="rhs"]/div[2]/div/div/div[1]/div/div[2]/div/a/div/div').click()
     except Exception as e:
         None
+
+    time.sleep(10)
     return driver.page_source
 
 # using BeautifulSoup to scrap the map view, type of locality, population, a short description in the preview area about the location.
@@ -48,9 +49,6 @@ def wiki_content(location):
     contenedor = soup.find_all(class_="I6TXqe osrp-blk")
     for i in contenedor:
         mapa = i.find(class_="lu-fs").attrs['src']
-        imagen = i.find(class_="GMCzAd BA0A6c")
-        if (imagen): imagen = imagen.find('img', recursive=False).attrs['src']
-        else: imagen = ""
         mapa_url = "https://google.com" + mapa
         nombre = i.find("h2").text
         tipo_localidad = i.find(class_="wwUB2c PZPZlf E75vKf")
@@ -72,10 +70,10 @@ def wiki_content(location):
                 poblacion = filas.text
                 
     # Converting the return value into a json
-    dict_response = {'locality_type': tipo_localidad, 'population':poblacion, 'description':descripcion_edit,'map': mapa_url, 'image': imagen}
+    dict_response = {'locality_type': tipo_localidad, 'population':poblacion, 'description':descripcion_edit,'map': mapa_url}
     json_response = json.dumps(dict_response, indent=3)
 
     return json_response
 
 #print(wiki_content(b'Samaniego'))  #Click en recomendados
-#print(wiki_content(b'Madrid'))     #Directamente la busqueda
+# print(wiki_content(b'Madrid'))     #Directamente la busqueda
