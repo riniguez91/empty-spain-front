@@ -1,15 +1,55 @@
 <div class="container mt-4">
     <div *ngIf="town">
-        <h1 class="display-3">{{town.municipio}}</h1>
-        <p>{{town.superficie}}</p>
-        <p>{{town.scraped}}</p>
-        <p>{{town.wiki_info.locality_type}}</p>
-       <div class="row">
+        <h1 class="display-2 text-center">
+            {{town.municipio}},
+            <small class="text-muted green-small-text">CCAA</small>
+        </h1>
+        <hr>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <!-- <img class="card-img-top" [src]="town.wiki_info.imagen"> -->
+                    <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Humada_Burgos.jpg">
+                    <div class="card-body">
+                        <p class="card-text">{{town.wiki_info.description}}</p>
+                        <p class="card-text"><small class="text-muted">{{town.wiki_info.population}}</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 ms-auto">
+                <table class="table table-hover table-striped">
+                    <thead class="table-time-header">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Dia</th>
+                            <th scope="col">Temperatura</th>
+                            <th scope="col">Lluvia</th>
+                            <th scope="col">Viento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let day of town.tiempo_info | slice:0:7; index as i"> 
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{day.Day}}</td>
+                            <td>{{day['Max temp']}} || {{day['Min temp']}}</td>
+                            <td>{{day.Rain}}</td>
+                            <td>{{day.Wind}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
+        </div>
+
+        <div class="row mt-4">
             <ul class="list-group mt-1">
-                <li class="list-group-item" *ngFor="let tweet of town.tripadvisor_info[town.municipio][0]['Alojate en']">
+                <li class="list-group-item"
+                    *ngFor="let tweet of town.tripadvisor_info[town.municipio][0]['Alojate en']">
                     {{tweet.Titulo}}
                 </li>
             </ul>
-        </div> 
+        </div>
+
+        <a href="https://twitter.com/intent/tweet?button_hashtag=Madrid&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #Madrid</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
     </div>
 </div>

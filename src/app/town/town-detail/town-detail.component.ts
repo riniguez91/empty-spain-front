@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { Observable, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { StorageService } from 'src/app/services/storage.service';
 
 import { TownService } from '../town.service';
@@ -41,6 +40,7 @@ export class TownDetailComponent implements OnInit {
         if (this.userId) this.addSearch(this.townName, this.townId, result, this.userId)
         else this.addSearch(this.townName, this.townId, result)
       } 
+      console.log(this.town)
     });
   }
 

@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora&family=Poppins:wght@300;400&display=swap');
 
 /* Variables globales */
-$colorPrincipal: rgb(115, 137, 220);
-$colorSecundario: rgb(64, 77, 126);
-$colorNeutral: rgb(243, 252, 193);
-$colorPositivo: rgb(157, 240, 157);
-$colorNegativo: rgb(247, 126, 126);
+:root {
+    --rich-black: rgb(36,41,46);
+    --azure: #3F84E5;
+    --light-sea-green: #00A6A6;
+    --lime-green: #6A9A1F;
+    --maximum-red: #DE1A1A;
+}
 
 // Asignar a 100% para que el footer este fijo debajo (id=estilo en div de app.component.html necesario)
 body, html {
@@ -24,15 +26,12 @@ body, html {
 .botones {
     margin-top: 20px!important;
     margin-bottom: 20px!important;
+    background-color: var(--lime-green)!important; 
 }
 
-.btn-primary {
-    background-color: $colorPrincipal;  
-}
-
-.btn-primary:hover {
-    background-color: $colorSecundario;
-}
+/* .btn-primary:hover {
+    background-color: var(--color-secundario);
+} */
 
 .h1Titulo {
     margin-bottom: 20px;
@@ -46,18 +45,6 @@ body, html {
     font-size: 18px;
     color: black;
     font-family: 'Lora', serif;
-}
-
-#positivo {
-    background-color: red;//$colorPositivo
-}
-
-#negativo {
-    background-color: $colorNegativo;
-}
-
-#neutral {
-    background-color: $colorNeutral;
 }
 
 .overlay {

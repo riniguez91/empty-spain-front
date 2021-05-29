@@ -1,0 +1,13 @@
+.green-small-text {
+    color: var(--maximum-red)!important;
+}
+
+.table-time-header {
+    background-color: var(--light-sea-green);
+    color: whitesmoke;
+} 
+
+/* Changes stripe color inside the table */
+/* .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: red;
+ } */

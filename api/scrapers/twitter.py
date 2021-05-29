@@ -19,7 +19,7 @@ api = API(auth)
 
 # Tweepy function, we obtain the most relevant and the most recent with the mixed search_type param
 def scrape(query, num_tweets=10):
-    output = {}
+    output = []
     # We decode the parameter since we are calling the function from a separate server and parameters info is binary-enconded
     engine_query = '#' + query.decode('utf-8') + ' -filter:retweets'
     # There is no need to check if there is a list of tweets returned from Cursor() since if thats the case it won't enter the for loop and thus raise no exceptions
@@ -36,7 +36,7 @@ def scrape(query, num_tweets=10):
 
 # Snscrape function to obtain the tweets relevant to a less known town since the Tweepy API is limited to 7-days on the search (we're using the standard license)
 def sns(query, num_tweets=10):
-    output = {}
+    output = []
     # We decode the parameter since we are calling the function from a separate server and parameters info is binary-enconded
     engine_query = '#' + query.decode('utf-8') + ' -filter:retweets'
     for i, tweet in enumerate(sntwitter.TwitterSearchScraper(engine_query).get_items()):
