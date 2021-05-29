@@ -7,6 +7,7 @@
         <hr>
         <div class="row mt-4">
             <div class="col-md-6">
+                <!-- Wiki info card -->
                 <div class="card">
                     <img class="card-img-top" src="{{town.wiki_info.imagen}}">
                     <div class="card-body">
@@ -16,6 +17,7 @@
                 </div>
             </div>
             <div class="col-md-6 ms-auto">
+                <!-- Weather table -->
                 <table class="table table-hover table-striped">
                     <thead class="table-time-header">
                         <tr>
@@ -30,14 +32,28 @@
                         <tr *ngFor="let day of town.tiempo_info | slice:0:7; index as i"> 
                             <th scope="row">{{i+1}}</th>
                             <td>{{day.Day}}</td>
-                            <td> <img src="../../../assets/images/up-arrow.svg" width="15"> {{day['Max temp']}} <img src="../../../assets/images/down-arrow.svg" width="15"> {{day['Min temp']}} </td>
-                            <td *ngIf="ConvertStringToFloat(day.Rain) > 5.0"> <img src="../../../assets/images/rainy.svg" width="15"> {{day.Rain}}</td>
-                            <td *ngIf="ConvertStringToFloat(day.Rain) <= 5.0"> <img src="../../../assets/images/sunny.svg" width="15"> {{day.Rain}}</td>
-                            <td *ngIf="ConvertStringToFloat(day.Wind) > 22"> <img src="../../../assets/images/windy.svg" width="20"> {{day.Wind}}</td>
+                            <td> <img src="../../../assets/images/up-arrow.svg" width="15" alt="Up arrow"> {{day['Max temp']}} <img src="../../../assets/images/down-arrow.svg" width="15" alt="Down arrow"> {{day['Min temp']}} </td>
+                            <td *ngIf="ConvertStringToFloat(day.Rain) > 5.0"> <img src="../../../assets/images/rainy.svg" width="15" alt="Rain icon"> {{day.Rain}}</td>
+                            <td *ngIf="ConvertStringToFloat(day.Rain) <= 5.0"> <img src="../../../assets/images/sunny.svg" width="15" alt="Rain icon"> {{day.Rain}}</td>
+                            <td *ngIf="ConvertStringToFloat(day.Wind) > 22"> {{day.Wind}} <img src="../../../assets/images/windy.svg" width="20" alt="Wind icon"></td>
                             <td *ngIf="ConvertStringToFloat(day.Wind) <= 22">{{day.Wind}}</td>
                         </tr>
                     </tbody>
                 </table>
+
+                <!-- Twitter card -->
+                <div class="card overflow-auto twitter-card">
+                    <div class="card-body">
+                        <div *ngFor="let tweet of town.twitter_info; let last = last">
+                            <p class="card-text"><img class="twitter-icon" src="../../../assets/images/twitter_icon.png" alt="Twitter icon"> @{{tweet.Username}}</p>
+                            <p class="card-text">{{tweet.Content}}</p>
+                            <p class="card-text"><small class="text-muted">{{tweet.Date}}</small></p>
+                            <!-- Removes the <hr> appearing below  the last element -->
+                            <hr *ngIf="!last">
+                        </div>
+                    </div>
+                </div>
+
             </div> 
         </div>
 

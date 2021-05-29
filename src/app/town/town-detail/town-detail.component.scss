@@ -7,6 +7,14 @@
     color: whitesmoke;
 } 
 
+.twitter-card {
+    max-height: 225px;
+}
+
+.twitter-icon {
+    height: 40px;
+}
+
 /* Changes stripe color inside the table */
 /* .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
     background-color: red;
