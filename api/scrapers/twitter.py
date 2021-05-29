@@ -24,12 +24,13 @@ def scrape(query, num_tweets=10):
     engine_query = '#' + query.decode('utf-8') + ' -filter:retweets'
     # There is no need to check if there is a list of tweets returned from Cursor() since if thats the case it won't enter the for loop and thus raise no exceptions
     for i, tweet in enumerate(Cursor(api.search, q=engine_query, lang='es', search_type='mixed').items(num_tweets)):
-        output['Tweet {}'.format(i+1)] = {
+        output.append({
+            'Tweet_No': str(i+1),
             'Date': str(tweet.created_at),
             'ID': tweet.id_str,
             'Content': tweet.text,
             'Username': tweet.user.name
-        }
+        })
 
     return json.dumps(output, indent=3)
 
@@ -42,12 +43,13 @@ def sns(query, num_tweets=10):
         # We need to limit the no. of tweets manually since the sns Python wrapper doesn't include the functionality
         if i > num_tweets-1:
             break
-        output['Tweet {}'.format(i+1)] = {
+        output.append({
+            'Tweet_No': str(i+1),
             'Date': str(tweet.date),
             'ID': tweet.id,
             'Content': tweet.content,
             'Username': tweet.username
-        }
+        })
 
     return json.dumps(output, indent=3)
 
