@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { Observable, throwError } from 'rxjs';
 import { StorageService } from 'src/app/services/storage.service';
+import * as $ from 'jquery'
 
 import { TownService } from '../town.service';
 
@@ -95,10 +96,39 @@ export class TownDetailComponent implements OnInit {
    * @param input string
    * @return float
    */
-  ConvertStringToFloat(input: string) {
+  convertStringToFloat(input: string) {
     var numeric = parseFloat(input);
     return numeric;
   }
+
+  /* cardCarouselHandler(){
+    Allows for multi-carrousels to work without disturbing each other  
+    $(() => function() {
+      $("#carouselExampleControls").on("slide.bs.carousel", function(e) {
+        var $e = $(e.relatedTarget); ///relatedTarget
+        var idx = $e.index();
+        var curr_id = e.currentTarget.id;
+        var itemsPerSlide = 4;
+        var totalItems = $("#" + curr_id + " .carousel-item").length;
+
+        if (idx >= totalItems - (itemsPerSlide - 1)) {
+          var it = itemsPerSlide - (totalItems - idx);
+          for (var i = 0; i < it; i++) {
+            // Append slides to end
+            if ($e.direction == "left") {
+              $("#" + curr_id + " .carousel-item")
+                .eq(i)
+                .appendTo("#" + curr_id + " .carousel-inner");
+            } else {
+              $("#" + curr_id + " .carousel-item")
+                .eq(0)
+                .appendTo("#" + curr_id + " .carousel-inner");
+            }
+          }
+        }
+      });
+    });
+    } */
 
 }
 

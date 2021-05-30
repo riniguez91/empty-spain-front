@@ -44,7 +44,7 @@ def wiki_imagen(user_input):
     driver.find_element_by_xpath('//*[@id="L2AGLb"]/div').click()           #Accepting Google Cookies
     try: driver.find_element_by_xpath('//*[@id="rhs"]/div/div/div/div[1]/div/div[2]/div/a/div/div').click()
     except Exception as e: None
-
+    time.sleep(2)
     try:
         driver.find_element_by_xpath('//*[@id="media_result_group"]/div[1]/div/div[2]/div/div/a/g-img/div').click()
         time.sleep(3)

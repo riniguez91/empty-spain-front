@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 import json
 #from selenium.webdriver.common.keys import Keys
 
-url = []
 
 def contenido_TripAdvisor(user_input):
     # Headless is faster than a window browser and consumes less resources since there is no need for a GUI
@@ -29,9 +28,7 @@ def contenido_TripAdvisor(user_input):
 
     #window_after = driver.window_handles[1]
     #driver.switch_to.window(window_after)'''
-    time.sleep(2)
-    url.append(driver.current_url)      # Url 
-
+    time.sleep(2)    
     return driver.page_source
 
 
@@ -55,6 +52,12 @@ def info_TripAdvisor(location):
             cont_cosas = cositas.find_all(class_="_1RFDj48Z") # Nombres por separado
             
             for contenido_cosas in cont_cosas:
+                #URL
+                try:
+                    url_cosas = contenido_cosas.find('a').attrs['href']
+                    url_cosas = "https://www.tripadvisor.es" + str(url_cosas)
+                except Exception as e:
+                    url_cosas = ""
                 #Titulo
                 try:
                     titulo_cosas = contenido_cosas.find(class_="VQlgmkyI WullykOU _3WoyIIcL").text
@@ -70,11 +73,12 @@ def info_TripAdvisor(location):
                     valoracion_cosas = contenido_cosas.find(class_="zTTYS8QR _1myiToNC _1z-B2F-n").attrs['aria-label'].replace("burbujas", "puntos")
                 except Exception as e:
                     valoracion_cosas = ""
-    
+   
                 cosas_dict = {
                     'Titulo': titulo_cosas,
                     'Imagen': imagen_cosas,
-                    'Valoracion': valoracion_cosas
+                    'Valoracion': valoracion_cosas,
+                    'URL': url_cosas
                 }
                 array_cosas.append(cosas_dict)
 
@@ -83,6 +87,12 @@ def info_TripAdvisor(location):
             cont_alojate = alojate_clase.find_all(class_="_1RFDj48Z") # Nombres por separado
 
             for contenido_alojate in cont_alojate:
+                #URL
+                try:
+                    url_alojate = contenido_alojate.find('a').attrs['href']
+                    url_alojate = "https://www.tripadvisor.es" + str(url_alojate)
+                except Exception as e:
+                    url_alojate = ""
                 #Titulo
                 try:
                     titulo_alojate = contenido_alojate.find(class_="VQlgmkyI WullykOU _3WoyIIcL").text
@@ -102,7 +112,8 @@ def info_TripAdvisor(location):
                 alojate_dict = {
                     'Titulo': titulo_alojate,
                     'Imagen': imagen_alojate,
-                    'Valoracion': valoracion_alojate
+                    'Valoracion': valoracion_alojate,
+                    'URL': url_alojate
                 }
                 array_alojate.append(alojate_dict)
 
@@ -112,6 +123,12 @@ def info_TripAdvisor(location):
             cont_comer = comer_clase.find_all(class_="_1RFDj48Z") # Nombres por separado
             
             for contenido_comer in cont_comer:
+                #URL
+                try:
+                    url_comer = contenido_comer.find('a').attrs['href']
+                    url_comer = "https://www.tripadvisor.es" + str(url_comer)
+                except Exception as e:
+                    url_comer = ""
                 #Titulo
                 try:
                     titulo_comer = contenido_comer.find(class_="VQlgmkyI WullykOU _3WoyIIcL").text
@@ -137,12 +154,12 @@ def info_TripAdvisor(location):
                     'Titulo': titulo_comer,
                     'Imagen': imagen_comer,
                     'Valoracion': valoracion_comer,
-                    'Descripcion': descripcion_comer
+                    'Descripcion': descripcion_comer,
+                    'URL': url_comer
                 }
                 array_comer.append(comer_dict)
         
         output[decoded_location].append({
-            'Url': url[-1],
             'Cosas que hacer': array_cosas,
             'Alojate en': array_alojate,
             'Comer en': array_comer

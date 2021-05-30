@@ -9,7 +9,7 @@
             <div class="col-md-6">
                 <!-- Wiki info card -->
                 <div class="card">
-                    <img class="card-img-top" src="{{town.wiki_info.imagen}}">
+                    <img class="card-img-center" src="{{town.wiki_info.imagen}}"> <!-- card-img-top -->
                     <div class="card-body">
                         <p class="card-text">{{town.wiki_info.description}}</p>
                         <p class="card-text"><small class="text-muted">{{town.wiki_info.population}}</small></p>
@@ -33,10 +33,10 @@
                             <th scope="row">{{i+1}}</th>
                             <td>{{day.Day}}</td>
                             <td> <img src="../../../assets/images/up-arrow.svg" width="15" alt="Up arrow"> {{day['Max temp']}} <img src="../../../assets/images/down-arrow.svg" width="15" alt="Down arrow"> {{day['Min temp']}} </td>
-                            <td *ngIf="ConvertStringToFloat(day.Rain) > 5.0"> <img src="../../../assets/images/rainy.svg" width="15" alt="Rain icon"> {{day.Rain}}</td>
-                            <td *ngIf="ConvertStringToFloat(day.Rain) <= 5.0"> <img src="../../../assets/images/sunny.svg" width="15" alt="Rain icon"> {{day.Rain}}</td>
-                            <td *ngIf="ConvertStringToFloat(day.Wind) > 22"> {{day.Wind}} <img src="../../../assets/images/windy.svg" width="20" alt="Wind icon"></td>
-                            <td *ngIf="ConvertStringToFloat(day.Wind) <= 22">{{day.Wind}}</td>
+                            <td *ngIf="convertStringToFloat(day.Rain) > 5.0"> <img src="../../../assets/images/rainy.svg" width="15" alt="Rain icon"> {{day.Rain}}</td>
+                            <td *ngIf="convertStringToFloat(day.Rain) <= 5.0"> <img src="../../../assets/images/sunny.svg" width="15" alt="Rain icon"> {{day.Rain}}</td>
+                            <td *ngIf="convertStringToFloat(day.Wind) > 22"> {{day.Wind}} <img src="../../../assets/images/windy.svg" width="20" alt="Wind icon"></td>
+                            <td *ngIf="convertStringToFloat(day.Wind) <= 22">{{day.Wind}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -57,16 +57,51 @@
             </div> 
         </div>
 
-        <div class="row mt-4">
-            <ul class="list-group mt-1">
-                <li class="list-group-item"
-                    *ngFor="let tweet of town.tripadvisor_info[town.municipio][0]['Alojate en']">
-                    {{tweet.Titulo}}
-                </li>
-            </ul>
-        </div>
+        <!-- JQuery example
+        
+        <div class="container-fluid">
+            <h2 class="display-4 fp-heading text-center">Hoteles donde alojarse:</h2>
+            <hr class="featurette-divider">
 
-        <a href="https://twitter.com/intent/tweet?button_hashtag=Madrid&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #Madrid</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="height: 300px; width: 200px;">
+                <div class="carousel-inner row w-100 mx-auto">
+                    <div class="carousel-item col-md-3 active" *ngFor="let alojate of town.tripadvisor_info[town.municipio][0]['Alojate en'];let index = index;let isFirst = first" [ngClass]="{active:isFirst}">
+                    <div class="card"> 
+                        <img class="card-img-top img-fluid" src="{{alojate.Imagen}}" alt="{{alojate.Titulo}}"> 
+                        <div class="card-body">
+                        <h4 class="card-title">{{alojate.Titulo}}</h4>
+                        <p class="card-text">{{alojate.Valoracion}}</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>-->
+        
+        <!-- Temporary Alojate -->
+        <div class="container tripAdvisor-container mt-5" *ngFor="let activities of town.tripadvisor_info[town.municipio][0] | keyvalue">
+            <h1 class="display-6">{{activities.key}}</h1>
+            <div class="row mt-3 gy-md-1 gy-4" >
+                <div class="col-md-3" *ngFor="let child of activities.value | slice:0:4">
+                    <div class="card alojate-card h-100">
+                        <img class="card-img-top" src="{{child.Imagen}}">
+                        <div class="card-body">
+                            <a class="link-text" href="{{child.URL}}" target="_blank"><p class="card-text">{{child.Titulo}}</p></a>
+                            <p class="card-text"><small class="text-muted">{{child.Descripcion}}</small></p>
+                            <p class="card-text"><small class="text-muted">{{child.Valoracion}}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>
