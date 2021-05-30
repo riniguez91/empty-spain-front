@@ -3,6 +3,7 @@
         <h1 class="display-2 text-center">
             {{town.municipio}},
             <small class="text-muted green-small-text">CCAA</small>
+            <h2 class="display-6 text-center">Despoblado</h2>
         </h1>
         <hr>
         <div class="row mt-4">
@@ -92,12 +93,14 @@
             <div class="row mt-3 gy-md-1 gy-4" >
                 <div class="col-md-3" *ngFor="let child of activities.value | slice:0:4">
                     <div class="card alojate-card h-100">
-                        <img class="card-img-top" src="{{child.Imagen}}">
-                        <div class="card-body">
-                            <a class="link-text" href="{{child.URL}}" target="_blank"><p class="card-text">{{child.Titulo}}</p></a>
-                            <p class="card-text"><small class="text-muted">{{child.Descripcion}}</small></p>
-                            <p class="card-text"><small class="text-muted">{{child.Valoracion}}</small></p>
-                        </div>
+                        <a class="link-text" href="{{child.URL}}" target="_blank">
+                            <img class="card-img-top" src="{{child.Imagen}}">
+                            <div class="card-body">
+                                <p class="card-text">{{child.Titulo}}</p>
+                                <p class="card-text"><small class="text-muted">{{child.Descripcion}}</small></p>
+                                <p class="card-text"><small class="text-muted">{{child.Valoracion}}</small></p>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
