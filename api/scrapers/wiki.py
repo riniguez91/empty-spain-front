@@ -63,6 +63,7 @@ def wiki_content(location):
     
     dict_response = {}
     mapa_url = ""
+    imagen = ""
     poblacion = ""
     descripcion_edit = ""
     tipo_localidad = ""

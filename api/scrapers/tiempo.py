@@ -29,18 +29,20 @@ def contenido_tiempo(location):
     driver.get('https://www.eltiempo.es')
     time.sleep(1)
     driver.find_element_by_xpath('//*[@id="didomi-notice-agree-button"]').click()
+    
+    #driver.find_element_by_xpath('//*[@id="term"]').click()   #Sin headless
     driver.find_element_by_xpath('//*[@id="page"]/nav/div[2]/div[2]/ul/li[2]/button').click()   #Necesario para headless
-    #time.sleep(2)
     driver.find_element_by_xpath('//*[@id="term"]').send_keys(getUrl(location))
     time.sleep(2)
 
     #Comprobar si está la locacalidad
     try:
-        driver.find_element_by_xpath('//*[@id="search"]/div/ul/li[1]/a').click()
+        driver.find_element_by_xpath('//*[@id="search"]/ul/li[1]/a').click()
     except Exception as e:
-        None
+        print("No ha recogido el page_source de selenium.")
 
     contenido = driver.page_source
+
 
     return contenido
 
@@ -51,6 +53,7 @@ def scrape_tiempo(location):
     output = []
     r = contenido_tiempo(decoded_location)
     soup = BeautifulSoup(r, 'lxml')
+    print(soup.find(class_="m_table_weather_day_max_temp"))
     try:
         # Obtain table wrapper and iterate through its rows to obtain data
         table = soup.find(class_='m_table_weather_day_wrapper')
@@ -72,7 +75,7 @@ def scrape_tiempo(location):
                 'Day nightfall': re.sub('\s+', '', day_nightfall.contents[3].text)
             })
     except Exception as e:
-        None
+        print("Error en la funcion de BeautifulSoup.")
     
     return json.dumps(output, indent=3)
     

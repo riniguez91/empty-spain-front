@@ -2,6 +2,8 @@ import os
 import json
 from tweepy import OAuthHandler, API, Cursor, StreamListener, Stream
 import snscrape.modules.twitter as sntwitter
+from textblob import TextBlob
+from deep_translator import GoogleTranslator
 
 # Git + Python 3.8+ is required: pip install git+https://github.com/JustAnotherArchivist/snscrape.git
 # Tweepy: pip install tweepy
@@ -43,12 +45,20 @@ def sns(query, num_tweets=10):
         # We need to limit the no. of tweets manually since the sns Python wrapper doesn't include the functionality
         if i > num_tweets-1:
             break
+        try:
+            to_translate = tweet.content
+            translated = GoogleTranslator(source='auto', target='en').translate(to_translate)
+            sentimiento = TextBlob(translated).sentiment
+        except Exception as e:
+            sentimiento = 0.0
+
         output.append({
             'Tweet_No': str(i+1),
             'Date': str(tweet.date),
             'ID': tweet.id,
             'Content': tweet.content,
-            'Username': tweet.username
+            'Username': tweet.username,
+            'Sentiment': round(sentimiento.polarity, 2)
         })
 
     return json.dumps(output, indent=3)
@@ -57,4 +67,4 @@ def sns(query, num_tweets=10):
     # os.system('snscrape --jsonl --max-results {} twitter-search \"{}\" > tweets.json'.format(num_tweets, words))
 
 """ print(scrape('#Granada -filter:retweets', 20))
-print(sns('#Fondales OR (#Fondales#Granada) -filter:retweets', 20)) """
+print(sns(b'#Fondales OR (#Fondales#Granada) -filter:retweets', 20)) """

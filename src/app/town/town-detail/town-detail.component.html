@@ -3,7 +3,7 @@
         <h1 class="display-2 text-center">
             {{town.municipio}},
             <small class="text-muted green-small-text">{{town.provincia}}</small>
-            <h2 class="display-6 text-center">Despoblado</h2>
+            <h2 class="display-6 text-center">{{town.municipio_state}}</h2>
         </h1>
         <hr>
         <div class="row mt-4 gy-md-1 gy-4" >
@@ -46,8 +46,12 @@
                 <div class="card overflow-auto twitter-card">
                     <div class="card-body">
                         <div *ngFor="let tweet of town.twitter_info; let last = last">
-                            <p class="card-text"><img class="twitter-icon" src="../../../assets/images/twitter_icon.png" alt="Twitter icon"> @{{tweet.Username}}
-                            | Resultado: </p>
+                            <p class="card-text"><img class="twitter-icon" src="../../../assets/images/twitter_icon.png" alt="Twitter icon"> @{{tweet.Username}} 
+                            || Resultado: {{tweet.Sentiment}}
+                            <img *ngIf="convertStringToFloat(tweet.Sentiment) >= 0.3" src="../../assets/images/feliz.png"  class="img_sentimiento" alt="Positivo">
+                            <img *ngIf="convertStringToFloat(tweet.Sentiment) <= -0.3" src="../../assets/images/triste.png" class="img_sentimiento" alt="Negativo">
+                            <img *ngIf="convertStringToFloat(tweet.Sentiment) < 0.3 && convertStringToFloat(tweet.Sentiment) > -0.3" src="../../assets/images/neutral.png" class="img_sentimiento" alt="Neutral">
+                            </p>
                             <p class="card-text">{{tweet.Content}}</p>
                             <p class="card-text"><small class="text-muted">{{tweet.Date}}</small></p>
                             <!-- Removes the <hr> appearing below  the last element -->
