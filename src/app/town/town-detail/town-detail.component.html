@@ -2,15 +2,15 @@
     <div *ngIf="town">
         <h1 class="display-2 text-center">
             {{town.municipio}},
-            <small class="text-muted green-small-text">CCAA</small>
+            <small class="text-muted green-small-text">{{town.provincia}}</small>
             <h2 class="display-6 text-center">Despoblado</h2>
         </h1>
         <hr>
-        <div class="row mt-4">
+        <div class="row mt-4 gy-md-1 gy-4" >
             <div class="col-md-6">
                 <!-- Wiki info card -->
                 <div class="card">
-                    <img class="card-img-center" src="{{town.wiki_info.imagen}}"> <!-- card-img-top -->
+                    <img class="card-img-center" src="{{town.wiki_info.imagen}}" alt="Wikipedia municipio image">
                     <div class="card-body">
                         <p class="card-text">{{town.wiki_info.description}}</p>
                         <p class="card-text"><small class="text-muted">{{town.wiki_info.population}}</small></p>
@@ -46,7 +46,8 @@
                 <div class="card overflow-auto twitter-card">
                     <div class="card-body">
                         <div *ngFor="let tweet of town.twitter_info; let last = last">
-                            <p class="card-text"><img class="twitter-icon" src="../../../assets/images/twitter_icon.png" alt="Twitter icon"> @{{tweet.Username}}</p>
+                            <p class="card-text"><img class="twitter-icon" src="../../../assets/images/twitter_icon.png" alt="Twitter icon"> @{{tweet.Username}}
+                            | Resultado: </p>
                             <p class="card-text">{{tweet.Content}}</p>
                             <p class="card-text"><small class="text-muted">{{tweet.Date}}</small></p>
                             <!-- Removes the <hr> appearing below  the last element -->
@@ -94,7 +95,7 @@
                 <div class="col-md-3" *ngFor="let child of activities.value | slice:0:4">
                     <div class="card alojate-card h-100">
                         <a class="link-text" href="{{child.URL}}" target="_blank">
-                            <img class="card-img-top" src="{{child.Imagen}}">
+                            <img class="card-img-top" src="{{child.Imagen}}" alt="Scraper service image">
                             <div class="card-body">
                                 <p class="card-text">{{child.Titulo}}</p>
                                 <p class="card-text"><small class="text-muted">{{child.Descripcion}}</small></p>
