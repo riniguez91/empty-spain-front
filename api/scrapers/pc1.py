@@ -13,7 +13,7 @@ Estamos cargando este conjunto de datos localmente, como un archivo Excel (xlsx)
 """
 from elPais import * #importar el fichero elPais.py
 
-def scrape_pc1(user_input):
+def scrape_pc1():
     from numpy.core.records import array
     import pandas as pd
 
@@ -105,6 +105,7 @@ def scrape_pc1(user_input):
     """
 
     from sklearn.model_selection import train_test_split
+    import pickle
 
     model = LogisticRegression(random_state=0)
 
@@ -112,7 +113,7 @@ def scrape_pc1(user_input):
     model.fit(X_train, y_train)
     y_pred_proba = model.predict_proba(X_test)
     y_pred = model.predict(X_test)
-
+ 
     """Analizamos en mas detalle los falsos verdaderos para la clase Despoblacion para comprobar que es lo que esta causando estos fallos:
 
     Como se puede ver anteriormente, los artículos clasificados erróneamente son artículos que hablan de diferentes temas (artículos que involucran palabras relacionadas con la Despoblacion, como aquellos que hablan de pueblos de España). Cabe destacar que un modelo con una precision máxima 100% es un caso poco realista ya que siempre existen fallos en el modelo debido a esto.
@@ -122,30 +123,9 @@ def scrape_pc1(user_input):
 
     model.fit(features, labels)
 
-    """### Prueba de funcionamiento
+    # Save the model & tf-idf so that we can use it later
+    pickle.dump(model, open('api/scrapers/data-pc1/trained_model.sav', 'wb'))
+    pickle.dump(tfidf, open('api/scrapers/data-pc1/tfidf.pkl', 'wb'))
 
-    A continuacion realizaremos una serie de pruebas con unos breves textos sobre distintos temas para observar como los categoriza el modelo, cabe destacar que en el ejemplo de la segunda frase "*Erase una vez una España bien facherita y estaba un dia con los boys haciendo cosas vaciada*" al tener una longitud corta obtenemos pocas características en el vector TF-IDF y por lo tanto palabras clave como "España vaciada" tienen más peso/importancia de ahi la predicción erronea, pero podemos comprobar que en un ejemplo más largo este caso no se da.
-    """
+scrape_pc1()
 
-    #Scrapper ElPais
-    array_textos_noticias = elpais_pc1(b"navacerrada")
-
-    #España pueblo vaciada
-    text_features = tfidf.transform(array_textos_noticias)
-    predictions = model.predict(text_features)
-    cont_desp = 0
-    cont_no_desp = 0
-
-    for text, predicted in zip(array_textos_noticias, predictions):
-      #print('"{}"'.format(text))
-      #print('-Predicted as: "{}"\n'.format(id_to_category[predicted]))
-      if (id_to_category[predicted] == "No Despoblacion"):
-        cont_no_desp += 1
-      else:
-        cont_desp += 1
-    #print("Cont Despo:{}\nCont No Despo:{}".format(cont_desp, cont_no_desp))
-    #La variable con mayor valor -> resultado
-    if (cont_desp < cont_no_desp): return "No Despoblacion"
-    else: return "Despoblacion"
-
-# print(scrape_pc1(b"navacerrada"))

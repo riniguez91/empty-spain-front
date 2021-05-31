@@ -6,6 +6,9 @@ import re
 import json
 from selenium.webdriver.common.keys import Keys
 
+import pickle
+import pandas as pd
+
 array_textos_noticias = []
 link = []
 def elpais_content(user_input):
@@ -31,12 +34,11 @@ def elpais_content(user_input):
     return driver.page_source       #Recoger todo el html de la pagina
 
 def text_elpais(user_input):
-    decoded_location = user_input.decode('utf-8')
     noticias = {}
-    noticias["ELPAIS News in " + decoded_location] = []
+    noticias["ELPAIS News in " + user_input] = []
     titulo, link_completo, subtitulo = "","",""
 
-    page_source = elpais_content(decoded_location) #Se llama a la funcion 'cope_content' para obtener el contenido de la pagina donde estan las noticias
+    page_source = elpais_content(user_input) #Se llama a la funcion 'cope_content' para obtener el contenido de la pagina donde estan las noticias
     soup = BeautifulSoup(page_source, 'lxml')
     #print(soup.text)
     contenedor = soup.find_all(class_="noticia")  #Div donde estan las noticias
@@ -59,7 +61,7 @@ def text_elpais(user_input):
         except Exception as e:
             None
 
-        noticias["ELPAIS News in " + decoded_location].append({
+        noticias["ELPAIS News in " + user_input].append({
             'Name': titulo,
             'Subtitle': subtitulo,
             'URL': link_completo
@@ -70,4 +72,35 @@ def text_elpais(user_input):
 def elpais_pc1(user_input):
     text_elpais(user_input)
     return array_textos_noticias
-#print(text_elpais(b"Brunete"))
+
+def model_prediction(user_input):
+     #Scrapper ElPais
+    array_textos_noticias = elpais_pc1(user_input.decode('utf-8'))
+    model = pickle.load(open('api/scrapers/data-pc1/trained_model.sav', 'rb'))
+    tfidf = pickle.load(open('api/scrapers/data-pc1/tfidf.pkl', 'rb'))
+    df = pd.read_excel('api/scrapers/data-pc1/Noticias_Excel.xlsx', engine='openpyxl')
+    df['category_id'] = df['Category'].factorize()[0] #Se cambia la categoria 0-> despoblacion 1-> no despoblacion
+    result = ''
+
+    category_id_df = df[['Category', 'category_id']].drop_duplicates().sort_values('category_id') #quita los valores duplicados y ordena
+    id_to_category = dict(category_id_df[['category_id', 'Category']].values)
+
+    #España pueblo vaciada
+    text_features = tfidf.transform(array_textos_noticias)
+    predictions = model.predict(text_features)
+    cont_desp = 0
+    cont_no_desp = 0
+
+    for text, predicted in zip(array_textos_noticias, predictions):
+      if (id_to_category[predicted] == "No Despoblacion"):
+        cont_no_desp += 1
+      else:
+        cont_desp += 1 
+    #La variable con mayor valor -> resultado
+    if (cont_desp < cont_no_desp): result = "No Despoblacion"
+    else: result = "Despoblacion"
+
+    json_response = json.dumps({"result": result}, indent=3)
+    return json_response
+
+# print(model_prediction(b'Brunete'))

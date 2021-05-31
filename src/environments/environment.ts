@@ -13,7 +13,8 @@ export const environment = {
   tripadvisor_scrapper_url_v2: 'http://localhost:5000/scrapers/tripadvisor/v2',
   twitter_scrapper_url: 'http://localhost:5000/scrapers/twitter/sns',
   tiempo_scrapper_url: 'http://localhost:5000/scrapers/tiempo',
-  wiki_scrapper_url: 'http://localhost:5000/scrapers/wiki'
+  wiki_scrapper_url: 'http://localhost:5000/scrapers/wiki',
+  model_url: 'http://localhost:5000/model/prediction'
 };
 
 /*

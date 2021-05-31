@@ -76,6 +76,16 @@ export class TownService {
   }
 
   /**
+   * Gets the result based on the pre-trained model predictions
+   * 
+   * @param city 
+   * @returns result
+   */
+  getModelResult(city: string): Observable<any> {
+    return this.http.post(environment.model_url, city)
+  }
+
+  /**
    * Calls the various scrapers and adds the information in the database
    * 
    * @param json object

@@ -7,6 +7,7 @@ from scrapers.tripadvisor_v2 import info_TripAdvisor
 from scrapers.tiempo import scrape_tiempo
 from scrapers.twitter import scrape, sns
 from scrapers.wiki import wiki_content
+from scrapers.elPais import model_prediction
 
 app = Flask(__name__)
 CORS(app)
@@ -55,6 +56,12 @@ def twitter_sns():
 @app.route('/scrapers/wiki', methods=['POST'])
 def wiki():
     return wiki_content(request.data)
+
+# Call the model to determine the state of a municipio
+@app.route('/model/prediction', methods=['POST'])
+def model_result():
+    return model_prediction(request.data)
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
