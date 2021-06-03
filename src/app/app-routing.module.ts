@@ -9,6 +9,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { PerfilGuard } from './guards/perfil.guard';
 import { AuthenticationGuard } from './guards/authentication.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardGuard } from './guards/dashboard.guard';
 
 
 
@@ -17,7 +18,7 @@ const appRoutes: Routes = [
     {path: 'inicio', component: InicioComponent},
     {path: 'authentication', component: AuthenticationComponent, canActivate: [AuthenticationGuard]},
     {path: 'perfil', component: PerfilComponent, canActivate: [PerfilGuard]},
-    {path: 'dashboard', component: DashboardComponent},
+    {path: 'dashboard', component: DashboardComponent, canActivate: [DashboardGuard]},
     {path: '404', component: NotFoundComponent},
     {path: '', redirectTo: '/inicio', pathMatch: 'full'},
     {path: '**', redirectTo: '/404', pathMatch: 'full'}

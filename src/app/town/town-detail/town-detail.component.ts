@@ -3,7 +3,6 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { Observable, throwError } from 'rxjs';
 import { StorageService } from 'src/app/services/storage.service';
-import * as $ from 'jquery'
 
 import { TownService } from '../town.service';
 
