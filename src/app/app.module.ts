@@ -19,10 +19,12 @@ import { SpinnerModule } from './shared/components/spinner/spinner.module';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
+import { EditService, ToolbarService, PageService, GridModule, SortService, EditSettingsModel, ToolbarItems, IEditCell, FilterService, GroupService } from '@syncfusion/ej2-angular-grids';
 import { TooltipService, LegendService, CategoryService, ChartModule, AccumulationChartModule, 
   PieSeriesService, AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService,
   AccumulationDataLabelService, BarSeriesService, DataLabelService, LineSeriesService, } from '@syncfusion/ej2-angular-charts';
- 
+  
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +35,8 @@ import { TooltipService, LegendService, CategoryService, ChartModule, Accumulati
     AuthenticationComponent,
     NotFoundComponent,
     PerfilComponent,
-    DashboardComponent
+    DashboardComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import { TooltipService, LegendService, CategoryService, ChartModule, Accumulati
     AppRoutingModule,
     ChartModule,
     AccumulationChartModule,
+    GridModule
 
   ],
   providers: [
@@ -52,7 +56,7 @@ import { TooltipService, LegendService, CategoryService, ChartModule, Accumulati
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
     CategoryService, LegendService, TooltipService, DataLabelService, LineSeriesService,PieSeriesService, 
     AccumulationLegendService, AccumulationTooltipService, AccumulationDataLabelService,
-    AccumulationAnnotationService, BarSeriesService
+    AccumulationAnnotationService, BarSeriesService,EditService, ToolbarService, PageService, SortService, FilterService, GroupService
   ],
   bootstrap: [AppComponent]
 })

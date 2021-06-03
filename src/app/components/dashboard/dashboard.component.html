@@ -1,30 +1,34 @@
-<!-- <button (click)='addData()'>asdfa</button>
-<div style="width:50%;">
-    <canvas id="busquedaPueblos" height=250 baseChart [chartType]="'pie'" [legend]="true" [datasets]="chartData"
-        [labels]="chartLabels" [options]="chartOptions">
-    </canvas>
-</div> -->
- 
 <!-- PARA MOSTRAR EL NUMERO DE BUSQUEDAS POR DIA O MES -->
 <div class="container grid-container">
     <div class="grid-item">
-    <ejs-chart id="chart-line" [primaryXAxis]='primaryXAxis'  title='Busquedas Mensuales'>
-        <e-series-collection>
-            <e-series [dataSource]='chartData' type='Bar' xName='month' yName='busquedas' name='Busquedas'></e-series>
-        </e-series-collection>
-    </ejs-chart> 
+        <ejs-chart id="chart-line" [primaryXAxis]='primaryXAxis' title='Busquedas Mensuales'>
+            <e-series-collection>
+                <e-series [dataSource]='chartData' type='Bar' xName='month' yName='busquedas' name='Busquedas'>
+                </e-series>
+            </e-series-collection>
+        </ejs-chart>
     </div>
-    
+
     <!-- NUMERO DE BUSQEUDAS POR LOCALIDAD -->
     <div class="grid-item">
         <ejs-accumulationchart id="chart-pie" [legendSettings]='legendSettings' title='Busquedas por Localidad'>
             <e-accumulation-series-collection>
-                <e-accumulation-series [dataSource]='piedata' xName='x' yName='y' [dataLabel]='datalabel'></e-accumulation-series>
+                <e-accumulation-series [dataSource]='piedata' xName='x' yName='y' [dataLabel]='datalabel'>
+                </e-accumulation-series>
             </e-accumulation-series-collection>
         </ejs-accumulationchart>
     </div>
+
+    <!-- TABLA DE USUARIOS -->
     <div class="grid-item tablaUsers">
-    
+        <ejs-grid [dataSource]='data' [editSettings]='editSettings' [toolbar]='toolbar'(toolbarClick)='clickHandler($event)' [allowPaging]="true" [pageSettings]="pageSettings" >
+            <e-columns>
+                <e-column field='OrderID' headerText='Order ID' textAlign='center' isPrimaryKey='true' width=100>
+                </e-column>
+                <e-column field='CustomerID' headerText='Customer ID' width=120></e-column>
+                <e-column field='Freight' headerText='Freight' textAlign='center' width=120 format='C2'></e-column>
+                <e-column field='ShipCountry' headerText='Ship Country' width=150></e-column>
+            </e-columns>
+        </ejs-grid>
     </div>
-    </div>
-    
+</div>
