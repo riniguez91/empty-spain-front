@@ -8,22 +8,25 @@
   <div class="collapse navbar-collapse" [ngClass]="{'show': navbarOpen}">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item mx-1">
-          <a class="nav-link" routerLink="/inicio" (click)="toggleNavbar()" routerLinkActive="activeLink">Inicio</a>
+          <a class="nav-link" routerLink="/inicio" routerLinkActive="activeLink">Inicio</a>
         </li>
         <li class="nav-item mx-1">
-          <a class="nav-link" routerLink="/analisis-texto" (click)="toggleNavbar()" routerLinkActive="activeLink">Análisis de Texto</a>
+          <a class="nav-link" routerLink="/analisis-texto" routerLinkActive="activeLink">Análisis de Texto</a>
         </li>
         <li class="nav-item mx-1">
-          <a class="nav-link" routerLink="/pueblos" (click)="toggleNavbar()" routerLinkActive="activeLink">Pueblos</a>
+          <a class="nav-link" routerLink="/pueblos" routerLinkActive="activeLink">Pueblos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="dashboardLink" routerLink="/dashboard" routerLinkActive="activeLink">Dashboard</a>
         </li>
         <li class="nav-item mx-1">
-          <a class="nav-link" *ngIf="!profileLink" (click)="toggleNavbar()" routerLink="/authentication" routerLinkActive="activeLink">Login</a>
+          <a class="nav-link" *ngIf="!profileLink" routerLink="/authentication" routerLinkActive="activeLink">Login</a>
         </li>
         <li class="nav-item mx-1">
-          <a class="nav-link" *ngIf="profileLink" (click)="toggleNavbar()" routerLink="/perfil" routerLinkActive="activeLink">Perfil</a>
+          <a class="nav-link" *ngIf="profileLink" routerLink="/perfil" routerLinkActive="activeLink">Perfil</a>
         </li>
         <li class="nav-item mx-1">
-          <a class="nav-link" *ngIf="profileLink" (click)="toggleNavbar()" routerLink="" (click)="logout()">Log out</a>
+          <a class="nav-link" *ngIf="profileLink" routerLink="" (click)="logout()">Log out</a>
         </li>
       </ul>
   </div>

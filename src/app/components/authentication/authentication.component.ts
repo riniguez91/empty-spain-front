@@ -95,6 +95,7 @@ export class AuthenticationComponent implements OnInit {
           var session = new Session(result['access_token'], user);
           this.storageService.setCurrentSession(session);
           this.storageService.setLoggedIn(true);
+          this.storageService.checkAdminToken();
           this.router.navigate(['/perfil']); 
         },
         err => { 

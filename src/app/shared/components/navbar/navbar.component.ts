@@ -12,7 +12,9 @@ export class NavbarComponent implements OnInit {
 
   navbarOpen = false;
   profileLink = false;
+  dashboardLink = false;
   loggedIn: Observable<boolean>;
+  admin: Observable<boolean>;
 
   constructor(private storageService: StorageService) { }
 
@@ -21,10 +23,13 @@ export class NavbarComponent implements OnInit {
    * 
    * @return void
    */
-  ngOnInit(): void { this.storageService.isLoggedIn().subscribe( res => { this.profileLink = res; }) }
+  ngOnInit(): void { 
+    this.storageService.isLoggedIn().subscribe( res => { this.profileLink = res; })
+    this.storageService.isAdminLoggedIn().subscribe( res => { this.dashboardLink = res; })
+  }
 
   toggleNavbar(): void { this.navbarOpen = !this.navbarOpen; }
-
+  
   /**
    * Remove current user from localStorage
    * 
@@ -33,5 +38,6 @@ export class NavbarComponent implements OnInit {
   logout(): void { 
     this.storageService.logout(); 
     this.storageService.setLoggedIn(false);
+    this.storageService.setAdminLoggedIn(false);
   }
 }

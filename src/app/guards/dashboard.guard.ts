@@ -12,12 +12,8 @@ export class DashboardGuard implements CanActivate {
   constructor(private router: Router, private storageService: StorageService) { }
 
   canActivate() {
-    // Check if there is a session
-    let session = this.storageService.loadSessionData();
-    if (session) { 
-      let adminToken = jwtDecode(session['access_token']);
-      if (adminToken['is_admin']) return true;
-    }
+    // Check if there is an admin session (returns true if there is)
+    if (this.storageService.checkAdminToken()) return true;
     this.router.navigate(['/inicio'])
     return false;
   }
