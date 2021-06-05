@@ -23,6 +23,7 @@ import { EditService, ToolbarService, PageService, GridModule, SortService, Edit
 import { TooltipService, LegendService, CategoryService, ChartModule, AccumulationChartModule, 
   PieSeriesService, AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService,
   AccumulationDataLabelService, BarSeriesService, DataLabelService, LineSeriesService, } from '@syncfusion/ej2-angular-charts';
+import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
   
 
 @NgModule({
@@ -36,10 +37,10 @@ import { TooltipService, LegendService, CategoryService, ChartModule, Accumulati
     NotFoundComponent,
     PerfilComponent,
     DashboardComponent,
-    
   ],
   imports: [
     BrowserModule,
+    DashboardLayoutModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,

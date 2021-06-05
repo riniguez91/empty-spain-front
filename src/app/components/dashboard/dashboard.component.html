@@ -1,34 +1,80 @@
-<!-- PARA MOSTRAR EL NUMERO DE BUSQUEDAS POR DIA O MES -->
-<div class="container grid-container">
-    <div class="grid-item">
-        <ejs-chart id="chart-line" [primaryXAxis]='primaryXAxis' title='Busquedas Mensuales'>
-            <e-series-collection>
-                <e-series [dataSource]='chartData' type='Bar' xName='month' yName='busquedas' name='Busquedas'>
-                </e-series>
-            </e-series-collection>
-        </ejs-chart>
-    </div>
 
-    <!-- NUMERO DE BUSQEUDAS POR LOCALIDAD -->
-    <div class="grid-item">
-        <ejs-accumulationchart id="chart-pie" [legendSettings]='legendSettings' title='Busquedas por Localidad'>
-            <e-accumulation-series-collection>
-                <e-accumulation-series [dataSource]='piedata' xName='x' yName='y' [dataLabel]='datalabel'>
-                </e-accumulation-series>
-            </e-accumulation-series-collection>
-        </ejs-accumulationchart>
-    </div>
+<div class="control-section m-3">
+    <ejs-dashboardlayout [columns]="3" [cellSpacing]='cellSpacing' [allowDragging]='allowDragging' [cellAspectRatio]='cellAspectRatio'>
+        <e-panels>
 
-    <!-- TABLA DE USUARIOS -->
-    <div class="grid-item tablaUsers">
-        <ejs-grid [dataSource]='data' [editSettings]='editSettings' [toolbar]='toolbar'(toolbarClick)='clickHandler($event)' [allowPaging]="true" [pageSettings]="pageSettings" >
-            <e-columns>
-                <e-column field='OrderID' headerText='Order ID' textAlign='center' isPrimaryKey='true' width=100>
-                </e-column>
-                <e-column field='CustomerID' headerText='Customer ID' width=120></e-column>
-                <e-column field='Freight' headerText='Freight' textAlign='center' width=120 format='C2'></e-column>
-                <e-column field='ShipCountry' headerText='Ship Country' width=150></e-column>
-            </e-columns>
-        </ejs-grid>
-    </div>
+            <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="0">
+                <ng-template #header>
+                    <div>Busqueda por municipios [[PIE-CHART]] top 10</div>
+                </ng-template>
+                <ng-template #content>
+                    <div id="column">
+                        <ejs-chart id="columnChart" height="162px" [primaryXAxis]='primaryXAxis' [tooltip]='tooltip'>
+                            <e-series-collection>
+                                <e-series [dataSource]="chartData" type='Column' xName='month' yName='sales'>
+                                </e-series>
+                            </e-series-collection>
+                        </ejs-chart>
+                    </div>
+                </ng-template>
+            </e-panel>
+
+            <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="1">
+                <ng-template #header>
+                    <div>Lanzada de scrapers</div>
+                </ng-template>
+                <ng-template #content>
+                    <div id="line">
+                        <ejs-chart id="lineChart" height="162px" [primaryXAxis]='primaryXAxis' [tooltip]='tooltip'>
+                            <e-series-collection>
+                                <e-series [dataSource]="lineData" xName='x' yName='y' type="Line">
+                                </e-series>
+                            </e-series-collection>
+                        </ejs-chart>
+                    </div>
+                </ng-template>
+            </e-panel>
+
+            <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="2">
+                <ng-template #header>
+                    <div>Cambiar los 4 top picks de pueblos</div>
+                </ng-template>
+                <ng-template #content>
+                    <div id="pie1">
+                        <ejs-accumulationchart id="pieChart1" [enableAnimation]="false"
+                            [tooltip]='tooltip' [legendSettings]='legendSettings'>
+                            <e-accumulation-series-collection>
+                                <e-accumulation-series [dataSource]="piechart1" xName="x" yName="y" radius="100%"
+                                    name="Browser" [dataLabel]='datalabel'>
+                                </e-accumulation-series>
+                            </e-accumulation-series-collection>
+                        </ejs-accumulationchart>
+                    </div>
+                </ng-template>
+            </e-panel>
+
+            <e-panel [sizeX]="1" [sizeY]="1" [row]="1" [col]="0">
+
+            </e-panel>
+
+            <e-panel [sizeX]="2" [sizeY]="1" [row]="1" [col]="2">
+                <ng-template #header>
+                    <div>Informacion usuarios y cambiar privilegios</div>
+                </ng-template>
+                <ng-template #content>
+                    <div id="pie2">
+                        <ejs-accumulationchart id="pieChart2" [enableAnimation]="false"
+                            [tooltip]='tooltip' [legendSettings]='legendSettings'>
+                            <e-accumulation-series-collection>
+                                <e-accumulation-series [dataSource]="piechart2" xName="x" yName="y" radius="100%"
+                                    name="Browser" [dataLabel]='datalabel'>
+                                </e-accumulation-series>
+                            </e-accumulation-series-collection>
+                        </ejs-accumulationchart>
+                    </div>
+                </ng-template>
+            </e-panel>
+
+        </e-panels>
+    </ejs-dashboardlayout>
 </div>

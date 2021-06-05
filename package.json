@@ -22,6 +22,7 @@
     "@angular/router": "~11.2.0",
     "@syncfusion/ej2-angular-charts": "^19.1.65",
     "@syncfusion/ej2-angular-grids": "^19.1.66",
+    "@syncfusion/ej2-angular-layouts": "^19.1.63",
     "@syncfusion/ej2-navigations": "^19.1.66",
     "bootstrap": "^5.0.0-beta2",
     "jquery": "^3.6.0",
