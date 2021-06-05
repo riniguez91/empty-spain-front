@@ -25,7 +25,7 @@ export class DashboardService {
    * @return Observable<any>
    */
 
-   users(): Observable<any> {
+   getUsers(): Observable<any> {
     return this.http.get(environment.all_users_url);
   }
 

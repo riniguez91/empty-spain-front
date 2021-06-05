@@ -54,12 +54,8 @@
             </e-panel>
 
             <e-panel [sizeX]="1" [sizeY]="1" [row]="1" [col]="0">
-
-            </e-panel>
-
-            <e-panel [sizeX]="2" [sizeY]="1" [row]="1" [col]="2">
-                <ng-template #header>
-                    <div>Informacion usuarios y cambiar privilegios</div>
+                <!-- <ng-template #header>
+                    <div>Pie Chart de algo</div>
                 </ng-template>
                 <ng-template #content>
                     <div id="pie2">
@@ -72,6 +68,24 @@
                             </e-accumulation-series-collection>
                         </ejs-accumulationchart>
                     </div>
+                </ng-template> -->
+            </e-panel>
+
+            <e-panel [sizeX]="2" [sizeY]="1" [row]="1" [col]="2">
+                <ng-template #header>
+                    <div>Informacion usuarios y cambiar privilegios</div>
+                </ng-template>
+                <ng-template #content>
+                    <ejs-grid [dataSource]='tableData' [allowPaging]="true" [pageSettings]="pageSettings" >
+                        <e-columns>
+                            <e-column field='id' headerText='ID' textAlign='center' isPrimaryKey='true' width=80></e-column>
+                            <e-column field='email' headerText='Correo Electronico' width=200></e-column>
+                            <e-column field='name' headerText='Nombre' width=120></e-column>
+                            <e-column field='surnames' headerText='Apellidos' textAlign='left' width=180></e-column>
+                            <e-column field='role' headerText='Rol' textAlign='right' width=60></e-column>
+                        </e-columns>
+                    </ejs-grid>
+            
                 </ng-template>
             </e-panel>
 
