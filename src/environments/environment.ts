@@ -10,6 +10,7 @@ export const environment = {
   municipios_url: 'http://localhost:8000/municipios',
   top_searches_url: 'http://localhost:8000/mostSearchedMunicipios',
   all_users_url: 'http://localhost:8000/users',
+  reset_ccaa_provincias_municipios_url: 'http://localhost:8000/resetCcaaProvinciasMunicipios',
   sentiment_url: 'http://localhost:5000/sentimiento',
   tripadvisor_scrapper_url: 'http://localhost:5000/scrapers/tripadvisor/v1',
   tripadvisor_scrapper_url_v2: 'http://localhost:5000/scrapers/tripadvisor/v2',

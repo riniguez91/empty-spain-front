@@ -55,6 +55,21 @@ export class DashboardComponent implements OnInit {
         console.log(this.piechart1)
       }
     );
+
+    /*
+    this.dashboardService.users().subscribe(
+      result => {
+        console.log(result);
+      }
+    );*/
   }
 
+  reset_locality(){ 
+    this.dashboardService.reset().subscribe(
+      result => {
+        console.log(result);
+      }
+    );
+  }
+  
 }
