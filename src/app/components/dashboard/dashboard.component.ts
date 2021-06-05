@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EditSettingsModel, ToolbarItems, IEditCell, GridLine, PageSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations';
+import { DashboardService } from 'src/app/services/dashboard.service';
 //import * as Chart from 'chart.js';
 
 
@@ -33,14 +34,7 @@ export class DashboardComponent implements OnInit {
     { x: 2017, y: 32 }, { x: 2018, y: 35 }
   ];
   public piechart: any[] = [{ x: 'TypeScript', y: 13, text: 'TS 13%' }, { x: 'React', y: 12.5, text: 'Reat 12.5%' },{ x: 'MVC', y: 12, text: 'MVC 12%' },{ x: 'Core', y: 12.5, text: 'Core 12.5%' },{ x: 'Vue', y: 10, text: 'Vue 10%' },{ x: 'Angular', y: 40, text: 'Angular 40%' }];
-  public piechart1: any[] = [
-    { 'x': 'Chrome', y: 37, text: '37%' },
-    { 'x': 'UC Browser', y: 17, text: '17%' },
-    { 'x': 'iPhone', y: 19, text: '19%' },
-    { 'x': 'Others', y: 4, text: '4%' },
-    { 'x': 'Opera', y: 11, text: '11%' },
-    { 'x': 'Android', y: 12, text: '12%' }
-   ];
+  public piechart1: any[];
    public legendSettings: Object = {
       visible: false
    };
@@ -51,8 +45,16 @@ export class DashboardComponent implements OnInit {
   chartLabels = [];
   chartOptions = { responsive: true, event: ['clck'] }; */
 
-  constructor() { }
+  constructor(private dashboardService: DashboardService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.dashboardService.topSearches().subscribe(
+      result => {
+        console.log(result);
+        this.piechart1 = result
+        console.log(this.piechart1)
+      }
+    );
+  }
 
 }

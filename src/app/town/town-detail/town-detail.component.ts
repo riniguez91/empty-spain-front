@@ -40,7 +40,6 @@ export class TownDetailComponent implements OnInit {
         if (this.userId) this.addSearch(this.townName, this.townId, result, this.userId)
         else this.addSearch(this.townName, this.townId, result)
       } 
-      console.log(this.town)
     });
   }
 

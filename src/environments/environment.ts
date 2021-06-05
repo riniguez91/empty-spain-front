@@ -8,6 +8,8 @@ export const environment = {
   register_url: 'http://localhost:8000/auth/register',
   add_search_url: 'http://localhost:8000/addSearch',
   municipios_url: 'http://localhost:8000/municipios',
+  top_searches_url: 'http://localhost:8000/mostSearchedMunicipios',
+  all_users_url: 'http://localhost:8000/users',
   sentiment_url: 'http://localhost:5000/sentimiento',
   tripadvisor_scrapper_url: 'http://localhost:5000/scrapers/tripadvisor/v1',
   tripadvisor_scrapper_url_v2: 'http://localhost:5000/scrapers/tripadvisor/v2',

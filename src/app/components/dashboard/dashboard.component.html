@@ -11,7 +11,7 @@
                     <div id="column">
                         <ejs-chart id="columnChart" height="162px" [primaryXAxis]='primaryXAxis' [tooltip]='tooltip'>
                             <e-series-collection>
-                                <e-series [dataSource]="chartData" type='Column' xName='month' yName='sales'>
+                                <e-series [dataSource]="chartData" type='Column' xName='municipio' yName='no_searches'>
                                 </e-series>
                             </e-series-collection>
                         </ejs-chart>
@@ -37,14 +37,14 @@
 
             <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="2">
                 <ng-template #header>
-                    <div>Cambiar los 4 top picks de pueblos</div>
+                    <div>Los 10 pueblos más buscados</div>
                 </ng-template>
                 <ng-template #content>
                     <div id="pie1">
                         <ejs-accumulationchart id="pieChart1" [enableAnimation]="false"
                             [tooltip]='tooltip' [legendSettings]='legendSettings'>
                             <e-accumulation-series-collection>
-                                <e-accumulation-series [dataSource]="piechart1" xName="x" yName="y" radius="100%"
+                                <e-accumulation-series [dataSource]="piechart1" xName='municipio' yName='no_searches' radius="95%"
                                     name="Browser" [dataLabel]='datalabel'>
                                 </e-accumulation-series>
                             </e-accumulation-series-collection>
