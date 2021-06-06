@@ -1,6 +1,6 @@
 
 <div class="control-section m-3">
-    <ejs-dashboardlayout [columns]="3" [cellSpacing]='cellSpacing' [allowDragging]='allowDragging' [cellAspectRatio]='cellAspectRatio'>
+    <ejs-dashboardlayout id="dashboard" [columns]="3" [cellSpacing]='cellSpacing' [allowDragging]='allowDragging' [cellAspectRatio]='cellAspectRatio'>
         <e-panels>
 
             <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="0">
@@ -25,7 +25,7 @@
                 </ng-template>
                 <ng-template #content>
                     <div id="line">
-                        <ejs-chart id="lineChart" height="162px" [primaryXAxis]='primaryXAxis' [tooltip]='tooltip'>
+                        <ejs-chart id="lineChart" [primaryXAxis]='primaryXAxis' [tooltip]='tooltip'>
                             <e-series-collection>
                                 <e-series [dataSource]="lineData" xName='x' yName='y' type="Line">
                                 </e-series>
@@ -40,12 +40,11 @@
                     <div>Los 10 pueblos más buscados</div>
                 </ng-template>
                 <ng-template #content>
-                    <div id="pie1">
-                        <ejs-accumulationchart id="pieChart1" [enableAnimation]="false"
-                            [tooltip]='tooltip' [legendSettings]='legendSettings'>
+                    <div id="searchPie">
+                        <ejs-accumulationchart id="searchPieChart" [enableAnimation]="false" [tooltip]='tooltip' [legendSettings]='legendSettings'>
                             <e-accumulation-series-collection>
-                                <e-accumulation-series [dataSource]="piechart1" xName='municipio' yName='no_searches' radius="95%"
-                                    name="Browser" [dataLabel]='datalabel'>
+                                <e-accumulation-series [dataSource]="searchpiechart" xName='municipio' yName='no_searches'
+                                    name="Top 10" [dataLabel]='datalabel' radius='85%'>
                                 </e-accumulation-series>
                             </e-accumulation-series-collection>
                         </ejs-accumulationchart>
