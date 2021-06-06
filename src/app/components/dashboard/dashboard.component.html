@@ -5,33 +5,13 @@
 
             <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="0">
                 <ng-template #header>
-                    <div>Busqueda por municipios [[PIE-CHART]] top 10</div>
-                </ng-template>
-                <ng-template #content>
-                    <div id="column">
-                        <ejs-chart id="columnChart" height="162px" [primaryXAxis]='primaryXAxis' [tooltip]='tooltip'>
-                            <e-series-collection>
-                                <e-series [dataSource]="chartData" type='Column' xName='municipio' yName='no_searches'>
-                                </e-series>
-                            </e-series-collection>
-                        </ejs-chart>
-                    </div>
+                    <div>Cambiar top picks de busqueda</div>
                 </ng-template>
             </e-panel>
 
             <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="1">
                 <ng-template #header>
                     <div>Lanzada de scrapers</div>
-                </ng-template>
-                <ng-template #content>
-                    <div id="line">
-                        <ejs-chart id="lineChart" [primaryXAxis]='primaryXAxis' [tooltip]='tooltip'>
-                            <e-series-collection>
-                                <e-series [dataSource]="lineData" xName='x' yName='y' type="Line">
-                                </e-series>
-                            </e-series-collection>
-                        </ejs-chart>
-                    </div>
                 </ng-template>
             </e-panel>
 
@@ -53,21 +33,9 @@
             </e-panel>
 
             <e-panel [sizeX]="1" [sizeY]="1" [row]="1" [col]="0">
-                <!-- <ng-template #header>
-                    <div>Pie Chart de algo</div>
+                <ng-template #header>
+                    <div>XXXXXXXXXX</div>
                 </ng-template>
-                <ng-template #content>
-                    <div id="pie2">
-                        <ejs-accumulationchart id="pieChart2" [enableAnimation]="false"
-                            [tooltip]='tooltip' [legendSettings]='legendSettings'>
-                            <e-accumulation-series-collection>
-                                <e-accumulation-series [dataSource]="piechart2" xName="x" yName="y" radius="100%"
-                                    name="Browser" [dataLabel]='datalabel'>
-                                </e-accumulation-series>
-                            </e-accumulation-series-collection>
-                        </ejs-accumulationchart>
-                    </div>
-                </ng-template> -->
             </e-panel>
 
             <e-panel [sizeX]="2" [sizeY]="1" [row]="1" [col]="2">

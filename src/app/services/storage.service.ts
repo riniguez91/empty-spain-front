@@ -76,7 +76,6 @@ export class StorageService {
    */
   checkAdminToken(): boolean {
     let session = this.loadSessionData();
-    console.log("klk")
     if (session) { 
       let adminToken = jwtDecode(session['access_token']);
       if (adminToken['is_admin']) { 
@@ -85,6 +84,7 @@ export class StorageService {
         return true;
       }
     }
+    this.setAdminLoggedIn(false);
   }
 
   /**

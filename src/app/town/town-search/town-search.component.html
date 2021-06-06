@@ -21,45 +21,15 @@
 <div class="container search-container mt-5">
     <h1 class="display-6">Pueblos destacados</h1>
     <div class="row mt-3 gy-md-1 gy-4">
-        <div class="col-md-3">
-            <div class="card">
-                <img class="card-img-top" src="https://d500.epimg.net/cincodias/imagenes/2018/11/09/midinero/1541785111_101699_1541785255_noticia_normal.jpg">
+        <div class="col-md-3" *ngFor="let town of highlightedTowns">
+            <div class="card h-100">
+                <img class="card-img-top" [src]="town.imagen">
                 <div class="card-body">
-                    <p class="card-text">Madrid es la capital central de España con elegantes bulevares y amplios parques muy cuidados, como el Buen Retiro. Es famosa por sus ricas colecciones de arte europeo, con obras de Goya, Velázquez y otros maestros españoles en el Museo del Prado</p>
-                    <p class="card-text"><small class="text-muted">3,223 millones (2018) Instituto Nacional de Estadística</small></p>
+                    <p class="card-text">{{town.description}}</p>
+                    <p class="card-text"><small class="text-muted">{{town.population}}</small></p>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card">
-                <img class="card-img-top" src="https://d500.epimg.net/cincodias/imagenes/2018/11/09/midinero/1541785111_101699_1541785255_noticia_normal.jpg">
-                <div class="card-body">
-                    <p class="card-text">Madrid es la capital central de España con elegantes bulevares y amplios parques muy cuidados, como el Buen Retiro. Es famosa por sus ricas colecciones de arte europeo, con obras de Goya, Velázquez y otros maestros españoles en el Museo del Prado</p>
-                    <p class="card-text"><small class="text-muted">3,223 millones (2018) Instituto Nacional de Estadística</small></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card">
-                <img class="card-img-top" src="https://d500.epimg.net/cincodias/imagenes/2018/11/09/midinero/1541785111_101699_1541785255_noticia_normal.jpg">
-                <div class="card-body">
-                    <p class="card-text">Madrid es la capital central de España con elegantes bulevares y amplios parques muy cuidados, como el Buen Retiro. Es famosa por sus ricas colecciones de arte europeo, con obras de Goya, Velázquez y otros maestros españoles en el Museo del Prado</p>
-                    <p class="card-text"><small class="text-muted">3,223 millones (2018) Instituto Nacional de Estadística</small></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card">
-                <img class="card-img-top" src="https://d500.epimg.net/cincodias/imagenes/2018/11/09/midinero/1541785111_101699_1541785255_noticia_normal.jpg">
-                <div class="card-body">
-                    <p class="card-text">Madrid es la capital central de España con elegantes bulevares y amplios parques muy cuidados, como el Buen Retiro. Es famosa por sus ricas colecciones de arte europeo, con obras de Goya, Velázquez y otros maestros españoles en el Museo del Prado</p>
-                    <p class="card-text"><small class="text-muted">3,223 millones (2018) Instituto Nacional de Estadística</small></p>
-                </div>
-            </div>
-        </div>
+        </div>  
     </div>
 </div>
 

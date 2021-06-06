@@ -94,5 +94,14 @@ export class TownService {
    addScrapersTown(json: object) {
     return this.http.post(environment.add_search_url, json);
   }
+
+  /**
+   * Obtain highlighted towns from backend
+   * 
+   * @return Observable<any>
+   */
+  getHighlightedMunicipios() {
+    return this.http.get(environment.highlighted_municipios_url);
+  }
   
 }
