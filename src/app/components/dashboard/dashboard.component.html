@@ -3,18 +3,32 @@
     <ejs-dashboardlayout id="dashboard" [columns]="3" [cellSpacing]='cellSpacing' [allowDragging]='allowDragging' [cellAspectRatio]='cellAspectRatio'>
         <e-panels>
 
+            <!-- Change top picks on search tab using grid -->
             <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="0">
                 <ng-template #header>
-                    <div>Cambiar top picks de busqueda</div>
+                    <div>Cambiar pueblos recomendados en la pestaña busqueda</div>
+                </ng-template>
+                <ng-template #content>
+                    <ejs-grid #topPicksGrid [dataSource]='topPicksData' [allowPaging]='true' [allowSorting]="true" [selectionSettings]="topPickSelectionOptions" [toolbar]='topPicksToolbarOptions'
+                            [allowFiltering]="true" [pageSettings]="topPicksPageSettings" height='100%' (rowDataBound)='topPicksRowDataBound($event)' [editSettings]='topPicksEditOptions'
+                            (dataBound)='topPicksDataBound($event)' (actionComplete)='topPicksActionComplete($event)'>
+                        <e-columns>
+                            <e-column field='id' headerText='Municipio ID' isPrimaryKey='true'></e-column>
+                            <e-column field='municipio' headerText='Nombre' [allowEditing]='false'></e-column>
+                            <e-column field='highlighted' headerText='Destacado' editType='dropdownedit' [edit]='ddParams'></e-column> <!-- displayAsCheckBox='true' editType='booleanedit' type='boolean' -->
+                        </e-columns>
+                    </ejs-grid>
                 </ng-template>
             </e-panel>
 
+            <!-- Reset the db and call different scrapers -->
             <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="1">
                 <ng-template #header>
                     <div>Lanzada de scrapers</div>
                 </ng-template>
             </e-panel>
 
+            <!-- Top 10 most searched municipios piechart -->
             <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="2">
                 <ng-template #header>
                     <div>Los 10 pueblos más buscados</div>
@@ -24,7 +38,7 @@
                         <ejs-accumulationchart id="searchPieChart" [enableAnimation]="false" [tooltip]='tooltip' [legendSettings]='legendSettings'>
                             <e-accumulation-series-collection>
                                 <e-accumulation-series [dataSource]="searchpiechart" xName='municipio' yName='no_searches'
-                                    name="Top 10" [dataLabel]='datalabel' radius='85%'>
+                                    name="Top 10" [dataLabel]='datalabel' radius='100%'>
                                 </e-accumulation-series>
                             </e-accumulation-series-collection>
                         </ejs-accumulationchart>
@@ -32,18 +46,20 @@
                 </ng-template>
             </e-panel>
 
+            <!-- WIP -->
             <e-panel [sizeX]="1" [sizeY]="1" [row]="1" [col]="0">
                 <ng-template #header>
                     <div>XXXXXXXXXX</div>
                 </ng-template>
             </e-panel>
 
+            <!-- Change user privileges grid -->
             <e-panel [sizeX]="2" [sizeY]="1" [row]="1" [col]="2">
                 <ng-template #header>
                     <div>Informacion usuarios y cambiar privilegios</div>
                 </ng-template>
                 <ng-template #content>
-                    <ejs-grid [dataSource]='tableData' [allowPaging]="true" [pageSettings]="pageSettings" >
+                    <ejs-grid [dataSource]='tableData' [allowPaging]="true" [pageSettings]="userPageSettings" >
                         <e-columns>
                             <e-column field='id' headerText='ID' textAlign='center' isPrimaryKey='true' width=80></e-column>
                             <e-column field='email' headerText='Correo Electronico' width=200></e-column>
@@ -52,7 +68,6 @@
                             <e-column field='role' headerText='Rol' textAlign='right' width=60></e-column>
                         </e-columns>
                     </ejs-grid>
-            
                 </ng-template>
             </e-panel>
 

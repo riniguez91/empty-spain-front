@@ -22,10 +22,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EditService, ToolbarService, PageService, GridModule, SortService, EditSettingsModel, ToolbarItems, IEditCell, FilterService, GroupService } from '@syncfusion/ej2-angular-grids';
 import { TooltipService, LegendService, CategoryService, ChartModule, AccumulationChartModule, 
   PieSeriesService, AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService,
-  AccumulationDataLabelService, BarSeriesService, DataLabelService, LineSeriesService, } from '@syncfusion/ej2-angular-charts';
+  AccumulationDataLabelService, BarSeriesService, DataLabelService, LineSeriesService } from '@syncfusion/ej2-angular-charts';
 import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
   
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,15 +48,14 @@ import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
     AppRoutingModule,
     ChartModule,
     AccumulationChartModule,
-    GridModule
-
+    GridModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
     CategoryService, LegendService, TooltipService, DataLabelService, LineSeriesService,PieSeriesService, 
     AccumulationLegendService, AccumulationTooltipService, AccumulationDataLabelService,
-    AccumulationAnnotationService, BarSeriesService,EditService, ToolbarService, PageService, SortService, FilterService, GroupService
+    AccumulationAnnotationService, BarSeriesService, EditService, ToolbarService, PageService, SortService, FilterService, GroupService
   ],
   bootstrap: [AppComponent]
 })

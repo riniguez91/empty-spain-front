@@ -11,6 +11,25 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   /**
+   * Returns searched municipios with highlighted
+   * 
+   * @returns Observable<any>
+   */
+  municipiosWithHighlighted(): Observable<any> {
+    return this.http.get(environment.municipios_with_highlighted_url);
+  }
+
+  /**
+   * Update highlighted column on busqueda table
+   * 
+   * @param object JSON containing municipio_id and highlighted fields
+   * @returns Observable<any>
+   */
+  updateHighlighted(body: object): Observable<any> {
+    return this.http.post(environment.update_highlighted_url, body);
+  }
+
+  /**
    * Obtain top searches from the API server using GET and passing JWT token in its header
    *
    * @return Observable<any>
