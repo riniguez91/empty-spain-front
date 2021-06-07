@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
 
   // Change top picks grid
   @ViewChild('topPicksGrid') public topPicksGrid: GridComponent;
-  public topPicksPageSettings = { pageSize: 8 };
+  public topPicksPageSettings = { pageSize: 18 };
   public topPickSelectionOptions: SelectionSettingsModel;
   public rowIndexes: number[] = [];
   public topPicksData: object[];
@@ -54,14 +54,14 @@ export class DashboardComponent implements OnInit {
     this.userPageSettings = { pageSize: 10 };
   }
 
-  
+  // Scraper grid options
   public townsData;
   public townPageSettings;
   tablaPueblos() {
     this.townService.getMunicipios().subscribe(result => this.townsData = result);
     this.editSettings = { allowEditing: false, allowAdding: false, allowDeleting: false };
     this.toolbar = ['Search'];
-    this.townPageSettings = { pageSize: 5 };
+    this.townPageSettings = { pageSize: 8 };
   }
   rowSelected(args){ 
     //console.log(args.data.id);  // you can get the selected record in the below argument 
