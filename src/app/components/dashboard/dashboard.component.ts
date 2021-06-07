@@ -69,8 +69,19 @@ export class DashboardComponent implements OnInit {
     this.townId = args.data.id;
   } 
   
+  public primaryXAxis: Object;
+  public despoblacionData: Object[];
+  public titleDespoblacion: string;
+  public primaryYAxis: Object;
+  chartDespoblacion(){
+    //habria que hacer en el back un endpoint que sea count(groupby) ?? o un count del busqueda::where(estado? == despo -> entonces ++1 a contDespo)
+    this.despoblacionData = [{ categoria: "Despoblación", cantidad: 10 },{ categoria: "No Despoblación", cantidad: 20 }]
+    this.primaryXAxis = {valueType: 'Category', title: 'Categoria'};
+    this.primaryYAxis = {minimum: 0, interval: 10, title: 'Busquedas'};
+    this.titleDespoblacion = 'Despoblacion frente No Despoblacion';
+  }
+  
   constructor(private dashboardService: DashboardService, private townService: TownService, private storageService: StorageService, private route: ActivatedRoute) { }
-
 
   towns: Town;
   ngOnInit(): void {
@@ -91,6 +102,9 @@ export class DashboardComponent implements OnInit {
 
     // Initialize admin table settings
     this.tablaAdmin();
+
+    // Initialize despoblacion chart settings
+    this.chartDespoblacion();
 
     // Get top picks grid data
     this.topPickSelectionOptions = { type: 'Multiple' }

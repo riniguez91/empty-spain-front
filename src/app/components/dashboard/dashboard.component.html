@@ -24,7 +24,14 @@
             <!-- Reset the db and call different scrapers -->
             <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="1">
                 <ng-template #header>
-                    <div>Lanzada de scrapers</div>
+                    <div>Busquedas con Despoblación</div>
+                </ng-template>
+                <ng-template #content>
+                    <ejs-chart id="chartDespoblacion" [primaryXAxis]='primaryXAxis'[primaryYAxis]='primaryYAxis' [title]='titleDespoblacion'>
+                        <e-series-collection>
+                            <e-series [dataSource]='despoblacionData' type='Column' xName='categoria' yName='cantidad' name='Pueblos'></e-series>
+                        </e-series-collection>
+                    </ejs-chart>
                 </ng-template>
             </e-panel>
 

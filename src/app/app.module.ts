@@ -24,6 +24,8 @@ import { TooltipService, LegendService, CategoryService, ChartModule, Accumulati
   PieSeriesService, AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService,
   AccumulationDataLabelService, BarSeriesService, DataLabelService, LineSeriesService } from '@syncfusion/ej2-angular-charts';
 import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
+import { ColumnSeriesService, MultiLevelLabelService, SelectionService} from '@syncfusion/ej2-angular-charts';
+
   
 @NgModule({
   declarations: [
@@ -55,7 +57,8 @@ import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
     CategoryService, LegendService, TooltipService, DataLabelService, LineSeriesService,PieSeriesService, 
     AccumulationLegendService, AccumulationTooltipService, AccumulationDataLabelService,
-    AccumulationAnnotationService, BarSeriesService, EditService, ToolbarService, PageService, SortService, FilterService, GroupService
+    AccumulationAnnotationService, BarSeriesService, EditService, ToolbarService, PageService, SortService, FilterService, GroupService,
+    ColumnSeriesService, MultiLevelLabelService, SelectionService
   ],
   bootstrap: [AppComponent]
 })
