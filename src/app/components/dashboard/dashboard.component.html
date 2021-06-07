@@ -35,7 +35,7 @@
                 </ng-template>
                 <ng-template #content>
                     <div id="searchPie">
-                        <ejs-accumulationchart id="searchPieChart" [enableAnimation]="false" [tooltip]='tooltip' [legendSettings]='legendSettings'>
+                        <ejs-accumulationchart id="searchPieChart" [enableAnimation]="false" [tooltip]='tooltip' [legendSettings]='legendSettings'[pageSettings]='townPageSettings'>
                             <e-accumulation-series-collection>
                                 <e-accumulation-series [dataSource]="searchpiechart" xName='municipio' yName='no_searches'
                                     name="Top 10" [dataLabel]='datalabel' radius='100%'>
@@ -71,9 +71,45 @@
                 </ng-template>
             </e-panel>
 
+
+            <!-- TABLA DE PUEBLOS -->
+            <e-panel [sizeX]="2" [sizeY]="2" [row]="2" [col]="0">
+                <ng-template #header>
+                    <div>Seleccionar pueblo para lanzar scrapers</div>
+                    
+                </ng-template>
+                <ng-template #content>
+                    <ejs-grid (rowSelected)='rowSelected($event)' [dataSource]='townsData' [allowPaging]="true" [pageSettings]="pageSettings" [toolbar]='toolbar'>
+                        <e-columns>
+                            <e-column field='id' headerText='ID municipio' textAlign='center' isPrimaryKey='true' width=80></e-column>
+                            <e-column field='municipio' headerText='Nombre municipio' width=200></e-column>
+                        </e-columns>
+                    </ejs-grid>
+            
+                </ng-template>
+            </e-panel>
+
+            <!-- Botones Scrapers -->
+            <e-panel [sizeX]="1" [sizeY]="2" [row]="2" [col]="2">
+                <ng-template #header>
+                <div>Seleccionar pueblo para lanzar scrapers</div>
+                </ng-template>
+            <ng-template #content>
+                <div><button class="btn btn-primary scraperBtn" (click)="reset_locality()">Resetear Localidades</button></div>
+                <div><button class="btn btn-primary scraperBtn" (click)="notScraped(0)"> TRIPADVISOR</button></div>
+                <div><button class="btn btn-primary scraperBtn" (click)="notScraped(1)"> TWITTER</button></div>
+                <div><button class="btn btn-primary scraperBtn" (click)="notScraped(2)"> TIEMPO</button></div>
+                <div><button class="btn btn-primary scraperBtn" (click)="notScraped(3)"> WIKI</button></div>
+            </ng-template>
+            </e-panel>
+
         </e-panels>
     </ejs-dashboardlayout>
 
-    <button class="btn btn-primary" (click)="reset_locality()">Resetear CCAA, Provincias y municipios</button>
+    <!--<button class="btn btn-primary" (click)="reset_locality()">Resetear CCAA, Provincias y municipios</button>
+     <button class="btn btn-primary" (click)="tripadvisorLaunch()">actualizar TRIP</button>
+    <button class="btn btn-primary" (click)="twitterLaunch()">actualizar TWITTER</button>
+    <button class="btn btn-primary" (click)="tiempoLaunch()">actualizar TIEMPO</button>
+    <button class="btn btn-primary" (click)="wikiLaunch()">actualizar WIKI</button> -->
     
 </div>

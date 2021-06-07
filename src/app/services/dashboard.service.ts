@@ -57,4 +57,13 @@ export class DashboardService {
     return this.http.get(environment.reset_ccaa_provincias_municipios_url);
   }
 
+  /**
+   * Calls an update to the database of a specified Field in search table using POST 
+   * @param body contains the townId, field to update, and the new content to update in Busqueda table
+   * @returns Observable<any>
+   */
+   updateSearch(body: object): Observable<any> {
+    return this.http.post(environment.update_search_url, body);
+  }
+
 }

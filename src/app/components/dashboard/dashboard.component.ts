@@ -1,6 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EditSettingsModel, ToolbarItems, SelectionSettingsModel, GridComponent, IEditCell } from '@syncfusion/ej2-angular-grids';
+import { EditSettingsModel, ToolbarItems, SelectionSettingsModel, GridComponent, IEditCell ,GridLine,PageSettingsModel} from '@syncfusion/ej2-angular-grids';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { TownService } from 'src/app/town/town.service';
+import { TownDetailComponent } from 'src/app/town/town-detail/town-detail.component';
+import { ActivatedRoute } from '@angular/router';
+import { StorageService } from '../../services/storage.service';
+import { LoginService } from '../../services/login.service';
+import { throwError } from 'rxjs';
+import { Town } from 'src/app/models/town.model';
 
 
 @Component({
@@ -47,8 +54,25 @@ export class DashboardComponent implements OnInit {
     this.userPageSettings = { pageSize: 10 };
   }
 
-  constructor(private dashboardService: DashboardService) { }
+  
+  public townsData;
+  public townPageSettings;
+  tablaPueblos() {
+    this.townService.getMunicipios().subscribe(result => this.townsData = result);
+    this.editSettings = { allowEditing: false, allowAdding: false, allowDeleting: false };
+    this.toolbar = ['Search'];
+    this.townPageSettings = { pageSize: 5 };
+  }
+  rowSelected(args){ 
+    //console.log(args.data.id);  // you can get the selected record in the below argument 
+    this.townName = args.data.municipio;
+    this.townId = args.data.id;
+  } 
+  
+  constructor(private dashboardService: DashboardService, private townService: TownService, private storageService: StorageService, private route: ActivatedRoute) { }
 
+
+  towns: Town;
   ngOnInit(): void {
     // Get municipios + highlighted column for highlighted towns grid
     this.dashboardService.municipiosWithHighlighted().subscribe( result => {
@@ -124,6 +148,9 @@ export class DashboardComponent implements OnInit {
     if (this.rowIndexes.length) 
       this.topPicksGrid.selectRows(this.rowIndexes);
       this.rowIndexes = []
+
+    this.tablaPueblos();
+
   }
 
   /**
@@ -137,4 +164,101 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  townName: string;
+  townId: number;
+  userId: number;
+  town: object;
+
+  
+  /** 
+   * Call the scrpers when needed if the town its not scraped or update a specific field in the database
+   * @param choice the value that  
+   * 
+  */
+  notScraped(choice: number){
+    let townDetail = new TownDetailComponent(this.route, this.townService, this.storageService);
+    this.townService.getTown(this.townId).subscribe(result=>{
+      console.log(result);
+      //if town is not scraped, then call all scrapers
+      if (!result['scraped']) {
+        townDetail.addSearch(this.townName, this.townId, result);
+      }
+      //If its already scraped update the value of the selected
+      else if (choice == 0) { this.tripadvisorLaunch(); }
+      else if (choice == 1) { this.twitterLaunch(); }
+      else if (choice == 2) { this.tiempoLaunch(); }
+      else if (choice == 3) { this.wikiLaunch(); }
+    });
+  }
+  
+  /**
+   * Call the scraper of tripadvisor and update the database
+   */
+  tripadvisorLaunch() {
+    this.townService.getTripAdvisorJsonV2(this.townName).subscribe(
+      result => {
+        let body = { "townId": this.townId, "field": "tripadvisor_info", "content": JSON.stringify(result) };
+        this.dashboardService.updateSearch(body).subscribe(
+          result => {
+            console.log(result);
+            alert('se ha ejecutado TripadvisorScraper');
+          }
+        );
+      }
+    );
+  }
+
+  /**
+   * Call the scraper of twitter and update the database
+   */
+  twitterLaunch() {
+    this.townService.getTwitterJson(this.townName).subscribe(
+      result => {
+        let body = { "townId": this.townId, "field": "twitter_info", "content": JSON.stringify(result) };
+        this.dashboardService.updateSearch(body).subscribe(
+          result => {
+            console.log(result);
+            alert('se ha ejecutado Twitter Scraper');
+          }
+        );
+      }
+    );
+  }
+
+  /**
+   * Call the scraper of tiempo and update the database
+   */
+  tiempoLaunch() {
+    this.townService.getTiempoJson(this.townName).subscribe(
+      result => {
+        let body = { "townId": this.townId, "field": "tiempo_info", "content": JSON.stringify(result) };
+        this.dashboardService.updateSearch(body).subscribe(
+          result => {
+            console.log(result);
+            alert('se ha ejecutado Tiempo Scraper');
+          }
+        );
+      }
+    );
+  }
+
+  /**
+   * Call the scraper of wiki and update the database
+   */
+  wikiLaunch() {
+    this.townService.getWikiJson(this.townName).subscribe(
+      result => {
+        let body = { "townId": this.townId, "field": "wiki_info", "content": JSON.stringify(result) };
+        this.dashboardService.updateSearch(body).subscribe(
+          result => {
+            console.log(result);
+            alert('se ha ejecutado WIKI Scraper');
+          }
+        );
+      }
+    );
+  }
 }
+
+
+
