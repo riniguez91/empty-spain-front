@@ -87,4 +87,13 @@ export class DashboardService {
     return this.http.post(environment.update_user_url, body);
   }
 
+
+   /** Calls count of Despoblacion and No Despoblacion using GET and passing JWT token in its header
+   * 
+   * @returns Observable<any>
+   */
+  getDespoblacion():Observable<any>{ 
+    return this.http.get(environment.get_despoblacion_url);
+  }
+
 }

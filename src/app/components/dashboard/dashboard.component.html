@@ -21,15 +21,15 @@
                 </ng-template>
             </e-panel>
 
-            <!-- Reset the db and call different scrapers -->
+            <!-- Compare Despoblacion vs No Despobacion -->
             <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="1">
                 <ng-template #header>
                     <div>Busquedas con Despoblación</div>
                 </ng-template>
                 <ng-template #content>
-                    <ejs-chart id="chartDespoblacion" [primaryXAxis]='primaryXAxis'[primaryYAxis]='primaryYAxis' [title]='titleDespoblacion' [tooltip]='tooltip' [legendSettings]='legendSettings'>
+                    <ejs-chart id="despoblacionChart" [primaryXAxis]='primaryXAxis'[primaryYAxis]='primaryYAxis' [title]='titleDespoblacion' [palettes]='palette' [tooltip]='tooltip' [legendSettings]='legendSettings'>
                         <e-series-collection>
-                            <e-series [dataSource]='despoblacionData' type='Column' xName='categoria' yName='cantidad' name='Pueblos'></e-series>
+                            <e-series [dataSource]='despoblacionData' type='Column' xName='municipio_state' yName='total' name='Pueblos'></e-series>
                         </e-series-collection>
                     </ejs-chart>
                 </ng-template>

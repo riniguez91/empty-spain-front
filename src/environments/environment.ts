@@ -23,7 +23,8 @@ export const environment = {
   tiempo_scrapper_url: 'http://localhost:5000/scrapers/tiempo',
   wiki_scrapper_url: 'http://localhost:5000/scrapers/wiki',
   model_url: 'http://localhost:5000/model/prediction',
-  update_search_url: 'http://localhost:8000/updateSearch'
+  update_search_url: 'http://localhost:8000/updateSearch',
+  get_despoblacion_url: 'http://localhost:8000/getDespoblacion',
 };
 
 /*
