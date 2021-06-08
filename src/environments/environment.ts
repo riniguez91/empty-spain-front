@@ -10,6 +10,8 @@ export const environment = {
   municipios_url: 'http://localhost:8000/municipios',
   top_searches_url: 'http://localhost:8000/mostSearchedMunicipios',
   all_users_url: 'http://localhost:8000/users',
+  update_user_url: 'http://localhost:8000/updateUser',
+  delete_user_url: 'http://localhost:8000/deleteUser',
   reset_ccaa_provincias_municipios_url: 'http://localhost:8000/resetCcaaProvinciasMunicipios',
   highlighted_municipios_url: 'http://localhost:8000/highlightedMunicipios',
   municipios_with_highlighted_url: 'http://localhost:8000/municipiosWithHighlighted',

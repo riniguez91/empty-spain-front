@@ -53,19 +53,21 @@
                 </ng-template>
             </e-panel>
 
-            <!-- Change user privileges grid -->
+            <!-- Change user privileges grid --> 
             <e-panel [sizeX]="2" [sizeY]="1" [row]="1" [col]="2">
                 <ng-template #header>
                     <div>Informacion usuarios y cambiar privilegios</div>
                 </ng-template>
                 <ng-template #content>
-                    <ejs-grid [dataSource]='tableData' [allowPaging]="true" [pageSettings]="userPageSettings" height='100%'>
+                    <ejs-grid [dataSource]='tableData' [allowPaging]="true" [pageSettings]="userPageSettings" [editSettings]='userGridEditSettings' [toolbar]='userGridToolbar' height='100%'
+                    (actionComplete)='userGridActionComplete($event)' [allowSorting]="true">
                         <e-columns>
                             <e-column field='id' headerText='ID' textAlign='center' isPrimaryKey='true' width=80></e-column>
-                            <e-column field='email' headerText='Correo Electronico' width=200></e-column>
-                            <e-column field='name' headerText='Nombre' width=120></e-column>
-                            <e-column field='surnames' headerText='Apellidos' textAlign='left' width=180></e-column>
-                            <e-column field='role' headerText='Rol' textAlign='right' width=60></e-column>
+                            <e-column field='email' headerText='Correo Electronico' [validationRules]='requiredField' width=200></e-column>
+                            <e-column field='name' headerText='Nombre' [validationRules]='requiredField' width=120></e-column>
+                            <e-column field='surnames' headerText='Apellidos' textAlign='left' [validationRules]='requiredField' width=180></e-column>
+                            <e-column field='role' headerText='Rol' editType='dropdownedit' textAlign='right' width=60></e-column>
+                            <e-column field='is_disabled' headerText='Disabled' editType='dropdownedit' textAlign='right' width=60></e-column>
                         </e-columns>
                     </ejs-grid>
                 </ng-template>

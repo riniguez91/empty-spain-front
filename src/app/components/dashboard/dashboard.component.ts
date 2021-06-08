@@ -42,22 +42,23 @@ export class DashboardComponent implements OnInit {
 
   // User table options
   public tableData: object[];
-  public editSettings: EditSettingsModel;
-  public toolbar: ToolbarItems[] | object;
+  public userGridEditSettings: EditSettingsModel;
+  public userGridToolbar: ToolbarItems[];
+  public requiredField: object;
   public userPageSettings;
   tablaAdmin() {
-    this.tableData = [{ OrderID: 1, CustomerID: 'asdf', Freight: 123, ShipCountry: 'asdf' }, { OrderID: 2, CustomerID: 'asdf', Freight: 123, ShipCountry: 'asdf' }];
-    this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true };
-    this.toolbar = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
+    this.userGridEditSettings = { showDeleteConfirmDialog: true, allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Dialog' };
+    this.userGridToolbar = ['Edit', 'Delete', 'Cancel', 'Search'];
     this.userPageSettings = { pageSize: 9 };
+    this.requiredField = { required: true, minLength: 3 };
   }
 
   // Scraper grid options
   public townsData;
   public townPageSettings;
+  public toolbar: ToolbarItems[];
   tablaPueblos() {
     this.townService.getMunicipios().subscribe(result => this.townsData = result);
-    this.editSettings = { allowEditing: false, allowAdding: false, allowDeleting: false };
     this.toolbar = ['Search'];
     this.townPageSettings = { pageSize: 8 };
   }
@@ -69,8 +70,8 @@ export class DashboardComponent implements OnInit {
   chartDespoblacion(){
     //habria que hacer en el back un endpoint que sea count(groupby) ?? o un count del busqueda::where(estado? == despo -> entonces ++1 a contDespo)
     this.despoblacionData = [{ categoria: "Despoblación", cantidad: 10 },{ categoria: "No Despoblación", cantidad: 20 }]
-    this.primaryXAxis = {valueType: 'Category', title: 'Categoria'};
-    this.primaryYAxis = {minimum: 0, interval: 10, title: 'Busquedas'};
+    this.primaryXAxis = { valueType: 'Category', title: 'Categoria' };
+    this.primaryYAxis = { minimum: 0, interval: 10, title: 'Busquedas' };
     this.titleDespoblacion = 'Despoblacion frente No Despoblacion';
   }
   
@@ -142,6 +143,24 @@ export class DashboardComponent implements OnInit {
 
     this.tablaPueblos();
 
+  }
+
+  /**
+   * Executed after the "update" button is clicked changes highlighted column in the db with the value from the grid
+   * 
+   * @param args 
+   */
+   userGridActionComplete(args: any) {
+    // Update user records in the db
+    if (args.requestType === 'save') {
+      let body = { "user_id": args.data.id, "email": args.data.email, "name": args.data.name, "surnames": args.data.surnames, "role": args.data.role, "is_disabled": args.data.is_disabled };
+      this.dashboardService.updateUser(body).subscribe( result => console.log(result) );
+    }
+    // PERMANENTLY delete user from table
+    else if (args.requestType === 'delete') {
+      let body = { "user_id": args.data.id };
+      this.dashboardService.deleteUser(body).subscribe( result => console.log(result) );
+    }
   }
 
   /**
