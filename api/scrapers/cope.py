@@ -14,10 +14,10 @@ def cope_content(user_input):
     options.add_argument('--incognito')
     options.add_argument('--headless') 
     options.add_argument('--enable-javascript')
-    PATH = 'chromedriver'  
+    PATH = 'C:/WebDriver/bin/chromedriver.exe'  
 
     pagina = "https://www.cope.es/emisoras/" + user_input
-    driver = webdriver.Chrome(PATH)#, options=options)
+    driver = webdriver.Chrome(PATH, options=options)
     driver.get(pagina)              #Lanzar la URL
     time.sleep(1)
     #driver.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]').click()    #Aceptar Cookies
@@ -47,4 +47,4 @@ def text(user_input):
 
 ###########
 #user_input = str(input("Introduce el nombre del pueblo donde desea buscar noticias: "))
-#print(text("Brunete"))
+#print(text("Madrid"))

@@ -4,10 +4,13 @@
 
 export const environment = {
   production: false,
+  // Authentication
   login_url: 'http://localhost:8000/auth/login',
   register_url: 'http://localhost:8000/auth/register',
+  // Town search
   add_search_url: 'http://localhost:8000/addSearch',
   municipios_url: 'http://localhost:8000/municipios',
+  // Dashboard
   top_searches_url: 'http://localhost:8000/mostSearchedMunicipios',
   all_users_url: 'http://localhost:8000/users',
   update_user_url: 'http://localhost:8000/updateUser',
@@ -16,15 +19,17 @@ export const environment = {
   highlighted_municipios_url: 'http://localhost:8000/highlightedMunicipios',
   municipios_with_highlighted_url: 'http://localhost:8000/municipiosWithHighlighted',
   update_highlighted_url: 'http://localhost:8000/updateHighlighted',
+  update_search_url: 'http://localhost:8000/updateSearch',
+  get_despoblacion_url: 'http://localhost:8000/getDespoblacion',
+  // Scrapers
   sentiment_url: 'http://localhost:5000/sentimiento',
   tripadvisor_scrapper_url: 'http://localhost:5000/scrapers/tripadvisor/v1',
   tripadvisor_scrapper_url_v2: 'http://localhost:5000/scrapers/tripadvisor/v2',
   twitter_scrapper_url: 'http://localhost:5000/scrapers/twitter/sns',
   tiempo_scrapper_url: 'http://localhost:5000/scrapers/tiempo',
   wiki_scrapper_url: 'http://localhost:5000/scrapers/wiki',
-  model_url: 'http://localhost:5000/model/prediction',
-  update_search_url: 'http://localhost:8000/updateSearch',
-  get_despoblacion_url: 'http://localhost:8000/getDespoblacion',
+  // Model
+  model_url: 'http://localhost:5000/model/prediction'
 };
 
 /*
