@@ -158,7 +158,7 @@ export class DashboardComponent implements OnInit {
     }
     // PERMANENTLY delete user from table
     else if (args.requestType === 'delete') {
-      let body = { "user_id": args.data.id };
+      let body = { "user_id": args.data[0].id };
       this.dashboardService.deleteUser(body).subscribe( result => console.log(result) );
     }
   }
