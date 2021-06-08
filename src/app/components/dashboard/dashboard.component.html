@@ -27,7 +27,7 @@
                     <div>Busquedas con Despoblación</div>
                 </ng-template>
                 <ng-template #content>
-                    <ejs-chart id="chartDespoblacion" [primaryXAxis]='primaryXAxis'[primaryYAxis]='primaryYAxis' [title]='titleDespoblacion'>
+                    <ejs-chart id="chartDespoblacion" [primaryXAxis]='primaryXAxis'[primaryYAxis]='primaryYAxis' [title]='titleDespoblacion' [tooltip]='tooltip' [legendSettings]='legendSettings'>
                         <e-series-collection>
                             <e-series [dataSource]='despoblacionData' type='Column' xName='categoria' yName='cantidad' name='Pueblos'></e-series>
                         </e-series-collection>
