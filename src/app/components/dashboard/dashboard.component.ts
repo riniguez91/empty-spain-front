@@ -5,8 +5,6 @@ import { TownService } from 'src/app/town/town.service';
 import { TownDetailComponent } from 'src/app/town/town-detail/town-detail.component';
 import { ActivatedRoute } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
-import { LoginService } from '../../services/login.service';
-import { throwError } from 'rxjs';
 import { Town } from 'src/app/models/town.model';
 
 
@@ -51,7 +49,7 @@ export class DashboardComponent implements OnInit {
     this.tableData = [{ OrderID: 1, CustomerID: 'asdf', Freight: 123, ShipCountry: 'asdf' }, { OrderID: 2, CustomerID: 'asdf', Freight: 123, ShipCountry: 'asdf' }];
     this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true };
     this.toolbar = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
-    this.userPageSettings = { pageSize: 10 };
+    this.userPageSettings = { pageSize: 9 };
   }
 
   // Scraper grid options
@@ -63,11 +61,6 @@ export class DashboardComponent implements OnInit {
     this.toolbar = ['Search'];
     this.townPageSettings = { pageSize: 8 };
   }
-  rowSelected(args){ 
-    //console.log(args.data.id);  // you can get the selected record in the below argument 
-    this.townName = args.data.municipio;
-    this.townId = args.data.id;
-  } 
   
   public primaryXAxis: Object;
   public despoblacionData: Object[];
@@ -121,22 +114,6 @@ export class DashboardComponent implements OnInit {
         let body = {"municipio_id" : args.data.id, "highlighted": args.data.highlighted };
         this.dashboardService.updateHighlighted(body).subscribe( result => console.log(result) );
     }
-}
-
-  /**
-   * asd
-   * 
-   * @param args 
-   * @return void
-   */
-  public topPicksRowSelected(args): void {
-    /* if (args.rowIndexes.length > 4) {
-      this.topPicksGrid.clearRowSelection()
-      alert('Mi pana ya has seleccionado 4');
-      this.topPicksGrid.selectRows(this.rowIndexes)
-    }
-    else
-      this.rowIndexes = args.rowIndexes; */
   }
 
   /**
@@ -166,6 +143,17 @@ export class DashboardComponent implements OnInit {
     this.tablaPueblos();
 
   }
+
+  /**
+   * Obtain town name and town id from scraper grid
+   * 
+   * @param args 
+   * @return void 
+   */
+   scraperGridRowSelected(args) { 
+    this.townName = args.data.municipio;
+    this.townId = args.data.id;
+  } 
 
   /**
    * Calls the function that uses the command php artisan db:seed to restore db rows

@@ -23,8 +23,14 @@ e-accumulation-series-collection {
     height: inherit !important;  
 }
 
+.container-scrapers {
+    width: inherit !important; 
+    height: inherit !important;  
+}
+
 .scraperBtn{
     margin-top: 5px;
     width:100%;
-    color: var--(green);
+    background-color: var(--lime-green);
+    color: white;
 }

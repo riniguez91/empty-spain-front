@@ -59,7 +59,7 @@
                     <div>Informacion usuarios y cambiar privilegios</div>
                 </ng-template>
                 <ng-template #content>
-                    <ejs-grid [dataSource]='tableData' [allowPaging]="true" [pageSettings]="userPageSettings" >
+                    <ejs-grid [dataSource]='tableData' [allowPaging]="true" [pageSettings]="userPageSettings" height='100%'>
                         <e-columns>
                             <e-column field='id' headerText='ID' textAlign='center' isPrimaryKey='true' width=80></e-column>
                             <e-column field='email' headerText='Correo Electronico' width=200></e-column>
@@ -72,14 +72,14 @@
             </e-panel>
 
 
-            <!-- TABLA DE PUEBLOS -->
+            <!-- Scraper grid -->
             <e-panel [sizeX]="2" [sizeY]="1" [row]="2" [col]="0">
                 <ng-template #header>
                     <div>Seleccionar pueblo para lanzar scrapers</div>
                     
                 </ng-template>
                 <ng-template #content>
-                    <ejs-grid (rowSelected)='rowSelected($event)' [dataSource]='townsData' [allowPaging]="true" [pageSettings]='townPageSettings' [toolbar]='toolbar'>
+                    <ejs-grid (rowSelected)='scraperGridRowSelected($event)' [dataSource]='townsData' [allowPaging]="true" [pageSettings]='townPageSettings' [toolbar]='toolbar' height='100%'>
                         <e-columns>
                             <e-column field='id' headerText='ID municipio' textAlign='center' isPrimaryKey='true' width=80></e-column>
                             <e-column field='municipio' headerText='Nombre municipio' width=200></e-column>
@@ -87,20 +87,22 @@
                     </ejs-grid>
             
                 </ng-template>
-            </e-panel>
+            </e-panel> 
 
-            <!-- Botones Scrapers -->
+            <!-- Scraper launch buttons -->
             <e-panel [sizeX]="1" [sizeY]="1" [row]="2" [col]="2">
                 <ng-template #header>
-                <div>Seleccionar pueblo para lanzar scrapers</div>
+                    <div>Seleccionar pueblo para lanzar scrapers</div>
                 </ng-template>
-            <ng-template #content>
-                <div><button class="btn btn-primary scraperBtn" (click)="reset_locality()">Resetear Localidades</button></div>
-                <div><button class="btn btn-primary scraperBtn" (click)="notScraped(0)"> Lanzar scraper TripAdvisor</button></div>
-                <div><button class="btn btn-primary scraperBtn" (click)="notScraped(1)"> Lanzar scraper Twitter</button></div>
-                <div><button class="btn btn-primary scraperBtn" (click)="notScraped(2)"> Lanzar scraper elTiempo.es</button></div>
-                <div><button class="btn btn-primary scraperBtn" (click)="notScraped(3)"> Lanzar scrapper Wikipedia</button></div>
-            </ng-template>
+                <ng-template #content height='100%'>
+                    <div class="container-scrapers">
+                        <div><button class="btn scraperBtn" (click)="reset_locality()">Resetear BBDD</button></div>
+                        <div><button class="btn scraperBtn" (click)="notScraped(0)"> Lanzar scraper TripAdvisor</button></div>
+                        <div><button class="btn scraperBtn" (click)="notScraped(1)"> Lanzar scraper Twitter</button></div>
+                        <div><button class="btn scraperBtn" (click)="notScraped(2)"> Lanzar scraper elTiempo.es</button></div>
+                        <div><button class="btn scraperBtn" (click)="notScraped(3)"> Lanzar scrapper Wikipedia</button></div>
+                    </div>
+                </ng-template>
             </e-panel>
 
         </e-panels>
