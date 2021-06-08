@@ -36,10 +36,9 @@ export class TownDetailComponent implements OnInit {
       if (result['scraped']) {
         const actual_date = new Date().getTime();
         const past_date = new Date(result['updated_at']).getTime();
-        // Si la diferencia de dias de la ultima modificacion y la actual es mayor que 1dia
+        // If difference between 'updated_at' and actual time is more than 1 day
         if (actual_date - past_date >= 86400000){
-          if (this.userId) this.addSearch(this.townName, this.townId, result, this.userId)
-          else this.addSearch(this.townName, this.townId, result)
+          //Call scraper tiempo here
         }
         this.town = this.parseScraperJsons(result);
       }  
