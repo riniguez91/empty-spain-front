@@ -33,7 +33,16 @@ export class TownDetailComponent implements OnInit {
     this.town$
     .subscribe( result => {
       // Check if the town has already been scraped
-      if (result['scraped']) this.town = this.parseScraperJsons(result);
+      if (result['scraped']) {
+        const actual_date = new Date().getTime();
+        const past_date = new Date(result['updated_at']).getTime();
+        // Si la diferencia de dias de la ultima modificacion y la actual es mayor que 1dia
+        if (actual_date - past_date >= 86400000){
+          if (this.userId) this.addSearch(this.townName, this.townId, result, this.userId)
+          else this.addSearch(this.townName, this.townId, result)
+        }
+        this.town = this.parseScraperJsons(result);
+      }  
       // If not call the scrapers depending if the user has logged in or not
       // Pass along the json obtained from the API endpoint
       else {
