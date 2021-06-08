@@ -23,15 +23,19 @@ def elpais_content(user_input):
 
     
     driver = webdriver.Chrome(PATH, options=options)
-    driver.get("https://elpais.com/buscador/")              #Lanzar la URL
-    time.sleep(2)
-    driver.find_element_by_xpath('//*[@id="didomi-notice-agree-button"]').click()
-    driver.find_element_by_xpath('//*[@id="formulario_busquedas"]/input[1]').send_keys(user_input)
-    time.sleep(2)
-    driver.find_element_by_xpath('//*[@id="formulario_busquedas"]/input[1]').send_keys(Keys.ENTER)
-    time.sleep(2)
+    try:
+        driver.get("https://elpais.com/buscador/")              #Lanzar la URL
+        time.sleep(2)
+        driver.find_element_by_xpath('//*[@id="didomi-notice-agree-button"]').click()
+        driver.find_element_by_xpath('//*[@id="formulario_busquedas"]/input[1]').send_keys(user_input)
+        time.sleep(2)
+        driver.find_element_by_xpath('//*[@id="formulario_busquedas"]/input[1]').send_keys(Keys.ENTER)
+        time.sleep(2)
+        source = driver.page_source
+    except Exception as e:
+        source = ""
 
-    return driver.page_source       #Recoger todo el html de la pagina
+    return source       #Recoger todo el html de la pagina
 
 def text_elpais(user_input):
     noticias = {}
@@ -40,33 +44,40 @@ def text_elpais(user_input):
 
     page_source = elpais_content(user_input) #Se llama a la funcion 'cope_content' para obtener el contenido de la pagina donde estan las noticias
     soup = BeautifulSoup(page_source, 'lxml')
-    #print(soup.text)
-    contenedor = soup.find_all(class_="noticia")  #Div donde estan las noticias
-    for i in contenedor:
-        #Titulo
-        try:
-            titulo = i.find(title="Ver noticia").text
-        except Exception as e:
-            None
-        #Link
-        try:
-            link = i.find(title="Ver noticia").attrs['href']
-            link_completo = "https://elpais.com" +str(link)
-        except Exception as e:
-            None
-        #Subtitulo
-        try:
-            subtitulo = i.find('p').text
-            array_textos_noticias.append(subtitulo)
-        except Exception as e:
-            None
+    try:
+        contenedor = soup.find_all(class_="noticia")  #Div donde estan las noticias
+        for i in contenedor:
+            #Titulo
+            try:
+                titulo = i.find(title="Ver noticia").text
+            except Exception as e:
+                None
+            #Link
+            try:
+                link = i.find(title="Ver noticia").attrs['href']
+                link_completo = "https://elpais.com" +str(link)
+            except Exception as e:
+                None
+            #Subtitulo
+            try:
+                subtitulo = i.find('p').text
+                array_textos_noticias.append(subtitulo)
+            except Exception as e:
+                None
 
+            noticias["ELPAIS News in " + user_input].append({
+                'Name': titulo,
+                'Subtitle': subtitulo,
+                'URL': link_completo
+            })
+    except Exception as e:
         noticias["ELPAIS News in " + user_input].append({
-            'Name': titulo,
-            'Subtitle': subtitulo,
-            'URL': link_completo
-        })
+                'Name': titulo,
+                'Subtitle': subtitulo,
+                'URL': link_completo
+            })
     return json.dumps(noticias, indent=3)
+#print(text_elpais("Talavera de la Reina"))
 
 #Llama a "text_elpais" para rellenar el array y devolverlo para el scrapper de PC1
 def elpais_pc1(user_input):
