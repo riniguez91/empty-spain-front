@@ -5,6 +5,7 @@ from flask_cors import CORS
 from scrapers.tripadvisor_v1 import informacion_detallada
 from scrapers.tripadvisor_v2 import info_TripAdvisor
 from scrapers.tiempo import scrape_tiempo
+from scrapers.tiempo_examen import scrape_tiempo_examen
 from scrapers.twitter import scrape, sns
 from scrapers.wiki import wiki_content
 from scrapers.elPais import model_prediction
@@ -41,6 +42,10 @@ def tripadvisor_v2():
 @app.route('/scrapers/tiempo', methods=['POST'])
 def tiempo():
     return scrape_tiempo(request.data)
+
+@app.route('/scrapers/tiempo_examen', methods=['POST'])
+def tiempo_examen():
+    return scrape_tiempo_examen(request.data)
 
 # Twitter scraper calls tweepy API
 @app.route('/scrapers/twitter/tweepy', methods=['POST'])

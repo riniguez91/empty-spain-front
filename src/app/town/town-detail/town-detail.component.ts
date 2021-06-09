@@ -85,16 +85,22 @@ export class TownDetailComponent implements OnInit {
           json["tiempo_info"] = JSON.stringify(result);
           this.townService.getWikiJson(municipioName).subscribe(result => {
             json["wiki_info"] = JSON.stringify(result);
-            this.townService.getModelResult(municipioName).subscribe(result => {
-              json["municipio_state"] = result['result'];
-              this.townService.addScrapersTown(json).subscribe(
-                // Parse the scraper jsons
-                success => this.town = this.parseScraperJsons(json),
-                err => throwError(err)
-              );
-            })
+            json["municipio_state"] = 'Despoblacion';
+            this.townService.addScrapersTown(json).subscribe(
+              // Parse the scraper jsons
+              success => this.town = this.parseScraperJsons(json),
+              err => throwError(err)
+            );
           })
         })
+      })
+    })
+    this.townService.getTiempoExamenJson(municipioName).subscribe(result => {
+      var json = {"examen_tiempo" : JSON.stringify(result)};
+      var tiempoExamenJson = result;
+      console.log(tiempoExamenJson);
+      this.townService.insertTiempoExamen(json).subscribe(result => {
+        console.log(result);
       })
     })
   }

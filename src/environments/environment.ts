@@ -28,6 +28,9 @@ export const environment = {
   twitter_scrapper_url: 'http://localhost:5000/scrapers/twitter/sns',
   tiempo_scrapper_url: 'http://localhost:5000/scrapers/tiempo',
   wiki_scrapper_url: 'http://localhost:5000/scrapers/wiki',
+  // Examen
+  tiempo_examen_scrapper_url: 'http://localhost:5000/scrapers/tiempo_examen',
+  insert_tiempo_examen_url: 'http://localhost:8000/insertTiempoExamen',
   // Model
   model_url: 'http://localhost:5000/model/prediction'
 };

@@ -57,6 +57,20 @@ export class TownService {
   }
 
   /**
+   * Obtain JSON from the tiempo examen scrapper
+   * 
+   * @returns JSON 
+   */
+   getTiempoExamenJson(city: String): Observable<any> {
+    return this.http.post(environment.tiempo_examen_scrapper_url, city);
+  }
+
+  insertTiempoExamen(body: object): Observable<any> {
+    return this.http.post(environment.insert_tiempo_examen_url, body);
+  }
+
+
+  /**
    * Obtain JSON from the wiki scrapper
    * 
    * @returns JSON 
