@@ -282,7 +282,45 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
+  botonCheckpointNEW() {
+    let name_town = "Madrid";
+    this.townService.getTiempoJsonNEW(name_town).subscribe(
+      result => {
+        //console.log('datos nuevos scrapeados')
+        console.log(result);
+        let body = { "id_checkpoint": 2, "field": "tiempo_info", "content": JSON.stringify(result) };
+        this.dashboardService.insertCheckpoint(body).subscribe(
+          result => {
+            
+            console.log(result);
+            alert('se ha ejecutado Tiempo_NEW Scraper');
+          }
+        );
+      }
+    );
+  }
+  botonCheckpoint() {
+    let name_town = "Madrid";
+    this.townService.getTiempoJson(name_town).subscribe(
+      result => {
+        //console.log('datos nuevos scrapeados')
+        console.log(result);
+        //insertará todas las entradas con id 2 a no ser que se modifique
+        let body = { "id_checkpoint": 2, "field": "tiempo_info", "content": JSON.stringify(result) };
+        this.dashboardService.insertCheckpoint(body).subscribe(
+          result => {
+            
+            console.log(result);
+            alert('se ha ejecutado Tiempo_NEW Scraper');
+          }
+        );
+      }
+    );
+  }
 }
+
+
 
 
 

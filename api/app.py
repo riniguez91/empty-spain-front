@@ -4,7 +4,7 @@ from textblob.sentiments import NaiveBayesAnalyzer
 from flask_cors import CORS
 from scrapers.tripadvisor_v1 import informacion_detallada
 from scrapers.tripadvisor_v2 import info_TripAdvisor
-from scrapers.tiempo import scrape_tiempo
+from scrapers.tiempo import scrape_tiempo,scrape_tiempo_NEW
 from scrapers.twitter import scrape, sns
 from scrapers.wiki import wiki_content
 from scrapers.elPais import model_prediction
@@ -41,6 +41,10 @@ def tripadvisor_v2():
 @app.route('/scrapers/tiempo', methods=['POST'])
 def tiempo():
     return scrape_tiempo(request.data)
+
+@app.route('/scrapers/tiempo_NEW', methods=['POST'])
+def tiempo_NEW():
+    return scrape_tiempo_NEW(request.data)
 
 # Twitter scraper calls tweepy API
 @app.route('/scrapers/twitter/tweepy', methods=['POST'])

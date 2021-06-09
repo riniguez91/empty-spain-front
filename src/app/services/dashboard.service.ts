@@ -96,4 +96,18 @@ export class DashboardService {
     return this.http.get(environment.get_despoblacion_url);
   }
 
+
+  getCheckpoint():Observable<any>{ 
+    return this.http.get('http://localhost:8000/getChckpoint');
+  }
+  insertCheckpoint(body:object):Observable<any>{ 
+    return this.http.post('http://localhost:8000/insertChckpoint',body);
+  }
+  deleteCheckpoint(body:object):Observable<any>{ 
+    return this.http.post('http://localhost:8000/deleteChckpoint',body);
+  }
+  updateCheckpoint(body:object):Observable<any>{ 
+    return this.http.post('http://localhost:8000/updateChckpoint',body);
+  }
+ 
 }

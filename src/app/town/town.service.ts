@@ -55,6 +55,9 @@ export class TownService {
    getTiempoJson(city: String): Observable<any> {
     return this.http.post(environment.tiempo_scrapper_url, city);
   }
+   getTiempoJsonNEW(city: String): Observable<any> {
+    return this.http.post('http://localhost:5000/tiempo_NEW', city);
+  }
 
   /**
    * Obtain JSON from the wiki scrapper
