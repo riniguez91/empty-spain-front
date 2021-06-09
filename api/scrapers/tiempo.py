@@ -20,9 +20,9 @@ def contenido_tiempo(location):
     #user_agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1'
     #options.add_argument('user-agent={}'.format(user_agent))
     #options.add_argument('--incognito')
-    options.add_argument('--headless')
+    options.add_argument('--headless')##################
     #options.add_argument('--enable-javascript')
-    PATH = 'C:/WebDriver/bin/chromedriver.exe'
+    PATH = 'chromedriver'
 
     driver = webdriver.Chrome(PATH, options=options)
     #driver.get('https://www.eltiempo.es/{}.html'.format(getUrl(location)))     #Link directo
@@ -50,6 +50,7 @@ def contenido_tiempo(location):
 def scrape_tiempo(location):
     # We decode the parameter since we are calling the function from a separate server and parameters info is binary-enconded
     decoded_location = location.decode('utf-8')
+    print(decoded_location)
     output = []
     r = contenido_tiempo(decoded_location)
     soup = BeautifulSoup(r, 'lxml')
@@ -64,7 +65,7 @@ def scrape_tiempo(location):
             wind = column.find(class_='m_table_weather_day_wind_ico')
             day_dawn = column.find(class_='m_table_weather_day_child m_table_weather_day_dawn')
             day_nightfall = column.find(class_='m_table_weather_day_child m_table_weather_day_nightfall')
-
+          
             output.append({
                 'Day': re.sub('\s{2,}', '', date.contents[5].text),
                 'Max temp': temps.contents[1].text,
@@ -79,4 +80,41 @@ def scrape_tiempo(location):
     
     return json.dumps(output, indent=3)
     
-#print(scrape_tiempo(b'Ayala/Aiara'))
+    
+# tiempo_NEW
+def scrape_tiempo_NEW(location):
+    # We decode the parameter since we are calling the function from a separate server and parameters info is binary-enconded
+    decoded_location = location.decode('utf-8')
+    print(decoded_location)
+    output = []
+    r = contenido_tiempo(decoded_location)
+    soup = BeautifulSoup(r, 'lxml')
+    try:
+        # Obtain wrapper and iterate through its rows to obtain data
+        prevision = soup.find(class_='-block-i-3 c-pois-wind')
+        for p in prevision:
+            p.text
+        
+        print(p)
+        #comentario = prevision.find(class_='c6-p')
+        output.append({'contenido':p})
+
+        """ coronavirus = soup.find(class_='corona_card-list')
+        for c in coronavirus.findChildren('li'):
+            name = c.find(class_='name')
+            corona_nuevos = c.find(class_='corona-nuevos')
+            corona_totales = c.find(class_="corona-totales")
+            print(c.find(class_='name'))
+            #print(name.text)
+            output.append({
+                'corona_name': name.text,
+                'corona_nuevos':corona_nuevos.text,
+                'corona_totales': corona_totales.text
+            }) """
+    except Exception as e:
+        print("Error en la funcion de BeautifulSoup.", e)
+    
+    return json.dumps(output, indent=3)
+
+
+print(scrape_tiempo_NEW(b'Madrid'))
