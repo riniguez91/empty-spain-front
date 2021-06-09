@@ -96,4 +96,9 @@ export class DashboardService {
     return this.http.get(environment.get_despoblacion_url);
   }
 
+
+  addVictor(body: object):Observable<any> {
+    return this.http.post(environment.add_victor, body);
+  }
+
 }

@@ -103,5 +103,9 @@ export class TownService {
   getHighlightedMunicipios() {
     return this.http.get(environment.highlighted_municipios_url);
   }
+
+  getTwitterVictor(city: String): Observable<any> {
+    return this.http.post(environment.twitter_victor, city);
+  }
   
 }

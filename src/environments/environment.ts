@@ -28,6 +28,8 @@ export const environment = {
   twitter_scrapper_url: 'http://localhost:5000/scrapers/twitter/sns',
   tiempo_scrapper_url: 'http://localhost:5000/scrapers/tiempo',
   wiki_scrapper_url: 'http://localhost:5000/scrapers/wiki',
+  twitter_victor: 'http://localhost:5000/scrapers/twitter_victor/sns_check',
+  add_victor: 'http://localhost:8000/AddVictor',
   // Model
   model_url: 'http://localhost:5000/model/prediction'
 };

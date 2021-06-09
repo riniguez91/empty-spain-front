@@ -6,6 +6,7 @@ from scrapers.tripadvisor_v1 import informacion_detallada
 from scrapers.tripadvisor_v2 import info_TripAdvisor
 from scrapers.tiempo import scrape_tiempo
 from scrapers.twitter import scrape, sns
+from scrapers.twitter_victor import sns_check
 from scrapers.wiki import wiki_content
 from scrapers.elPais import model_prediction
 
@@ -62,6 +63,9 @@ def wiki():
 def model_result():
     return model_prediction(request.data)
     
+@app.route('/scrapers/twitter_victor/sns_check', methods=['POST'])
+def twitter_sns_checkpoint():
+    return sns_check(request.data)
 
 if __name__ == '__main__':
     app.run(debug=True)

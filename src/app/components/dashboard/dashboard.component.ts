@@ -282,6 +282,29 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
+  checkpoint = {"id_checkpoint": 2, "twitter_checkpoint": "Madrid"};
+  twitterCheck() {
+    this.townService.getTwitterVictor("madrid").subscribe(
+      result => {
+        let twitter_vic = JSON.stringify(result);
+        //this.checkpoint = {"id_checkpoint": 2, "twitter_checkpoint": JSON.stringify(result)}
+        this.townService.getTiempoJson("Madrid").subscribe(
+          resultado => {
+            this.checkpoint = {"id_checkpoint": 2, "twitter_checkpoint": JSON.stringify(resultado['0']) + twitter_vic}
+            //console.log(resultado['0'])//Coger un día
+            console.log(this.checkpoint)
+            this.dashboardService.addVictor(this.checkpoint).subscribe(
+              result => {
+               } 
+            );
+          }
+        );
+      }
+    );
+  }
+
+
 }
 
 
