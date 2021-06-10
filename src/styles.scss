@@ -10,7 +10,7 @@
 @import '../node_modules/@syncfusion/ej2-angular-grids/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-angular-layouts/styles/material.css';
 
-@import url('https://fonts.googleapis.com/css2?family=Lora&family=Poppins:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Maitree:wght@400;500&display=swap');
 
 /* Variables globales */
 :root {
@@ -45,9 +45,8 @@ body, html {
     background-color: var(--color-secundario);
 } */
 
-.h1Titulo {
-    margin-bottom: 20px;
-    font-family: 'Poppins', sans-serif;
+.title {
+    font-family: 'Maitree', serif;
 }
 
 .texto_principal {

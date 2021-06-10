@@ -1,31 +1,32 @@
 <!-- Search container -->
-<div class="container search-container mt-4">
-    <div class="background-container">
-        <h1 class="display-4 mt-5 text-center">¿Qué pueblo desea buscar?</h1>
+<div class="background-container">
+    <div class="container search-container">
+        <h1 class="display-4 text-center search-title title"><strong>¿Qué pueblo desea buscar?</strong></h1>
         <div class="p-1 bg-light shadow-sm mt-3 rounded rounded-pill">
             <div class="input-group">
                 <input type="text" placeholder="Introduzca el pueblo a buscar..." aria-describedby="search-text" [(ngModel)]="searchText" class="form-control border-0 rounded rounded-pill bg-light" autofocus
                     (blur)="unfocusSearchResults()" (focus)="focusSearchResults()">
-                <button id="button-addon1" type="submit" class="btn btn-link text-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <button id="button-addon1" type="submit" class="btn btn-link text-primary" aria-label="Search icon button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                 </svg></button>
+                <div class="list-group rounded mt-5"> <!-- *ngIf="unfocusList" -->
+                    <!-- results of ngFor is passed to appFilter with argument searchText -->
+                    <a [routerLink]="['/pueblos', town.id, {municipio: town.municipio}]" class="list-group-item list-group-item-action" *ngFor="let town of towns | searchFilter: searchText | slice:0:10">
+                        {{town.municipio}}
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="list-group rounded mt-1"> <!-- *ngIf="unfocusList" -->
-            <!-- results of ngFor is passed to appFilter with argument searchText -->
-            <a [routerLink]="['/pueblos', town.id, {municipio: town.municipio}]" class="list-group-item list-group-item-action" *ngFor="let town of towns | searchFilter: searchText | slice:0:10">
-                {{town.municipio}}
-            </a>
-        </div>
+        <img class="mx-auto d-block down-arrow" src="https://images-ext-2.discordapp.net/external/yvDqcTRHfLl54W_XDTdhfUEhoO8n3zjPR7G6BCAaVGE/https/aipljoycentral.com/assets/img/dripping-down-arrow.gif" alt="Down arrow">
     </div>
 </div>
 
-<div class="container search-container mt-5">
-    <h1 class="display-6">Pueblos destacados</h1>
+<div class="container cream-container mt-5">
+    <h1 class="display-6 title">Pueblos destacados</h1>
     <div class="row mb-5 mt-3 gy-md-1 gy-4">
         <div class="col-md-3" *ngFor="let town of highlightedTowns">
             <div class="card h-100">
-                <img class="card-img-top" [src]="town.imagen">
+                <img class="card-img-top" [src]="town.imagen" alt="Town image">
                 <div class="card-body">
                     <p class="card-text">{{town.description}}</p>
                     <p class="card-text"><small class="text-muted">{{town.population}}</small></p>
