@@ -23,7 +23,17 @@
     transform: translate(-50%, -50%);
 }
 
-.down-arrow {
+.example{
+    position: relative;
+}
+
+.example-arrow{
+    width: 100%;
+    position: absolute;
+    bottom: 0; 
+}
+
+.arrow{
     height: 15vh;
 }
 

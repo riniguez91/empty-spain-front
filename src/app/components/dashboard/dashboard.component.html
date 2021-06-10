@@ -1,5 +1,32 @@
+<!-- INICIO DE LA INFORMACION DEL DASHBOARD -->
+<div class="modal fade" id="FAQModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Funcionamiento del Dashboard</h5>
+            </div>
+            <div class="modal-body accordion-body text-justify">
+                <li class="mb-4"> <strong>Cambiar pueblos recomendados en la pestaña busqueda:</strong> 
+                    <p class="faq-text"> En la parte superior izquierda de la pantalla se puede ver una tabla compuesta por el <i>ID del municipio</i>, el <i>nombre</i> y el campo <i>destacado</i>. El funcionamiento de esta tabla permite seleccionar 4 pueblos destacados para mostrarlos en la vista de "Pueblos". </p>
+                </li>
+                <li class="mb-4"> <strong>Representaciones gráficas: </strong>
+                    <p class="faq-text"> En la <strong>primera gráfica</strong>, se muestra en un gráfico circular la cantidad de pueblos categorizados como "Despoblación" frente a los de "No Despoblación". </p>
+                    <p class="faq-text"> En la <strong>segunda gráfica</strong>, se muestra, en un gráfico de barras, los 10 pueblos más buscados. </p>
+                </li>  
+                <li class="mb-4"> <strong>Edición de datos de usuarios:</strong>
+                    <p class="faq-text"> Es posible editar los datos de los usuarios, tanto el nombre y apellios, correo electronico o como el rol, marcando con 1 que es un administrador, hay que seleccionar un usuario en la tabla haciendo doble click y editar los campos que se necesiten en la pestaña emergente, hay que confirmar los cambios pulsando "save" para que entren en vigor. </p>
+                </li> 
+                <li class="mb-4"> <strong>Llamada a los scrapers:</strong>
+                    <p class="faq-text"> Para ejecutar cada uno de los scrapers y actualizar el contenido, es imprescindible que se seleccione el pueblo que de desea actualizar en la tabla inferior llamada "Seleccionar pueblo para lanzar scrapers" y seguidamente, hacer click en el boton que ejecute la actualización que se necesite. </p>
+                </li> 
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="control-section m-3">
+<img class="info-img mt-2" style="float: right;" data-bs-toggle="modal" data-bs-target="#FAQModal"alt="dashboard info" src="../../../assets/images/info.png">
+<!-- //FIN DE LA INFROMACIÓN DEL DASHBOARD -->
+<div class="control-section m-3" style="clear: both;">
     <ejs-dashboardlayout id="dashboard" [columns]="3" [cellSpacing]='cellSpacing' [allowDragging]='allowDragging' [cellAspectRatio]='cellAspectRatio'>
         <e-panels>
 
