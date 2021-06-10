@@ -42,7 +42,7 @@
                         <e-columns>
                             <e-column field='id' headerText='Municipio ID' isPrimaryKey='true'></e-column>
                             <e-column field='municipio' headerText='Nombre' [allowEditing]='false'></e-column>
-                            <e-column field='highlighted' headerText='Destacado' editType='dropdownedit' [edit]='ddParams'></e-column> <!-- displayAsCheckBox='true' editType='booleanedit' type='boolean' -->
+                            <e-column field='highlighted' type='boolean' editType='booleanedit' displayAsCheckBox='true' headerText='Destacado'></e-column> <!-- displayAsCheckBox='true' editType='booleanedit' type='boolean' -->
                         </e-columns>
                     </ejs-grid>
                 </ng-template>
@@ -90,11 +90,11 @@
                     (actionComplete)='userGridActionComplete($event)' [allowSorting]="true">
                         <e-columns>
                             <e-column field='id' headerText='ID' textAlign='center' isPrimaryKey='true' width=80></e-column>
-                            <e-column field='email' headerText='Correo Electronico' [validationRules]='requiredField' width=200></e-column>
-                            <e-column field='name' headerText='Nombre' [validationRules]='requiredField' width=120></e-column>
-                            <e-column field='surnames' headerText='Apellidos' textAlign='left' [validationRules]='requiredField' width=180></e-column>
-                            <e-column field='role' headerText='Rol' editType='dropdownedit' textAlign='right' width=60></e-column>
-                            <e-column field='is_disabled' headerText='Disabled' editType='dropdownedit' textAlign='right' width=60></e-column>
+                            <e-column field='email' headerText='Correo Electronico' [validationRules]='requiredField' width=100></e-column>
+                            <e-column field='name' headerText='Nombre' [validationRules]='requiredField' width=100></e-column>
+                            <e-column field='surnames' headerText='Apellidos' textAlign='left' [validationRules]='requiredField' width=60></e-column>
+                            <e-column field='role' headerText='Admin' type='boolean' editType='booleanedit' displayAsCheckBox='true' textAlign='right' width=60></e-column>
+                            <e-column field='is_disabled' headerText='Disabled' type='boolean' editType='booleanedit' displayAsCheckBox='true' textAlign='right' width=60></e-column>
                         </e-columns>
                     </ejs-grid>
                 </ng-template>

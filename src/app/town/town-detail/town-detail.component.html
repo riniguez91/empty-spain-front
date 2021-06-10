@@ -22,7 +22,6 @@
                 <table class="table table-hover table-striped">
                     <thead class="table-time-header">
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Dia</th>
                             <th scope="col">Temperatura</th>
                             <th scope="col">Lluvia</th>
@@ -31,7 +30,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let day of town.tiempo_info | slice:0:7; index as i"> 
-                            <th scope="row">{{i+1}}</th>
                             <td>{{day.Day}}</td>
                             <td> <img src="../../../assets/images/up-arrow.svg" width="15" alt="Up arrow"> {{day['Max temp']}} <img src="../../../assets/images/down-arrow.svg" width="15" alt="Down arrow"> {{day['Min temp']}} </td>
                             <td *ngIf="convertStringToFloat(day.Rain) > 5.0"> <img src="../../../assets/images/rainy.svg" width="15" alt="Rain icon"> {{day.Rain}}</td>
