@@ -5,23 +5,23 @@
             alt="Logo empty-spain">
         <h1 class="h3 mb-3 font-weight-normal">Empty Spain Inc.</h1>
 
-        <label for="inputEmail" class="sr-only">E-mail address</label>
-        <input type="email" id="inputEmail" class="form-control" name="email" placeholder="E-mail address" ngModel email
+        <label for="inputEmail" class="sr-only">Dirección de Correo Electronico</label>
+        <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Correo Electronico" ngModel email
             required autofocus>
 
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" ngModel
+        <label for="inputPassword" class="sr-only">Contraseña</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Contraseña" ngModel
             required>
 
-        <div *ngIf="!validLoginEmail" class="alert alert-danger">Invalid email (should be example@example.com)</div>
-        <div *ngIf="!validLoginPassword" class="alert alert-danger">Please insert a password.</div>
-        <div *ngIf="invalidLogin" class="alert alert-danger">Invalid user credentials, please check they are correct</div>
+        <div *ngIf="!validLoginEmail" class="alert alert-danger">E-mail invalido (debe ser similar a example@example.com)</div>
+        <div *ngIf="!validLoginPassword" class="alert alert-danger">Porfavor, inserta una contraseña.</div>
+        <div *ngIf="invalidLogin" class="alert alert-danger">Credenciales de usuario Invalidas, porfavor comprueba que son correctas</div>
 
-        <div *ngIf="!notValidRegister" class="alert alert-success">Successfully registered.</div>
+        <div *ngIf="!notValidRegister" class="alert alert-success">Registrado correctamente.</div>
 
         <div class="text-center">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            <a class="register-link d-block" (click)="show()">Don't have an account?</a>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
+            <a class="register-link d-block" (click)="show()">¿Aún no tienes cuenta?</a>
             <p class="mt-4 text-muted">&copy; 2019-2020 by Grupo 5</p>
         </div>
     </form>
@@ -36,37 +36,37 @@
     <div class="modal-dialog modal-dialog-scrollable" id="reg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Register</h4>
+                <h4 class="modal-title" id="myModalLabel">Registrarse</h4>
                 <button type="button" (click)="close(registerform)" class="close" aria-label="Close"><span aria-hidden="false">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form #registerform="ngForm" (ngSubmit)="onRegisterSubmit(registerform)" class="form-signin mx-auto d-block">
             
-                    <label for="inputNameRegister" class="sr-only">Name</label>
-                    <input type="name" name="name" id="inputNameRegister" class="form-control" placeholder="Name" ngModel
+                    <label for="inputNameRegister" class="sr-only">Nombre</label>
+                    <input type="name" name="name" id="inputNameRegister" class="form-control" placeholder="Nombre" ngModel
                         required autofocus>
-                    <div *ngIf="!validRegisterName" class="alert alert-danger">Invalid Name (max. 8 characters).</div>
+                    <div *ngIf="!validRegisterName" class="alert alert-danger">Nombre Invalido (max. 8 caracteres).</div>
                         
-                    <label for="inputSurnamesRegister" class="sr-only">Surnames</label>
-                    <input type="surnames" name="surnames" id="inputSurnamesRegister" class="form-control" placeholder="Surnames" ngModel
+                    <label for="inputSurnamesRegister" class="sr-only">Apellidos</label>
+                    <input type="surnames" name="surnames" id="inputSurnamesRegister" class="form-control" placeholder="Apellidos" ngModel
                         required>
-                    <div *ngIf="!validRegisterSurnames" class="alert alert-danger">Invalidvalid Surnames (max. 24 characters).</div>
+                    <div *ngIf="!validRegisterSurnames" class="alert alert-danger">Apellidos invalidos (max. 24 caracteres).</div>
 
-                    <label for="inputEmailRegister" class="sr-only">E-mail address</label>
-                    <input type="email" id="inputEmailRegister" class="form-control" name="email" placeholder="E-mail address" ngModel email
+                    <label for="inputEmailRegister" class="sr-only">Dirección de Correo Electronico</label>
+                    <input type="email" id="inputEmailRegister" class="form-control" name="email" placeholder="Correo Electronico" ngModel email
                         required >
-                    <div *ngIf="!validRegisterEmail" class="alert alert-danger">Invalid E-mail (should be example@example.com)</div>
+                    <div *ngIf="!validRegisterEmail" class="alert alert-danger"> E-mail invalido (debe ser similar a example@example.com)</div>
             
-                    <label for="inputPasswordRegister" class="sr-only">Password</label>
-                    <input type="password" name="password" id="inputPasswordRegister" class="form-control" placeholder="Password" ngModel
+                    <label for="inputPasswordRegister" class="sr-only">Contraseña</label>
+                    <input type="password" name="password" id="inputPasswordRegister" class="form-control" placeholder="Contraseña" ngModel
                         required>
-                    <div *ngIf="!validRegisterPassword" class="alert alert-danger">Please insert a password longer than 6 characters.</div>
+                    <div *ngIf="!validRegisterPassword" class="alert alert-danger">La contraseña debe tener al menos 6 caracteres.</div>
             
                     <div *ngIf="submitted && validRegisterEmail && validRegisterName && validRegisterSurnames && validRegisterPassword" class="alert alert-success">Registrado Correctamente</div>
-                    <div *ngIf="invalidRegister" class="alert alert-danger">Email address is already in use.</div>
+                    <div *ngIf="invalidRegister" class="alert alert-danger">Esa dirección de Correo Electronico ya está en uso</div>
 
                     <div class="text-center">
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Registrate</button>
                         <p class="mt-4 text-muted">&copy; 2019-2020 by Grupo 5</p>
                     </div>
                 </form>

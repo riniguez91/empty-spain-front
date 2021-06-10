@@ -1,0 +1,21 @@
+.auth{
+    height: 260px;
+}
+
+p{
+    text-align: justify;
+}
+
+button:not(.collapsed) {
+    font-weight: bold;
+    color: green;
+    background-color: #e9ffec;
+}
+
+.ui-accordion-header:hover {
+    color: pink!important;
+}
+
+.li{
+    text-align: justify;
+}

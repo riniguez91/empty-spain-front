@@ -25,6 +25,7 @@ import { TooltipService, LegendService, CategoryService, ChartModule, Accumulati
   AccumulationDataLabelService, BarSeriesService, DataLabelService, LineSeriesService } from '@syncfusion/ej2-angular-charts';
 import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
 import { ColumnSeriesService, MultiLevelLabelService, SelectionService} from '@syncfusion/ej2-angular-charts';
+import { FAQComponent } from './components/faq/faq.component';
 
   
 @NgModule({
@@ -38,6 +39,7 @@ import { ColumnSeriesService, MultiLevelLabelService, SelectionService} from '@s
     NotFoundComponent,
     PerfilComponent,
     DashboardComponent,
+    FAQComponent,
   ],
   imports: [
     BrowserModule,
