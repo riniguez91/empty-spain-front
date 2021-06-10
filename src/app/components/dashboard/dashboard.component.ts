@@ -32,13 +32,13 @@ export class DashboardComponent implements OnInit {
   public topPicksToolbarOptions: ToolbarItems[] = ['Edit', 'Update', 'Cancel']
 
   // Top 10 municipios piechart options
-  public searchpiechart: any[];
+  /* public searchpiechart: any[];
   public tooltip: Object = {
     enable: true
   };
   public legendSettings: Object = {
     visible: true
-  };
+  }; */
 
   // User table options
   public tableData: object[];
@@ -62,22 +62,34 @@ export class DashboardComponent implements OnInit {
     this.toolbar = ['Search'];
     this.townPageSettings = { pageSize: 8 };
   }
-  
-  public primaryXAxis: Object;
-  public despoblacionData: Object;
-  public titleDespoblacion: string;
-  public primaryYAxis: Object;
-  public palette: any[];
-  chartDespoblacion(){
 
-    //this.despoblacionData = [{ categoria: "Despoblación", cantidad: 10 },{ categoria: "No Despoblación", cantidad: 20 }]
-    this.palette = ['#6a9a1f'];
-    this.dashboardService.getDespoblacion().subscribe( result=> this.despoblacionData = result);
-    this.primaryXAxis = {valueType: 'Category', title: 'Categoria'};
-    this.primaryYAxis = {minimum: 0, interval: 10, title: 'Busquedas'};
-    this.titleDespoblacion = 'Despoblacion frente a No Despoblacion';
-  }
   
+  // Top 10 Searches config
+  public primaryXAxisTop: Object;
+  public primaryYAxisTop: Object;
+  public topData: Object;
+  public titleTop: string;
+  public paletteTop: string[];
+  chartTop(){
+    //this.despoblacionData = [{ categoria: "Despoblación", cantidad: 10 },{ categoria: "No Despoblación", cantidad: 20 }]
+    this.dashboardService.topSearches().subscribe( result=> {this.topData = result; console.log('top data');console.log(this.topData)});
+    this.primaryXAxisTop = {valueType: 'Category', title: 'Categoria'};
+    this.primaryYAxisTop = {minimum: 0, interval: 10, title: 'Busquedas'};
+    this.titleTop = 'Top 10 Pueblos';
+    this.paletteTop = ["#3F84E5"]; // color var(--azure)
+  }
+
+   // Despo vs No Despo PieChart config
+   public palettePie: string[];
+   public despopiechart: any[];
+   public tooltipDespo: Object
+   public legendSettingsDespo: Object;
+   despoPieChart(){
+     this.palettePie = ['#bf6d85','#f47382','#f7b198']
+     this.dashboardService.getDespoblacion().subscribe(result => this.despopiechart = result);
+     this.legendSettingsDespo = {visible: true};
+     this.tooltipDespo= {enable: true};
+   }
   constructor(private dashboardService: DashboardService, private townService: TownService, private storageService: StorageService, private route: ActivatedRoute) { }
 
   towns: Town;
@@ -87,11 +99,6 @@ export class DashboardComponent implements OnInit {
       this.topPicksData = result
     });
 
-    // Get top searches piechart data
-    this.dashboardService.topSearches().subscribe(
-      result => this.searchpiechart = result
-    );
-
     // Get user grid data
     this.dashboardService.getUsers().subscribe(
       result => this.tableData = result
@@ -100,11 +107,14 @@ export class DashboardComponent implements OnInit {
     // Initialize admin table settings
     this.tablaAdmin();
 
-    // Initialize despoblacion chart settings
-    this.chartDespoblacion();
-
     // Get top picks grid data
     this.topPickSelectionOptions = { type: 'Multiple' }
+    
+    //show the data of despo vs no despo PieChart
+    this.despoPieChart();
+
+    //show the columns chart of top 10 searches
+    this.chartTop();
   }
 
   /**

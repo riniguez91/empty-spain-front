@@ -47,38 +47,38 @@
                     </ejs-grid>
                 </ng-template>
             </e-panel>
-
-            <!-- Compare Despoblacion vs No Despobacion -->
+ 
+            <!-- TOP busquedas ColumnChart -->
             <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="1">
                 <ng-template #header>
-                    <div>Busquedas con Despoblación</div>
+                    <div>Top 10 Busquedas</div>
                 </ng-template>
                 <ng-template #content>
-                    <ejs-chart id="despoblacionChart" [primaryXAxis]='primaryXAxis'[primaryYAxis]='primaryYAxis' [title]='titleDespoblacion' [palettes]='palette' [tooltip]='tooltip' [legendSettings]='legendSettings'>
+                    <ejs-chart id="topChart" [primaryXAxis]='primaryXAxisTop'[primaryYAxis]='primaryYAxisTop' [title]='titleTop' [tooltip]='tooltipDespo' [palettes]='paletteTop' [legendSettings]='legendSettingsTop'>
                         <e-series-collection>
-                            <e-series [dataSource]='despoblacionData' type='Column' xName='municipio_state' yName='total' name='Pueblos'></e-series>
+                            <e-series [dataSource]='topData' type='Column' xName='municipio' yName='no_searches' name='Busquedas'></e-series>
                         </e-series-collection>
                     </ejs-chart>
                 </ng-template>
             </e-panel>
 
-            <!-- Top 10 most searched municipios piechart -->
+            <!-- DESPO VS NO DESPO PIECHART-->
             <e-panel [sizeX]="1" [sizeY]="1" [row]="0" [col]="2">
                 <ng-template #header>
-                    <div>Los 10 pueblos más buscados</div>
+                    <div>Despoblacion vs No Despoblación</div>
                 </ng-template>
                 <ng-template #content>
-                    <div id="searchPie">
-                        <ejs-accumulationchart id="searchPieChart" [enableAnimation]="false" [tooltip]='tooltip' [legendSettings]='legendSettings'>
+                    <div id="despoPie">
+                        <ejs-accumulationchart id="despoPieChart" [enableAnimation]="false" [palettes]='paletteTop' [tooltip]='tooltipDespo' [legendSettings]='legendSettingsDespo' >
                             <e-accumulation-series-collection>
-                                <e-accumulation-series [dataSource]="searchpiechart" xName='municipio' yName='no_searches'
-                                    name="Top 10" [dataLabel]='datalabel' radius='90%'>
+                                <e-accumulation-series [dataSource]="despopiechart" xName='municipio_state' yName='total'
+                                    name="Pueblos" [dataLabel]='datalabelDespo' radius='90%'>
                                 </e-accumulation-series>
                             </e-accumulation-series-collection>
                         </ejs-accumulationchart>
                     </div>
                 </ng-template>
-            </e-panel>
+            </e-panel> 
 
             <!-- Change user privileges grid --> 
             <e-panel [sizeX]="2" [sizeY]="1" [row]="1" [col]="2">
@@ -124,23 +124,58 @@
                     <div>Seleccionar pueblo para lanzar scrapers</div>
                 </ng-template>
                 <ng-template #content height='100%'>
-                    <div class="container-scrapers">
-                        <div><button class="btn scraperBtn" (click)="reset_locality()">Resetear BBDD</button></div>
-                        <div><button class="btn scraperBtn" (click)="notScraped(0)"> Lanzar scraper TripAdvisor</button></div>
-                        <div><button class="btn scraperBtn" (click)="notScraped(1)"> Lanzar scraper Twitter</button></div>
-                        <div><button class="btn scraperBtn" (click)="notScraped(2)"> Lanzar scraper elTiempo.es</button></div>
-                        <div><button class="btn scraperBtn" (click)="notScraped(3)"> Lanzar scrapper Wikipedia</button></div>
+                    <div id="scrapersLayout" class="container-scrapers px-4">
+
+
+                        <div class="row">
+                            <div class="col bot">
+                              <p>Lanzar Scraper: </p>
+                            </div>
+                            <div class="col">
+                                <button class="btn scraperBtn" (click)="notScraped(0)"> TripAdvisor</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col bot">
+                              <p>Lanzar Scraper: </p>
+                            </div>
+                            <div class="col">
+                                <button class="btn scraperBtn" (click)="notScraped(1)"> Twitter</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col bot">
+                              <p>Lanzar Scraper:</p>
+                            </div>
+                            <div class="col">
+                                <button class="btn scraperBtn" (click)="notScraped(2)"> elTiempo.es</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col bot">
+                              <p>Lanzar Scraper: </p>
+                            </div>
+                            <div class="col">
+                                <button class="btn scraperBtn" (click)="notScraped(3)"> Wikipedia</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col bot">
+                              <p>Resetear Base de Datos: </p>
+                            </div>
+                            <div class="col">
+                                <button class="btn scraperBtn" (click)="reset_locality()"> Resetear</button>
+                            </div>
+                        </div>
+
+                        <!-- <div ><p class="d-flex justify-content-evenly">Resetear Base de Datos: <button class="btn scraperBtn" (click)="reset_locality()">Resetear</button></p></div>
+                        <div ><p class="d-flex justify-content-evenly">Lanzar scraper :<button class="btn scraperBtn" (click)="notScraped(0)"> TripAdvisor</button></p></div>
+                        <div ><p class="d-flex justify-content-evenly">Lanzar scraper :<button class="btn scraperBtn" (click)="notScraped(1)"> Twitter</button></p></div>
+                        <div ><p class="d-flex justify-content-evenly">Lanzar scraper :<button class="btn scraperBtn" (click)="notScraped(2)"> elTiempo.es</button></p></div>
+                        <div ><p class="d-flex justify-content-evenly">Lanzar scraper :<button class="btn scraperBtn" (click)="notScraped(3)"> Wikipedia</button></p></div> -->
                     </div>
                 </ng-template>
             </e-panel>
-
         </e-panels>
     </ejs-dashboardlayout>
-
-    <!--<button class="btn btn-primary" (click)="reset_locality()">Resetear CCAA, Provincias y municipios</button>
-     <button class="btn btn-primary" (click)="tripadvisorLaunch()">actualizar TRIP</button>
-    <button class="btn btn-primary" (click)="twitterLaunch()">actualizar TWITTER</button>
-    <button class="btn btn-primary" (click)="tiempoLaunch()">actualizar TIEMPO</button>
-    <button class="btn btn-primary" (click)="wikiLaunch()">actualizar WIKI</button> -->
-    
 </div>

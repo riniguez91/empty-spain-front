@@ -1,9 +1,14 @@
-#searchPie { 
+#despoPie{ 
     width: inherit !important; 
     height: inherit !important; 
 } 
 
-#despoblacionChart { 
+#topChart{ 
+    width: inherit !important; 
+    height: inherit !important; 
+} 
+
+#scrapersLayout{ 
     width: inherit !important; 
     height: inherit !important; 
 } 
@@ -34,8 +39,12 @@ e-accumulation-series-collection {
 }
 
 .container-scrapers {
+    padding-top: 5%;
     width: inherit !important; 
     height: inherit !important;  
+}
+.container-scrapers p{ 
+    vertical-align: middle;
 }
 
 .scraperBtn{
@@ -52,4 +61,8 @@ e-accumulation-series-collection {
 
 .faq-text {
     text-align: justify;
+}
+
+.bot{
+    vertical-align: baseline;
 }
