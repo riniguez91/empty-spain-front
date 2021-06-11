@@ -10,6 +10,8 @@ export const environment = {
   // Town search
   add_search_url: 'http://localhost:8000/addSearch',
   municipios_url: 'http://localhost:8000/municipios',
+  // User profile
+  user_searches_url: 'http://localhost:8000/userSearchHistory',
   // Dashboard
   top_searches_url: 'http://localhost:8000/mostSearchedMunicipios',
   all_users_url: 'http://localhost:8000/users',

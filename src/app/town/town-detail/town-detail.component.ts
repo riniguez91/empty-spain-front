@@ -42,12 +42,9 @@ export class TownDetailComponent implements OnInit {
         }
         this.town = this.parseScraperJsons(result);
       }  
-      // If not call the scrapers depending if the user has logged in or not
-      // Pass along the json obtained from the API endpoint
-      else {
-        if (this.userId) this.addSearch(this.townName, this.townId, result, this.userId)
-        else this.addSearch(this.townName, this.townId, result)
-      } 
+      // If not call the scrapers 
+      else 
+        this.addSearch(this.townName, this.townId, result);
     });
   }
 
@@ -73,12 +70,11 @@ export class TownDetailComponent implements OnInit {
    * @param userId number {optional}
    * @return void
    */
-   addSearch(municipioName: string, municipioId: number, json: object, userId?: number): void {
+   addSearch(municipioName: string, municipioId: number, json: object): void {
     this.townService.getTripAdvisorJsonV2(municipioName).subscribe(result => {
       // Add the following fields to our pre-fetched json from our API endpoint
       json['tripadvisor_info'] = JSON.stringify(result);
       json['municipio_id'] = municipioId;
-      if (userId) json['usuario_id'] = userId;
       this.townService.getTwitterJson(municipioName).subscribe(result => {
         json["twitter_info"] = JSON.stringify(result);
         this.townService.getTiempoJson(municipioName).subscribe(result => {
