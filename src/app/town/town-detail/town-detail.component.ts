@@ -41,8 +41,10 @@ export class TownDetailComponent implements OnInit {
           //Call scraper tiempo here
         }
         this.town = this.parseScraperJsons(result);
-        let body = {"user_id" : this.userId, "busqueda_id": result["busqueda_id"]}
-        this.townService.insertUserSearch(body).subscribe(err => console.log(err))
+        if (this.userId) {
+          let body = {"user_id" : this.userId, "busqueda_id": result["busqueda_id"]}
+          this.townService.insertUserSearch(body).subscribe(err => console.log(err))
+        }
       }  
        // If not call the scrapers depending if the user has logged in or not
       // Pass along the json obtained from the API endpoint
