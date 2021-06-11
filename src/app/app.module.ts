@@ -19,7 +19,7 @@ import { SpinnerModule } from './shared/components/spinner/spinner.module';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
-import { EditService, ToolbarService, PageService, GridModule, SortService, EditSettingsModel, ToolbarItems, IEditCell, FilterService, GroupService } from '@syncfusion/ej2-angular-grids';
+import { EditService, ToolbarService, PageService, GridModule, SortService, FilterService, GroupService } from '@syncfusion/ej2-angular-grids';
 import { TooltipService, LegendService, CategoryService, ChartModule, AccumulationChartModule, 
   PieSeriesService, AccumulationLegendService, AccumulationTooltipService, AccumulationAnnotationService,
   AccumulationDataLabelService, BarSeriesService, DataLabelService, LineSeriesService } from '@syncfusion/ej2-angular-charts';

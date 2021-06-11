@@ -21,11 +21,11 @@
         </div>
     </div>
     <div class="example-arrow">
-        <img class="d-block mx-auto d-block arrow" src="../../../assets/images/flecha.gif" alt="Down arrow">
+        <img (click)="scrollDown(target)" class="d-block mx-auto d-block arrow" src="../../../assets/images/flecha.gif" alt="Down arrow">
     </div>
 </div>
 
-<div class="container cream-container mt-5">
+<div class="container cream-container mt-5" #target>
     <h1 class="display-6 title">Pueblos destacados</h1>
     <div class="row mb-5 mt-3 gy-md-1 gy-4">
         <div class="col-md-3" *ngFor="let town of highlightedTowns">

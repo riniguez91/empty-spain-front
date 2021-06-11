@@ -32,4 +32,7 @@ export class TownSearchComponent implements OnInit {
 
   focusSearchResults() { this.unfocusList = false }
 
+  // Scroll down when u click "flecha.gif"
+  scrollDown($element): void{ $element.scrollIntoView({behaviour: "smooth", block: "start", inline: "nearest"}); }
+
 }

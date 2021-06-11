@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EditSettingsModel, ToolbarItems, SelectionSettingsModel, GridComponent, IEditCell ,GridLine,PageSettingsModel} from '@syncfusion/ej2-angular-grids';
+import { EditSettingsModel, ToolbarItems, SelectionSettingsModel, GridComponent, IEditCell} from '@syncfusion/ej2-angular-grids';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { TownService } from 'src/app/town/town.service';
 import { TownDetailComponent } from 'src/app/town/town-detail/town-detail.component';

@@ -69,7 +69,7 @@
                 </ng-template>
                 <ng-template #content>
                     <div id="despoPie">
-                        <ejs-accumulationchart id="despoPieChart" [enableAnimation]="false" [palettes]='paletteTop' [tooltip]='tooltipDespo' [legendSettings]='legendSettingsDespo' >
+                        <ejs-accumulationchart id="despoPieChart" [enableAnimation]="false" [palettes]='palettePie' [tooltip]='tooltipDespo' [legendSettings]='legendSettingsDespo' >
                             <e-accumulation-series-collection>
                                 <e-accumulation-series [dataSource]="despopiechart" xName='municipio_state' yName='total'
                                     name="Pueblos" [dataLabel]='datalabelDespo' radius='90%'>
