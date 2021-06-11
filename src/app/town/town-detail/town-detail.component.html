@@ -3,7 +3,14 @@
         <h1 class="display-2 text-center">
             {{town.municipio}},
             <small class="text-muted green-small-text">{{town.provincia}}</small>
-            <h2 class="display-6 text-center">{{town.municipio_state}}</h2>
+            <div class="text-center">               
+                <h2 class="display-6">{{town.municipio_state}}
+                    <span>
+                    <div class="d-inline" *ngIf="town.municipio_state == 'Despoblacion'"><img src="../../../assets/images/despoblacion.png" class="municipio-state-icon" alt="Despoblacion icon"></div>
+                    <div class="d-inline" *ngIf="town.municipio_state == 'No Despoblacion'"><img src="../../../assets/images/no_despoblacion.png" class="municipio-state-icon" alt="Despoblacion icon"></div>
+                    </span>
+                </h2>
+            </div>
         </h1>
         <hr>
         <div class="row mt-4 gy-md-1 gy-4" >

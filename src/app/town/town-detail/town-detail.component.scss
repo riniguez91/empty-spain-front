@@ -2,6 +2,11 @@
     color: var(--maximum-red)!important;
 }
 
+.municipio-state-icon {
+  margin-left: 7px;
+  height: 40px;
+}
+
 .table-time-header {
     background-color: var(--azure);
     color: whitesmoke;
@@ -29,7 +34,7 @@
 .link-text{
     text-decoration: none;
     color: black;
-    font-weight: bold;
+    font-size: 18px;
 }
 
 .tripAdvisor-container {
