@@ -41,10 +41,15 @@ export class TownDetailComponent implements OnInit {
           //Call scraper tiempo here
         }
         this.town = this.parseScraperJsons(result);
+        let body = {"user_id" : this.userId, "busqueda_id": result["busqueda_id"]}
+        this.townService.insertUserSearch(body).subscribe(err => console.log(err))
       }  
-      // If not call the scrapers 
-      else 
-        this.addSearch(this.townName, this.townId, result);
+       // If not call the scrapers depending if the user has logged in or not
+      // Pass along the json obtained from the API endpoint
+      else {
+        if (this.userId) this.addSearch(this.townName, this.townId, result, this.userId)
+        else this.addSearch(this.townName, this.townId, result)
+      } 
     });
   }
 
@@ -70,7 +75,7 @@ export class TownDetailComponent implements OnInit {
    * @param userId number {optional}
    * @return void
    */
-   addSearch(municipioName: string, municipioId: number, json: object): void {
+   addSearch(municipioName: string, municipioId: number, json: object, userId?: number): void {
     this.townService.getTripAdvisorJsonV2(municipioName).subscribe(result => {
       // Add the following fields to our pre-fetched json from our API endpoint
       json['tripadvisor_info'] = JSON.stringify(result);
@@ -84,8 +89,15 @@ export class TownDetailComponent implements OnInit {
             this.townService.getModelResult(municipioName).subscribe(result => {
               json["municipio_state"] = result['result'];
               this.townService.addScrapersTown(json).subscribe(
-                // Parse the scraper jsons
-                success => this.town = this.parseScraperJsons(json),
+                // If the use is logged in insert it into its search history
+                success => {
+                  if (userId) {
+                    let body = {"user_id" : userId, "busqueda_id": success["busqueda_id"]}
+                    this.townService.insertUserSearch(body).subscribe(err => console.log(err))
+                  }
+                  // Parse the scraper jsons
+                  this.town = this.parseScraperJsons(json)
+                },
                 err => throwError(err)
               );
             })
@@ -94,6 +106,17 @@ export class TownDetailComponent implements OnInit {
       })
     })
   }
+
+  /**
+   * Insert search in user search history
+   *
+   * @param json
+   * @returns void 
+   */
+  insertUserSearch() {
+
+  }
+
 
   /**
    * Parse str to float
@@ -105,35 +128,6 @@ export class TownDetailComponent implements OnInit {
     var numeric = parseFloat(input);
     return numeric;
   }
-
-  /* cardCarouselHandler(){
-    Allows for multi-carrousels to work without disturbing each other  
-    $(() => function() {
-      $("#carouselExampleControls").on("slide.bs.carousel", function(e) {
-        var $e = $(e.relatedTarget); ///relatedTarget
-        var idx = $e.index();
-        var curr_id = e.currentTarget.id;
-        var itemsPerSlide = 4;
-        var totalItems = $("#" + curr_id + " .carousel-item").length;
-
-        if (idx >= totalItems - (itemsPerSlide - 1)) {
-          var it = itemsPerSlide - (totalItems - idx);
-          for (var i = 0; i < it; i++) {
-            // Append slides to end
-            if ($e.direction == "left") {
-              $("#" + curr_id + " .carousel-item")
-                .eq(i)
-                .appendTo("#" + curr_id + " .carousel-inner");
-            } else {
-              $("#" + curr_id + " .carousel-item")
-                .eq(0)
-                .appendTo("#" + curr_id + " .carousel-inner");
-            }
-          }
-        }
-      });
-    });
-    } */
 
 }
 

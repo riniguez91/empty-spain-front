@@ -21,6 +21,16 @@ export class TownService {
   }
 
   /**
+   * Inserts a search inside the search history table
+   * 
+   * @param body 
+   * @returns Observable<any>
+   */
+  insertUserSearch(body: object): Observable<any> {
+    return this.http.post(environment.insert_user_search_url, body);
+  }
+
+  /**
    * Obtains JSON from the tripadvisor scrapper
    * 
    * @returns JSON
