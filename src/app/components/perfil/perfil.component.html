@@ -2,8 +2,8 @@
     <h2 class="container-header title">Historial de busqueda</h2>
     <p>Bienvenido de nuevo, <strong>{{userCredentials['name']}} {{userCredentials['surnames']}}!</strong></p>
     <hr class="horizontal-break">
-    <div class="row mb-5 mt-3 gy-md-1 gy-4">
-        <div class="col-md-3" *ngFor="let town of searchedTowns">
+    <div class="row">
+        <div class="col-md-3 mb-4 mt-2 gy-md-1 gy-4" *ngFor="let town of searchedTowns">
             <div class="card h-100">
                 <img class="card-img-top" [src]="town.wiki_info.imagen" alt="Town image">
                 <div class="card-body">
