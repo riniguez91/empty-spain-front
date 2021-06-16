@@ -96,4 +96,19 @@ export class DashboardService {
     return this.http.get(environment.get_despoblacion_url);
   }
 
+  getTiempoOldJson(city: string){ 
+    return this.http.post('http://localhost:5000/scrapers/tiempo_old', city)
+  }
+  getTiempoJson(city: string){ 
+    return this.http.post('http://localhost:5000/scrapers/tiempo', city)
+  }
+
+  getTiempoNew(){ 
+    return this.http.get('http://localhost:8000/getTiempoNew');
+  }
+
+  insertTiempoNew(body: object){ 
+    return this.http.post('http://localhost:8000/insertTiempoNew', body);
+  }
+
 }

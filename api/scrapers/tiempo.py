@@ -22,7 +22,7 @@ def contenido_tiempo(location):
     #options.add_argument('--incognito')
     options.add_argument('--headless')
     #options.add_argument('--enable-javascript')
-    PATH = 'C:/WebDriver/bin/chromedriver.exe'
+    PATH = 'chromedriver'
 
     driver = webdriver.Chrome(PATH, options=options)
     #driver.get('https://www.eltiempo.es/{}.html'.format(getUrl(location)))     #Link directo
@@ -53,7 +53,45 @@ def scrape_tiempo(location):
     output = []
     r = contenido_tiempo(decoded_location)
     soup = BeautifulSoup(r, 'lxml')
-    print(soup.find(class_="m_table_weather_day_max_temp"))
+    #print(soup.find(class_="m_table_weather_day_max_temp"))
+    try:
+        # Obtain table wrapper and iterate through its rows to obtain data
+        table = soup.find(class_='m_table_weather_day_wrapper')
+        for column in table.findChildren('div', recursive=False):
+            date = column.find(class_='m_table_weather_day_date')
+            temps = column.find(class_='m_table_weather_day_max_min')
+            rain = column.find(class_='m_table_weather_day_child m_table_weather_day_rain')
+            wind = column.find(class_='m_table_weather_day_wind_ico')
+            day_dawn = column.find(class_='m_table_weather_day_child m_table_weather_day_dawn')
+            day_nightfall = column.find(class_='m_table_weather_day_child m_table_weather_day_nightfall')
+            temp_morning = column.find(class_="m_table_weather_day_temp_wrapper")
+            #pollution = column.find(class_="m_pollution-card-data")
+            #for p in pollution.findAll(class_='value'):
+                #print(p.text)
+            output.append({
+                'Day': re.sub('\s{2,}', '', date.contents[5].text),
+                'Max / Min NEW': temps.contents[1].text +' - '+ temps.contents[3].text, #Cambiado a una sola fila
+                'Rain': rain.contents[3].text,
+                'Wind': wind.contents[2].text,
+                'Day dawn': re.sub('\s+', ' ', day_dawn.contents[3].text),
+                'Day nightfall': re.sub('\s+', '', day_nightfall.contents[3].text),
+                'Temp Morning_NEW': re.sub('\n', '', temp_morning.text) #añadido el nuevo campo
+                #'Pollution': pollution.text
+
+            })
+    except Exception as e:
+        print("Error en la funcion de BeautifulSoup.")
+    
+    return json.dumps(output, indent=3)
+    
+
+def scrape_tiempo_old(location):
+# We decode the parameter since we are calling the function from a separate server and parameters info is binary-enconded
+    decoded_location = location.decode('utf-8')
+    output = []
+    r = contenido_tiempo(decoded_location)
+    soup = BeautifulSoup(r, 'lxml')
+    #print(soup.find(class_="m_table_weather_day_max_temp"))
     try:
         # Obtain table wrapper and iterate through its rows to obtain data
         table = soup.find(class_='m_table_weather_day_wrapper')
@@ -76,7 +114,7 @@ def scrape_tiempo(location):
             })
     except Exception as e:
         print("Error en la funcion de BeautifulSoup.")
-    
+
     return json.dumps(output, indent=3)
     
-#print(scrape_tiempo(b'Ayala/Aiara'))
+print(scrape_tiempo(b'Madrid'))

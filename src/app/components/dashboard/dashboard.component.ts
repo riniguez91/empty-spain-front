@@ -292,6 +292,35 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
+
+  //Esta funcion introduce los datos viejos y nuevos en la tabla TiempoNew
+  tiempoCheckpoint() {
+    let pueblo = 'Barcelona'
+    let id_new = 6
+    let tiempo_new :string
+    let tiempo_old :string
+    let body: object
+    this.dashboardService.getTiempoJson(pueblo).subscribe(
+      result => {
+        tiempo_new = JSON.stringify(result);
+        console.log('tiempo new');
+        console.log(result);
+        this.dashboardService.getTiempoOldJson(pueblo).subscribe(
+          resul => {
+            tiempo_old = JSON.stringify(resul)
+            console.log('tiempo old')
+            console.log(resul)
+            body = {'id_new':id_new,'pueblo':pueblo, 'tiempo_old':tiempo_old, 'tiempo_new':tiempo_new}
+            this.dashboardService.insertTiempoNew(body).subscribe(res=>console.log(res))
+          }
+        );
+        //let old = JSON.stringify(result)
+        //let body = { "id_new": id_new, "old": JSON.stringify(result), "new": JSON.stringify(result) };
+        
+      }
+    );
+  }
 }
 
 

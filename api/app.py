@@ -8,6 +8,7 @@ from scrapers.tiempo import scrape_tiempo
 from scrapers.twitter import scrape, sns
 from scrapers.wiki import wiki_content
 from scrapers.elPais import model_prediction
+from scrapers.tiempo import scrape_tiempo_old
 
 app = Flask(__name__)
 CORS(app)
@@ -62,6 +63,10 @@ def wiki():
 def model_result():
     return model_prediction(request.data)
     
+# eltiempo.es scrapers returns city JSON weather
+@app.route('/scrapers/tiempo_old', methods=['POST'])
+def tiempo_old():
+    return scrape_tiempo_old(request.data)
 
 if __name__ == '__main__':
     app.run(debug=True)
