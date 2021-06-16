@@ -26,6 +26,7 @@ import { TooltipService, LegendService, CategoryService, ChartModule, Accumulati
 import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
 import { ColumnSeriesService, MultiLevelLabelService, SelectionService} from '@syncfusion/ej2-angular-charts';
 import { FAQComponent } from './components/faq/faq.component';
+import { ExamenPc3Component } from './components/examen-pc3/examen-pc3.component';
 
   
 @NgModule({
@@ -40,6 +41,7 @@ import { FAQComponent } from './components/faq/faq.component';
     PerfilComponent,
     DashboardComponent,
     FAQComponent,
+    ExamenPc3Component,
   ],
   imports: [
     BrowserModule,

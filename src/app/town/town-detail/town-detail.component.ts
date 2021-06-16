@@ -82,7 +82,7 @@ export class TownDetailComponent implements OnInit {
       // Add the following fields to our pre-fetched json from our API endpoint
       json['tripadvisor_info'] = JSON.stringify(result);
       json['municipio_id'] = municipioId;
-      this.townService.getTwitterJson(municipioName).subscribe(result => {
+      this.townService.getTwitterJson_old(municipioName).subscribe(result => {
         json["twitter_info"] = JSON.stringify(result);
         this.townService.getTiempoJson(municipioName).subscribe(result => {
           json["tiempo_info"] = JSON.stringify(result);

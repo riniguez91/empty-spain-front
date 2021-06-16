@@ -11,6 +11,7 @@ import { PerfilGuard } from './guards/perfil.guard';
 import { AuthenticationGuard } from './guards/authentication.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardGuard } from './guards/dashboard.guard';
+import { ExamenPc3Component } from './components/examen-pc3/examen-pc3.component';
 
 
 
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
     {path: 'authentication', component: AuthenticationComponent, canActivate: [AuthenticationGuard]},
     {path: 'perfil', component: PerfilComponent, canActivate: [PerfilGuard]},
     {path: 'dashboard', component: DashboardComponent, canActivate: [DashboardGuard]},
+    {path: 'examen-pc3', component: ExamenPc3Component},
     {path: '404', component: NotFoundComponent},
     {path: '', redirectTo: '/pueblos', pathMatch: 'full'},
     {path: '**', redirectTo: '/404', pathMatch: 'full'}

@@ -246,15 +246,21 @@ export class DashboardComponent implements OnInit {
    * Call the scraper of twitter and update the database
    */
   twitterLaunch() {
-    this.townService.getTwitterJson(this.townName).subscribe(
+    var body = { "townId": this.townId, "field": "twitter_info"};
+    this.townService.getTwitterJson_old(this.townName).subscribe(
       result => {
-        let body = { "townId": this.townId, "field": "twitter_info", "content": JSON.stringify(result) };
-        this.dashboardService.updateSearch(body).subscribe(
+        body["content"] =  JSON.stringify(result);
+        this.townService.getTwitterJson(this.townName).subscribe(
           result => {
-            console.log(result);
-            alert('se ha ejecutado Twitter Scraper');
+            body["content_new"] = JSON.stringify(result);
+            this.dashboardService.updateSearch(body).subscribe(
+              result => {
+                console.log(result);
+                alert('se ha ejecutado Twitter Scraper');
+              }
+            );
           }
-        );
+        )
       }
     );
   }

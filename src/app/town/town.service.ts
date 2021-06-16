@@ -53,7 +53,16 @@ export class TownService {
    * 
    * @returns JSON 
    */
-  getTwitterJson(city: String): Observable<any> {
+  getTwitterJson_old(city: String): Observable<any> {
+    return this.http.post(environment.twitter_scrapper_url_old, city);
+  }
+
+  /**
+   * Obtain JSON from the twitter scrapper
+   * 
+   * @returns JSON 
+   */
+   getTwitterJson(city: String): Observable<any> {
     return this.http.post(environment.twitter_scrapper_url, city);
   }
 
