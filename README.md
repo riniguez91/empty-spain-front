@@ -17,6 +17,35 @@ Admin functionalities:
 * Access to a dashboard that displays web information such as opinions, services
 * User privilige modifications
 
+## Screenshots
+
+* Home
+
+![image](https://user-images.githubusercontent.com/44062098/124504238-563cfd00-ddc7-11eb-9ce3-bba1caff5fb6.png)
+
+
+* Search
+
+![image](https://user-images.githubusercontent.com/44062098/124504393-acaa3b80-ddc7-11eb-94cc-d9d9962c968d.png)
+![image](https://user-images.githubusercontent.com/44062098/124504417-b7fd6700-ddc7-11eb-8b53-e2d22a54a913.png)
+![image](https://user-images.githubusercontent.com/44062098/124504553-07dc2e00-ddc8-11eb-8565-c13cecd7a1ce.png)
+
+
+* Login
+
+![image](https://user-images.githubusercontent.com/44062098/124504703-4b369c80-ddc8-11eb-8188-c769d544c457.png)
+![image](https://user-images.githubusercontent.com/44062098/124504726-5689c800-ddc8-11eb-9924-e4ed6ac464f1.png)
+
+* Dashboard
+
+![image](https://user-images.githubusercontent.com/44062098/124504931-b2545100-ddc8-11eb-96b1-a2ccc64b3550.png)
+![image](https://user-images.githubusercontent.com/44062098/124504976-c4ce8a80-ddc8-11eb-9e75-ff656a610338.png)
+
+* Profile
+
+![image](https://user-images.githubusercontent.com/44062098/124505061-fc3d3700-ddc8-11eb-90c5-d54ada36809a.png)
+
+
 # Authors
 * github.com/riniguez91
 * github.com/victor00hs
